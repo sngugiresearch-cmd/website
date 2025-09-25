@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Stanley Ngugi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #2A2A3A;
+            --bg-secondary: #35354A;
+            --text-primary: #E5E5E5;
+            --text-secondary: #A0A0A0;
+            --accent: #F78C6C;
+            --border: #4A4A5A;
+            --hover-bg: #3A3A4A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        nav a.active {
+            color: var(--text-primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--accent);
+            border-radius: 1px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--text-primary);
+            background-color: var(--hover-bg);
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0 120px;
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        /* Research Focus */
+        .research-focus {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 60px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .focus-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .focus-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .focus-description strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Publications Section */
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .publications-list {
+            display: grid;
+            gap: 50px;
+        }
+
+        .publication {
+            position: relative;
+        }
+
+        .pub-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .pub-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .pub-title a:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+
+        .pub-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .pub-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pub-meta-item svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .abstract-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .pub-abstract {
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .pub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background-color: var(--hover-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .pub-link:hover {
+            background-color: var(--bg-secondary);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .pub-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Research Interests */
+        .research-interests {
+            margin-top: 80px;
+        }
+
+        .interests-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .interest-item {
+            padding: 24px;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .interest-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .interest-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .interest-description strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .research-focus {
+                padding: 20px;
+            }
+
+            .pub-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .pub-links {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            main {
+                padding: 60px 0 100px;
+            }
+
+            .publications-list {
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <a href="/" class="logo">Stanley Ngugi</a>
+                
+                <nav>
+                    <a href="/">Posts</a>
+                    <a href="/research.html" class="active">Research</a>
+                    <a href="/about.html">About</a>
+                </nav>
+
+                <div class="controls">
+                    <button class="icon-btn" aria-label="Search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                    <button class="icon-btn" aria-label="Toggle theme">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="page-header">
+                <h1 class="page-title">Research</h1>
+            </div>
+
+            <div class="research-focus">
+                <h2 class="focus-title">Research Focus Areas</h2>
+                <p class="focus-description">
+                    My key research areas center on mechanistic interpretability in AI, with a strong emphasis on <strong>polysemanticity</strong> and <strong>sparse autoencoders (SAEs)</strong> for disentangling superimposed features in large language models. I excel in theoretical and conceptual explorations, such as <strong>superposition hypotheses</strong> and <strong>non-linear representation dynamics</strong>, while integrating practical elements like <strong>circuit analysis</strong> using tools such as <strong>TransformerLens</strong> for knowledge rewriting. Additionally, I delve into <strong>attribution patching</strong> for causal interventions, <strong>multimodal interpretability</strong> to extend insights across vision and text, and scientific applications in biology, including <strong>protein language models</strong> where polysemanticity manifests in sequence motifs and functional domains. This interdisciplinary focus positions me to contribute to <strong>AI safety</strong> through robust, scalable understanding of model internals.
+                </p>
+            </div>
+
+            <section>
+                <h2 class="section-title">Publications</h2>
+                
+                <div class="publications-list">
+                    <article class="publication">
+                        <h3 class="pub-title">
+                            <a href="https://arxiv.org/html/2508.07075v1">
+                                Surgical Knowledge Rewrite in Compact LLMs: An 'Unlearn-then-Learn' Strategy with ((IA)³) for Localized Factual Modulation and Catastrophic Forgetting Mitigation
+                            </a>
+                        </h3>
+                        
+                        <div class="pub-meta">
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10,9 9,9 8,9"/>
+                                </svg>
+                                arXiv Preprint
+                            </div>
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 1v6m0 6v6"/>
+                                    <path d="M17.196 9l-5.196 3l-5.196-3"/>
+                                </svg>
+                                August 9, 2025
+                            </div>
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                </svg>
+                                Stanley Ngugi
+                            </div>
+                        </div>
+
+                        <div class="abstract-label">Abstract</div>
+                        <p class="pub-abstract">
+                            Large Language Models (LLMs) struggle with dynamic knowledge updates, especially when new information conflicts with deeply embedded facts. Such conflicting factual edits often lead to two critical issues: resistance to adopting the new fact and severe catastrophic forgetting of unrelated knowledge. This paper introduces and evaluates a novel "unlearn-then-learn" strategy for precise knowledge editing in LLMs, leveraging the parameter-efficient fine-tuning (PEFT) technique, Infused Adapter by Inhibiting and Amplifying Inner Activations (IA)³. Crucially, this two-stage approach is powered by an initial circuit localization phase that identifies and targets the specific internal components responsible for encoding the conflicting fact. Through a rigorous experimental methodology on microsoft/Phi-3-mini-4k-instruct, we demonstrate that this mechanistically informed two-stage approach achieves near-perfect accuracy (98.50%) for the new, modulated fact while simultaneously effectively suppressing the original conflicting fact (96.00% forget rate). Critically, our strategy exhibits unprecedented localization (72.00% F_control accuracy), dramatically mitigating catastrophic forgetting observed in direct fine-tuning approaches (which showed as low as ∼20% F_control accuracy), a direct benefit of our targeted interpretability-guided intervention. Furthermore, qualitative analysis reveals a nuanced mechanism of "soft forgetting," where original knowledge is suppressed from default retrieval but remains latent and conditionally accessible, enhancing model safety and control. These findings represent a significant advancement towards precise, localized, and safe knowledge management in compact LLMs.
+                        </p>
+
+                        <div class="pub-links">
+                            <a href="https://arxiv.org/abs/2508.07075" class="pub-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7,10 12,15 17,10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                arXiv PDF
+                            </a>
+                            <a href="https://arxiv.org/html/2508.07075v1" class="pub-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                HTML Version
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="publication">
+                        <h3 class="pub-title">
+                            <a href="https://arxiv.org/html/2506.15415v1">
+                                Targeted Lexical Injection: Unlocking Latent Cross-Lingual Alignment in Lugha-Llama via Early-Layer LoRA Fine-Tuning
+                            </a>
+                        </h3>
+                        
+                        <div class="pub-meta">
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10,9 9,9 8,9"/>
+                                </svg>
+                                arXiv Preprint
+                            </div>
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 1v6m0 6v6"/>
+                                    <path d="M17.196 9l-5.196 3l-5.196-3"/>
+                                </svg>
+                                June 6, 2025
+                            </div>
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                </svg>
+                                Stanley Ngugi
+                            </div>
+                        </div>
+
+                        <div class="abstract-label">Abstract</div>
+                        <p class="pub-abstract">
+                            Large Language Models (LLMs) have demonstrated remarkable capabilities, yet their performance in low-resource languages (LRLs), such as Swahili, often lags due to data scarcity and underrepresentation in pre-training. A key challenge is achieving robust cross-lingual lexical alignment, crucial for tasks like translation and cross-lingual information retrieval. This paper introduces Targeted Lexical Injection (TLI), a novel and efficient fine-tuning approach. We first demonstrate that Lugha-Llama-8B-wura, a Swahili-centric LLM, exhibits strong, near-perfect lexical alignment for Swahili-English word pairs in its early internal layers (specifically Layer 2, with 0.99998 average cosine similarity based on a pilot study), a capability not fully reflected in its final output representations (baseline 0.32 similarity on our evaluation set). TLI leverages this insight by using Low-Rank Adaptation (LoRA) and a contrastive learning objective to fine-tune the model, specifically targeting embeddings from this empirically identified optimal early layer. Our experiments show that TLI significantly improves the output-level lexical alignment for 623 trained Swahili-English word pairs, increasing average cosine similarity from 0.3211 to 0.4113 (+28.08%, p < 1.33 × 10⁻²⁴⁰). More importantly, these improvements generalize remarkably well to 63 unseen control word pairs, with similarity increasing from 0.3143 to 0.4033 (+28.32%, p < 7.17 × 10⁻²⁷). These findings suggest TLI enhances the model's ability to preserve and propagate its inherent early-layer cross-lingual knowledge, offering a parameter-efficient and effective strategy for improving lexical alignment in LRL-focused LLMs.
+                        </p>
+
+                        <div class="pub-links">
+                            <a href="https://arxiv.org/abs/2506.15415" class="pub-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7,10 12,15 17,10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                arXiv PDF
+                            </a>
+                            <a href="https://arxiv.org/html/2506.15415v1" class="pub-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                HTML Version
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="research-interests">
+                <h2 class="section-title">Research Interests</h2>
+                
+                <div class="interests-grid">
+                    <div class="interest-item">
+                        <h3 class="interest-title">Mechanistic Interpretability & Polysemanticity</h3>
+                        <p class="interest-description">
+                            Understanding how neural networks represent multiple concepts in superposition, with focus on <strong>sparse autoencoders</strong> and <strong>superposition hypotheses</strong> for disentangling feature representations.
+                        </p>
+                    </div>
+
+                    <div class="interest-item">
+                        <h3 class="interest-title">Circuit Analysis & Knowledge Editing</h3>
+                        <p class="interest-description">
+                            Developing precise methods for locating and modifying knowledge circuits using <strong>TransformerLens</strong> and <strong>attribution patching</strong> for targeted interventions while preventing catastrophic forgetting.
+                        </p>
+                    </div>
+
+                    <div class="interest-item">
+                        <h3 class="interest-title">Cross-Lingual Understanding & LRL Enhancement</h3>
+                        <p class="interest-description">
+                            Investigating layer-specific representations and cross-lingual alignment mechanisms, particularly for low-resource languages through <strong>targeted fine-tuning</strong> and contrastive learning approaches.
+                        </p>
+                    </div>
+
+                    <div class="interest-item">
+                        <h3 class="interest-title">Multimodal & Biological Interpretability</h3>
+                        <p class="interest-description">
+                            Extending interpretability insights across vision and text modalities, with applications to <strong>protein language models</strong> where polysemanticity manifests in sequence motifs and functional domains.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Simple theme toggle functionality
+        const themeToggle = document.querySelector('.icon-btn[aria-label="Toggle theme"]');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                console.log('Theme toggle clicked');
+            });
+        }
+
+        // Search functionality placeholder
+        const searchBtn = document.querySelector('.icon-btn[aria-label="Search"]');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                console.log('Search clicked');
+            });
+        }
+    </script>
+</body>
+</html>
