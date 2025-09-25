@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Stanley Ngugi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #2A2A3A;
+            --bg-secondary: #35354A;
+            --text-primary: #E5E5E5;
+            --text-secondary: #A0A0A0;
+            --accent: #F78C6C;
+            --border: #4A4A5A;
+            --hover-bg: #3A3A4A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        nav a.active {
+            color: var(--text-primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--accent);
+            border-radius: 1px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--text-primary);
+            background-color: var(--hover-bg);
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0 120px;
+        }
+
+        .page-header {
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-intro {
+            color: var(--text-secondary);
+            font-size: 16px;
+            max-width: 600px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 50px;
+        }
+
+        .content-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .content-section p {
+            color: var(--text-primary);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .content-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background-color: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            border: none;
+            padding: 0;
+        }
+
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background-color: var(--hover-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            background-color: var(--bg-primary);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .contact-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .highlight-box {
+                padding: 20px;
+                margin: 30px 0;
+            }
+
+            .contact-section {
+                padding: 30px 20px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            main {
+                padding: 60px 0 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <a href="/" class="logo">Stanley Ngugi</a>
+                
+                <nav>
+                    <a href="/">Posts</a>
+                    <a href="/research.html">Research</a>
+                    <a href="/about.html" class="active">About</a>
+                </nav>
+
+                <div class="controls">
+                    <button class="icon-btn" aria-label="Search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                    <button class="icon-btn" aria-label="Toggle theme">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="page-header">
+            </div>
+
+            <section class="content-section">
+                <h2>Who I Am</h2>
+                <p>
+                    I'm Stanley, a 19-year-old researcher based in Nairobi, Kenya, fascinated by understanding how artificial intelligence actually works. Instead of treating neural networks as mysterious black boxes, I dig into the mechanics—figuring out how they represent knowledge and make decisions at the most fundamental level.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>My Learning Journey</h2>
+                <p>
+                    I've taken an unconventional path to AI research, building my expertise through intensive self-directed study combined with hands-on experimentation. I don't just want to know <em>that</em> something works—I need to understand <em>why</em> it works. This has led me to develop deep knowledge in everything from advanced mathematics to transformer architectures, always starting from first principles.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>Research & Philosophy</h2>
+                <p>
+                    My work focuses on mechanistic interpretability—basically reverse-engineering how AI systems think. I'm particularly interested in techniques that can precisely edit what models know without breaking everything else they've learned.
+                </p>
+                <p>
+                    But beyond the technical work, I spend a lot of time wrestling with bigger questions: What does it mean for a machine to "understand" something? How does consciousness emerge? What is intelligence, really? I explore these philosophical puzzles through research and writing on my blog, because I believe understanding AI requires grappling with these deeper questions about minds and reality.
+                </p>
+            </section>
+
+            <div class="highlight-box">
+                <p>
+                    I've developed a research methodology that combines human insight with AI collaboration—I lead the conceptual work while leveraging AI tools for synthesis and implementation. This lets me move fast while maintaining complete understanding and accountability for everything I create.
+                </p>
+            </div>
+
+            <section class="content-section">
+                <h2>Beyond Research</h2>
+                <p>
+                    When I'm not buried in research, I write about the intersection of AI development, consciousness, and what it means to be human in an age of artificial intelligence. Living in Kenya gives me a unique perspective on AI development from the Global South, which influences how I think about accessibility and the global impact of these technologies.
+                </p>
+            </section>
+
+            <section class="contact-section">
+                <h2>Let's Connect</h2>
+                <p>
+                    I'm always up for discussing ideas, collaborating on research, or just having interesting conversations about AI, consciousness, or whatever rabbit holes we might stumble into. The most interesting discoveries happen when different perspectives collide.
+                </p>
+                
+                <div class="contact-links">
+                    <a href="mailto:sngugi.research@gmail.com" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        Email
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Simple theme toggle functionality
+        const themeToggle = document.querySelector('.icon-btn[aria-label="Toggle theme"]');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                console.log('Theme toggle clicked');
+            });
+        }
+
+        // Search functionality placeholder
+        const searchBtn = document.querySelector('.icon-btn[aria-label="Search"]');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                console.log('Search clicked');
+            });
+        }
+    </script>
+</body>
+</html>
