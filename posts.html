@@ -38,7 +38,6 @@
             padding: 0 20px;
         }
 
-        /* Header */
         header {
             padding: 40px 0;
             border-bottom: 1px solid var(--border);
@@ -112,7 +111,6 @@
             background-color: var(--hover-bg);
         }
 
-        /* Search Functionality */
         .search-container {
             position: relative;
             margin-bottom: 40px;
@@ -148,7 +146,6 @@
             display: none;
         }
 
-        /* Category Filter */
         .category-filter {
             display: flex;
             gap: 10px;
@@ -179,7 +176,6 @@
             border-color: var(--accent);
         }
 
-        /* Main Content */
         main {
             padding: 80px 0 120px;
         }
@@ -201,7 +197,6 @@
             font-style: italic;
         }
 
-        /* Year Section */
         .year-section {
             margin-bottom: 60px;
         }
@@ -230,7 +225,6 @@
             font-weight: 500;
         }
 
-        /* Month Section */
         .month-section {
             margin-bottom: 40px;
         }
@@ -247,7 +241,6 @@
             gap: 30px;
         }
 
-        /* Post Card */
         .post-card {
             display: block;
             text-decoration: none;
@@ -308,7 +301,6 @@
             font-size: 14px;
         }
 
-        /* Category Badge */
         .post-category {
             background-color: var(--bg-secondary);
             color: var(--text-secondary);
@@ -318,7 +310,6 @@
             font-weight: 500;
         }
 
-        /* No Results */
         .no-results {
             text-align: center;
             color: var(--text-secondary);
@@ -330,7 +321,6 @@
             display: none;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -418,44 +408,98 @@
 
         <main>
             <div class="page-header">
-                <h1 class="page-title">All Posts</h1>
-                <p class="page-subtitle">Browse all blog posts by year and month</p>
+                <h1 class="page-title">Curated Essays</h1>
+                <p class="page-subtitle">Explorations of paradox, consciousness, and the nature of knowing</p>
             </div>
 
-            <!-- Search Container -->
             <div class="search-container hidden" id="search-container">
                 <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"/>
                     <path d="m21 21-4.35-4.35"/>
                 </svg>
-                <input type="text" class="search-input" placeholder="Search posts..." id="search-input">
+                <input type="text" class="search-input" placeholder="Search essays..." id="search-input">
             </div>
 
-            <!-- Category Filter -->
             <div class="category-filter">
                 <button class="category-btn active" data-category="all">All</button>
-                <button class="category-btn" data-category="AI Research">AI Research</button>
-                <button class="category-btn" data-category="Philosophy">Philosophy</button>
-                <button class="category-btn" data-category="AI & Society">AI & Society</button>
-                <button class="category-btn" data-category="Productivity">Productivity</button>
-                <button class="category-btn" data-category="Learning">Learning</button>
+                <button class="category-btn" data-category="Paradox">Paradox</button>
+                <button class="category-btn" data-category="Epistemology">Epistemology</button>
+                <button class="category-btn" data-category="Reality">Reality</button>
+                <button class="category-btn" data-category="Consciousness">Consciousness</button>
+                <button class="category-btn" data-category="AI Philosophy">AI Philosophy</button>
             </div>
 
-            <!-- No Results Message -->
             <div class="no-results hidden" id="no-results">
-                No posts found matching your search criteria.
+                No essays found matching your search criteria.
             </div>
 
             <div class="year-section" data-year="2025">
                 <div class="year-header">
                     <h2 class="year-title">2025</h2>
-                    <span class="post-count">26</span>
+                    <span class="post-count">18</span>
+                </div>
+
+                <div class="month-section" data-month="October">
+                    <h3 class="month-title">October</h3>
+                    <div class="posts-list">
+                        <a href="files/attachment.html" class="post-card" data-category="Paradox">
+                            <div class="post-meta">
+                                <div class="post-date">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                    October 19, 2025
+                                </div>
+                                <div class="post-readtime">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12,6 12,12 16,14"/>
+                                    </svg>
+                                    4 min read
+                                </div>
+                                <span class="post-category">Paradox</span>
+                            </div>
+                            <h3 class="post-title">The Attachment-Detachment Paradox: Why Your Habits Need Both to Survive</h3>
+                            <p class="post-excerpt">
+                                Habits don't survive on motivation; they survive on identity. This article reveals the paradoxical strategy of combining intense, long-term attachment to who you are with a radical, short-term detachment from what you do.
+                            </p>
+                        </a>
+
+                        <a href="files/success.html" class="post-card" data-category="Epistemology">
+                            <div class="post-meta">
+                                <div class="post-date">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                    October 19, 2025
+                                </div>
+                                <div class="post-readtime">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12,6 12,12 16,14"/>
+                                    </svg>
+                                    4 min read
+                                </div>
+                                <span class="post-category">Epistemology</span>
+                            </div>
+                            <h3 class="post-title">Why Successful People Give "Obvious" Advice (And Why It Still Doesn't Work For Most)</h3>
+                            <p class="post-excerpt">
+                                Why does "obvious" advice from successful people rarely work? This article reveals the gap between their words and their success: they aren't just "focusing on their strengths"—they know what their strengths are, a non-transmittable secret that's the real key to their success.
+                            </p>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="month-section" data-month="June">
                     <h3 class="month-title">June</h3>
                     <div class="posts-list">
-                        <a href="files/blog-abundance-of-choice.html" class="post-card" data-category="Philosophy">
+                        <a href="files/blog-abundance-of-choice.html" class="post-card" data-category="Paradox">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -473,7 +517,7 @@
                                     </svg>
                                     6 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Paradox</span>
                             </div>
                             <h3 class="post-title">The Abundance of Choice: How to Commit in a World of Many</h3>
                             <p class="post-excerpt">
@@ -481,7 +525,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2025-06-14-lifes-algorithm-exploration-exploitation.html" class="post-card" data-category="Philosophy">
+                        <a href="posts/2025-06-14-lifes-algorithm-exploration-exploitation.html" class="post-card" data-category="Paradox">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -499,7 +543,7 @@
                                     </svg>
                                     5 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Paradox</span>
                             </div>
                             <h3 class="post-title">Life's Algorithm: The Human Dance of Exploration vs. Exploitation</h3>
                             <p class="post-excerpt">
@@ -507,85 +551,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2025-06-13-human-comprehension-bottleneck.html" class="post-card" data-category="AI & Society">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    June 13, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    4 min read
-                                </div>
-                                <span class="post-category">AI & Society</span>
-                            </div>
-                            <h3 class="post-title">The New Bottleneck: Human Comprehension in the Age of Infinite AI-Generated Content</h3>
-                            <p class="post-excerpt">
-                                Examining how our ability to process and understand information is becoming the primary limitation in a world of endless AI-generated data. The shift from information scarcity to attention scarcity.
-                            </p>
-                        </a>
-
-                        <a href="posts/2025-06-12-reimagining-software-engineering.html" class="post-card" data-category="AI & Society">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    June 12, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    5 min read
-                                </div>
-                                <span class="post-category">AI & Society</span>
-                            </div>
-                            <h3 class="post-title">Beyond the Code: Reimagining Software Engineering in the Age of AI</h3>
-                            <p class="post-excerpt">
-                                Exploring the evolving role of a software engineer from a coder to a system architect and problem-definer with AI assistance. How the profession is transforming in the era of AI-assisted development.
-                            </p>
-                        </a>
-
-                        <a href="posts/2025-06-11-static-syllabus-ai.html" class="post-card" data-category="Learning">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    June 11, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    4 min read
-                                </div>
-                                <span class="post-category">Learning</span>
-                            </div>
-                            <h3 class="post-title">The Paradox of the Static Syllabus in the Age of AI</h3>
-                            <p class="post-excerpt">
-                                Discussing the need for dynamic and adaptive educational curricula in a rapidly changing technological landscape. Why traditional education systems struggle to keep pace with AI advancement.
-                            </p>
-                        </a>
-
-                        <a href="files/blog-unified-canvas.html" class="post-card" data-category="Philosophy">
+                        <a href="files/blog-unified-canvas.html" class="post-card" data-category="Reality">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -603,7 +569,7 @@
                                     </svg>
                                     7 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Reality</span>
                             </div>
                             <h3 class="post-title">The Unified Canvas: How All Disciplines Are but Different Strokes of the Same Truth</h3>
                             <p class="post-excerpt">
@@ -616,7 +582,7 @@
                 <div class="month-section" data-month="May">
                     <h3 class="month-title">May</h3>
                     <div class="posts-list">
-                        <a href="files/blog-fluidity-of-reality.html" class="post-card" data-category="Philosophy">
+                        <a href="files/blog-fluidity-of-reality.html" class="post-card" data-category="Reality">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -634,7 +600,7 @@
                                     </svg>
                                     5 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Reality</span>
                             </div>
                             <h3 class="post-title">The Fluidity of Reality: Why Anything Can Be Anything</h3>
                             <p class="post-excerpt">
@@ -642,7 +608,7 @@
                             </p>
                         </a>
 
-                        <a href="files/blog-inquisitive-machine.html" class="post-card" data-category="AI Research">
+                        <a href="files/blog-inquisitive-machine.html" class="post-card" data-category="AI Philosophy">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -660,7 +626,7 @@
                                     </svg>
                                     6 min read
                                 </div>
-                                <span class="post-category">AI Research</span>
+                                <span class="post-category">AI Philosophy</span>
                             </div>
                             <h3 class="post-title">The Inquisitive Machine: How Uncertainty Fuels AI's Next Leap Beyond Consciousness</h3>
                             <p class="post-excerpt">
@@ -668,7 +634,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2025-05-09-hacking-focus.html" class="post-card" data-category="Productivity">
+                        <a href="posts/2025-05-09-hacking-focus.html" class="post-card" data-category="Consciousness">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -686,7 +652,7 @@
                                     </svg>
                                     4 min read
                                 </div>
-                                <span class="post-category">Productivity</span>
+                                <span class="post-category">Consciousness</span>
                             </div>
                             <h3 class="post-title">Hacking Your Focus: Using Place and Presence Like 'Severance'</h3>
                             <p class="post-excerpt">
@@ -694,33 +660,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2025-05-08-adaptability-advantage.html" class="post-card" data-category="AI & Society">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    May 8, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    5 min read
-                                </div>
-                                <span class="post-category">AI & Society</span>
-                            </div>
-                            <h3 class="post-title">The Adaptability Advantage: Thriving Beyond Job Titles in the Age of AI</h3>
-                            <p class="post-excerpt">
-                                Discussing how a focus on adaptable skills and continuous learning is more valuable than a rigid job title in the AI-driven future. The importance of meta-skills over specific expertise.
-                            </p>
-                        </a>
-
-                        <a href="files/blog-true-scarcity.html" class="post-card" data-category="Philosophy">
+                        <a href="files/blog-true-scarcity.html" class="post-card" data-category="Epistemology">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -738,7 +678,7 @@
                                     </svg>
                                     4 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Epistemology</span>
                             </div>
                             <h3 class="post-title">The True Scarcity: Why Questioning, Not Intelligence, Defines Our Age</h3>
                             <p class="post-excerpt">
@@ -746,7 +686,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2025-05-07-beyond-human-benchmark.html" class="post-card" data-category="AI Research">
+                        <a href="posts/2025-05-07-beyond-human-benchmark.html" class="post-card" data-category="AI Philosophy">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -764,7 +704,7 @@
                                     </svg>
                                     5 min read
                                 </div>
-                                <span class="post-category">AI Research</span>
+                                <span class="post-category">AI Philosophy</span>
                             </div>
                             <h3 class="post-title">Beyond the Human Benchmark: Redefining the Goal of AI</h3>
                             <p class="post-excerpt">
@@ -772,33 +712,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2024-05-06-beyond-training-data.html" class="post-card" data-category="AI Research">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    May 6, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    4 min read
-                                </div>
-                                <span class="post-category">AI Research</span>
-                            </div>
-                            <h3 class="post-title">Beyond the Training Data: Can AI Truly Learn on the Fly?</h3>
-                            <p class="post-excerpt">
-                                Exploring the concept of real-time, unsupervised learning for AI and its implications for future systems. The challenge of continual learning without catastrophic forgetting.
-                            </p>
-                        </a>
-
-                        <a href="files/blog-unseen-power.html" class="post-card" data-category="Philosophy">
+                        <a href="files/blog-unseen-power.html" class="post-card" data-category="Consciousness">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -816,7 +730,7 @@
                                     </svg>
                                     4 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Consciousness</span>
                             </div>
                             <h3 class="post-title">The Unseen Power: Reclaiming the Wisdom of Our Common Senses</h3>
                             <p class="post-excerpt">
@@ -824,33 +738,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2024-05-05-vibe-coding-deep-control.html" class="post-card" data-category="AI & Society">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    May 5, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    3 min read
-                                </div>
-                                <span class="post-category">AI & Society</span>
-                            </div>
-                            <h3 class="post-title">'Vibe Coding' vs. Deep Control: Finding the Balance with AI</h3>
-                            <p class="post-excerpt">
-                                An essay on the two approaches to working with AI: trusting the intuition of the model vs. maintaining precise control over every detail. Finding the optimal collaboration paradigm.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-05-04-ai-mirror.html" class="post-card" data-category="Philosophy">
+                        <a href="posts/2024-05-04-ai-mirror.html" class="post-card" data-category="Consciousness">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -868,89 +756,11 @@
                                     </svg>
                                     5 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Consciousness</span>
                             </div>
                             <h3 class="post-title">The AI Mirror: What Chatbots Teach Us About Connection, Truth, and Ourselves</h3>
                             <p class="post-excerpt">
                                 How interacting with AI reflects our own cognitive biases and social expectations back to us. The unexpected psychological insights from human-AI interaction patterns.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-05-03-foundational-ai-expertise.html" class="post-card" data-category="Learning">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    May 3, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    6 min read
-                                </div>
-                                <span class="post-category">Learning</span>
-                            </div>
-                            <h3 class="post-title">Forging Foundational AI Expertise: An AI-Assisted Journey</h3>
-                            <p class="post-excerpt">
-                                A practical guide on building a solid understanding of AI fundamentals, using AI itself as a learning tool. Meta-learning strategies for the age of AI acceleration.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-05-02-beyond-confidence.html" class="post-card" data-category="AI Research">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    May 2, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    5 min read
-                                </div>
-                                <span class="post-category">AI Research</span>
-                            </div>
-                            <h3 class="post-title">Beyond Confidence: Why AI Needs to Know What It Doesn't Know</h3>
-                            <p class="post-excerpt">
-                                The importance of uncertainty quantification in AI systems and the ethical implications of models that can't admit their limitations. Calibration and epistemic humility in AI.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-05-01-navigating-ai-uncertainty.html" class="post-card" data-category="AI Research">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    May 1, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    4 min read
-                                </div>
-                                <span class="post-category">AI Research</span>
-                            </div>
-                            <h3 class="post-title">Navigating AI Uncertainty: Why My Focus Lands on VI</h3>
-                            <p class="post-excerpt">
-                                An explanation of why Variational Inference is a critical and fascinating area of research in the field of AI. The mathematical beauty of approximate posterior distributions.
                             </p>
                         </a>
                     </div>
@@ -959,33 +769,7 @@
                 <div class="month-section" data-month="April">
                     <h3 class="month-title">April</h3>
                     <div class="posts-list">
-                        <a href="posts/2024-04-30-beyond-degrees.html" class="post-card" data-category="AI & Society">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    April 30, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    4 min read
-                                </div>
-                                <span class="post-category">AI & Society</span>
-                            </div>
-                            <h3 class="post-title">Beyond Degrees: AI, Outliers, and the Future of Expertise</h3>
-                            <p class="post-excerpt">
-                                Discussing the rise of non-traditional experts and how AI is democratizing knowledge and skill development. The changing landscape of credentialism in the digital age.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-04-29-ai-risk-reconsidered.html" class="post-card" data-category="AI Research">
+                        <a href="posts/2024-04-29-ai-risk-reconsidered.html" class="post-card" data-category="AI Philosophy">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1003,7 +787,7 @@
                                     </svg>
                                     5 min read
                                 </div>
-                                <span class="post-category">AI Research</span>
+                                <span class="post-category">AI Philosophy</span>
                             </div>
                             <h3 class="post-title">AI Risk Reconsidered: Human Actors, Not Rogue Machines</h3>
                             <p class="post-excerpt">
@@ -1011,7 +795,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2024-04-28-decoding-agi-discourse.html" class="post-card" data-category="AI & Society">
+                        <a href="posts/2024-04-28-decoding-agi-discourse.html" class="post-card" data-category="AI Philosophy">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1029,7 +813,7 @@
                                     </svg>
                                     4 min read
                                 </div>
-                                <span class="post-category">AI & Society</span>
+                                <span class="post-category">AI Philosophy</span>
                             </div>
                             <h3 class="post-title">Decoding the AGI Discourse: Hype, Hope, and Hidden Agendas</h3>
                             <p class="post-excerpt">
@@ -1037,33 +821,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2024-04-27-self-mystery.html" class="post-card" data-category="Philosophy">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    April 27, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    4 min read
-                                </div>
-                                <span class="post-category">Philosophy</span>
-                            </div>
-                            <h3 class="post-title">The Self Must Remain a Mystery</h3>
-                            <p class="post-excerpt">
-                                A philosophical argument for why a complete understanding of the self would lead to a stagnation of growth and experience. The necessity of epistemic humility about consciousness.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-04-26-infinite-posterior.html" class="post-card" data-category="Philosophy">
+                        <a href="posts/2024-04-26-infinite-posterior.html" class="post-card" data-category="Consciousness">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1081,7 +839,7 @@
                                     </svg>
                                     6 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Consciousness</span>
                             </div>
                             <h3 class="post-title">The Infinite Posterior: Life as Variational Inference</h3>
                             <p class="post-excerpt">
@@ -1089,7 +847,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2024-04-25-belief-filter.html" class="post-card" data-category="Philosophy">
+                        <a href="posts/2024-04-25-belief-filter.html" class="post-card" data-category="Reality">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1107,7 +865,7 @@
                                     </svg>
                                     4 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Reality</span>
                             </div>
                             <h3 class="post-title">The Belief Filter: How Our Assumptions Shape Reality (and How Influence Works)</h3>
                             <p class="post-excerpt">
@@ -1115,7 +873,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2024-04-25-invisible-structure.html" class="post-card" data-category="Philosophy">
+                        <a href="posts/2024-04-25-invisible-structure.html" class="post-card" data-category="Reality">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1133,7 +891,7 @@
                                     </svg>
                                     4 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Reality</span>
                             </div>
                             <h3 class="post-title">The Invisible Structure: How Life Approximates Reality</h3>
                             <p class="post-excerpt">
@@ -1141,85 +899,7 @@
                             </p>
                         </a>
 
-                        <a href="posts/2024-04-23-hidden-curriculum.html" class="post-card" data-category="Learning">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    April 23, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    5 min read
-                                </div>
-                                <span class="post-category">Learning</span>
-                            </div>
-                            <h3 class="post-title">The Hidden Curriculum of Life: What Nobody Teaches You</h3>
-                            <p class="post-excerpt">
-                                An article on the unwritten rules and unspoken knowledge that are essential for navigating the real world. The tacit knowledge gap in formal education systems.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-04-22-robot-design.html" class="post-card" data-category="AI Research">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    April 22, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    3 min read
-                                </div>
-                                <span class="post-category">AI Research</span>
-                            </div>
-                            <h3 class="post-title">Why Robots Shouldn't Look Like Us (Unless They Have To)</h3>
-                            <p class="post-excerpt">
-                                A discussion on the uncanny valley and the benefits of designing AI and robots with non-humanoid forms. Function over anthropomorphism in AI system design.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-04-22-beyond-scaling.html" class="post-card" data-category="AI Research">
-                            <div class="post-meta">
-                                <div class="post-date">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    April 22, 2025
-                                </div>
-                                <div class="post-readtime">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                    4 min read
-                                </div>
-                                <span class="post-category">AI Research</span>
-                            </div>
-                            <h3 class="post-title">Beyond Scaling: Should We Build Resource Constraints into AI?</h3>
-                            <p class="post-excerpt">
-                                A thought experiment on the benefits and drawbacks of creating AI systems with inherent limitations to mimic real-world biological constraints. Artificial scarcity as a design principle.
-                            </p>
-                        </a>
-
-                        <a href="posts/2024-04-21-love-blueprint.html" class="post-card" data-category="Philosophy">
+                        <a href="posts/2024-04-21-love-blueprint.html" class="post-card" data-category="Consciousness">
                             <div class="post-meta">
                                 <div class="post-date">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1237,7 +917,7 @@
                                     </svg>
                                     4 min read
                                 </div>
-                                <span class="post-category">Philosophy</span>
+                                <span class="post-category">Consciousness</span>
                             </div>
                             <h3 class="post-title">Love Beyond the Blueprint: Rethinking Our Relationship Rules</h3>
                             <p class="post-excerpt">
@@ -1251,7 +931,6 @@
     </div>
 
     <script>
-        // Blog functionality
         const searchToggle = document.getElementById('search-toggle');
         const searchContainer = document.getElementById('search-container');
         const searchInput = document.getElementById('search-input');
@@ -1264,7 +943,6 @@
         let currentFilter = 'all';
         let currentSearch = '';
 
-        // Search toggle
         searchToggle.addEventListener('click', () => {
             searchContainer.classList.toggle('hidden');
             if (!searchContainer.classList.contains('hidden')) {
@@ -1272,20 +950,15 @@
             }
         });
 
-        // Search functionality
         searchInput.addEventListener('input', (e) => {
             currentSearch = e.target.value.toLowerCase();
             filterPosts();
         });
 
-        // Category filter
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
                 categoryBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
                 btn.classList.add('active');
-                
                 currentFilter = btn.dataset.category;
                 filterPosts();
             });
@@ -1310,7 +983,6 @@
                     card.style.display = 'block';
                     visibleCount++;
                     
-                    // Track visible months and years
                     const monthSection = card.closest('[data-month]');
                     const yearSection = card.closest('[data-year]');
                     if (monthSection) visibleMonths.add(monthSection.dataset.month);
@@ -1320,7 +992,6 @@
                 }
             });
 
-            // Show/hide month sections
             monthSections.forEach(section => {
                 const monthName = section.dataset.month;
                 if (visibleMonths.has(monthName)) {
@@ -1330,7 +1001,6 @@
                 }
             });
 
-            // Show/hide year sections
             yearSections.forEach(section => {
                 const yearName = section.dataset.year;
                 if (visibleYears.has(yearName)) {
@@ -1340,14 +1010,12 @@
                 }
             });
 
-            // Show/hide no results message
             if (visibleCount === 0) {
                 noResults.classList.remove('hidden');
             } else {
                 noResults.classList.add('hidden');
             }
 
-            // Update post counts
             updatePostCounts();
         }
 
@@ -1361,15 +1029,6 @@
             });
         }
 
-        // Theme toggle functionality
-        const themeToggle = document.querySelector('.icon-btn[aria-label="Toggle theme"]');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                console.log('Theme toggle clicked');
-            });
-        }
-
-        // Initialize
         updatePostCounts();
     </script>
 </body>
