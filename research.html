@@ -38,7 +38,6 @@
             padding: 0 20px;
         }
 
-        /* Header */
         header {
             padding: 40px 0;
             border-bottom: 1px solid var(--border);
@@ -112,7 +111,6 @@
             background-color: var(--hover-bg);
         }
 
-        /* Main Content */
         main {
             padding: 40px 0 120px;
         }
@@ -128,7 +126,6 @@
             letter-spacing: -0.02em;
         }
 
-        /* Research Focus */
         .research-focus {
             background-color: var(--bg-secondary);
             padding: 30px;
@@ -154,7 +151,6 @@
             font-weight: 700;
         }
 
-        /* Publications Section */
         .section-title {
             font-size: 24px;
             font-weight: 700;
@@ -224,6 +220,19 @@
             margin-bottom: 20px;
         }
 
+        .tldr-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .pub-tldr {
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
         .pub-links {
             display: flex;
             gap: 16px;
@@ -256,42 +265,10 @@
             height: 14px;
         }
 
-        /* Research Interests */
-        .research-interests {
+        .research-blog {
             margin-top: 80px;
         }
 
-        .interests-grid {
-            display: grid;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .interest-item {
-            padding: 24px;
-            background-color: var(--bg-secondary);
-            border-radius: 8px;
-            border-left: 3px solid var(--accent);
-        }
-
-        .interest-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-
-        .interest-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .interest-description strong {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -380,9 +357,9 @@
             </div>
 
             <div class="research-focus">
-                <h2 class="focus-title">Research Focus Areas</h2>
+                <h2 class="focus-title">Current Work</h2>
                 <p class="focus-description">
-                    My key research areas center on mechanistic interpretability in AI, with a strong emphasis on <strong>polysemanticity</strong> and <strong>sparse autoencoders (SAEs)</strong> for disentangling superimposed features in large language models. I excel in theoretical and conceptual explorations, such as <strong>superposition hypotheses</strong> and <strong>non-linear representation dynamics</strong>, while integrating practical elements like <strong>circuit analysis</strong> using tools such as <strong>TransformerLens</strong> for knowledge rewriting. Additionally, I delve into <strong>attribution patching</strong> for causal interventions, <strong>multimodal interpretability</strong> to extend insights across vision and text, and scientific applications in biology, including <strong>protein language models</strong> where polysemanticity manifests in sequence motifs and functional domains. This interdisciplinary focus positions me to contribute to <strong>AI safety</strong> through robust, scalable understanding of model internals.
+                    I'm currently investigating <strong>metacognition circuits</strong> in large language models. My broader research interests include <strong>polysemanticity</strong> and <strong>circuit analysis</strong> in neural networks.
                 </p>
             </div>
 
@@ -446,6 +423,12 @@
                                 </svg>
                                 HTML Version
                             </a>
+                            <a href="https://github.com/stanleyngugi/surgical_knowledge_editing" class="pub-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                                Code
+                            </a>
                         </div>
                     </article>
 
@@ -477,7 +460,7 @@
                             </div>
                             <div class="pub-meta-item">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 6 0 0 1 2-2h2"/>
                                     <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
                                 </svg>
                                 Stanley Ngugi
@@ -510,44 +493,69 @@
                 </div>
             </section>
 
-            <section class="research-interests">
-                <h2 class="section-title">Research Interests</h2>
+            <section class="research-blog">
+                <h2 class="section-title">Research Blog</h2>
                 
-                <div class="interests-grid">
-                    <div class="interest-item">
-                        <h3 class="interest-title">Mechanistic Interpretability & Polysemanticity</h3>
-                        <p class="interest-description">
-                            Understanding how neural networks represent multiple concepts in superposition, with focus on <strong>sparse autoencoders</strong> and <strong>superposition hypotheses</strong> for disentangling feature representations.
-                        </p>
-                    </div>
+                <div class="publications-list">
+                    <article class="publication">
+                        <h3 class="pub-title">
+                            <a href="/files/taming_polysemanticity.html">
+                                Taming Incidental Polysemanticity in Toy Models: How Network Training Choices Affect Feature Entanglement
+                            </a>
+                        </h3>
+                        
+                        <div class="pub-meta">
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10,9 9,9 8,9"/>
+                                </svg>
+                                Technical Blog Post
+                            </div>
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 1v6m0 6v6"/>
+                                    <path d="M17.196 9l-5.196 3l-5.196-3"/>
+                                </svg>
+                                October 19, 2025
+                            </div>
+                            <div class="pub-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                </svg>
+                                Stanley Ngugi
+                            </div>
+                        </div>
 
-                    <div class="interest-item">
-                        <h3 class="interest-title">Circuit Analysis & Knowledge Editing</h3>
-                        <p class="interest-description">
-                            Developing precise methods for locating and modifying knowledge circuits using <strong>TransformerLens</strong> and <strong>attribution patching</strong> for targeted interventions while preventing catastrophic forgetting.
+                        <div class="tldr-label">TL;DR</div>
+                        <p class="pub-tldr">
+                            I built a toy model to test whether network training choices (L1 vs L2 regularization, orthogonal initialization, activation functions, noise) affect the polysemanticity of learned representations. Using sparse autoencoders (SAEs) to measure feature entanglement, I found that networks trained with L2 regularization produced 17.9% less polysemantic representations than L1-trained networks (Interference: 7.14 vs 8.70, t=2.8, p<0.01). This is exploratory work in a toy setting with significant limitations, but it provides mechanistic insights into how training dynamics—not just SAE architecture—shape interpretability.
                         </p>
-                    </div>
 
-                    <div class="interest-item">
-                        <h3 class="interest-title">Cross-Lingual Understanding & LRL Enhancement</h3>
-                        <p class="interest-description">
-                            Investigating layer-specific representations and cross-lingual alignment mechanisms, particularly for low-resource languages through <strong>targeted fine-tuning</strong> and contrastive learning approaches.
-                        </p>
-                    </div>
-
-                    <div class="interest-item">
-                        <h3 class="interest-title">Multimodal & Biological Interpretability</h3>
-                        <p class="interest-description">
-                            Extending interpretability insights across vision and text modalities, with applications to <strong>protein language models</strong> where polysemanticity manifests in sequence motifs and functional domains.
-                        </p>
-                    </div>
+                        <div class="pub-links">
+                            <a href="/files/taming_polysemanticity.html" class="pub-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10,9 9,9 8,9"/>
+                                </svg>
+                                Read Post
+                            </a>
+                        </div>
+                    </article>
                 </div>
             </section>
         </main>
     </div>
 
     <script>
-        // Simple theme toggle functionality
         const themeToggle = document.querySelector('.icon-btn[aria-label="Toggle theme"]');
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
@@ -555,7 +563,6 @@
             });
         }
 
-        // Search functionality placeholder
         const searchBtn = document.querySelector('.icon-btn[aria-label="Search"]');
         if (searchBtn) {
             searchBtn.addEventListener('click', () => {
