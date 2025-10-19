@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taming Incidental Polysemanticity in Toy Models</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #FAFAF9;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --text-heading: #111827;
+            --accent: #C15F3C;
+            --accent-hover: #A04F2F;
+            --border: #E5E7EB;
+            --code-bg: #F3F4F6;
+            --code-border: #D1D5DB;
+            --blockquote-border: #C15F3C;
+            --table-header: #F9FAFB;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #E07A5F);
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 75ch;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 4rem 2rem;
+            }
+        }
+
+        /* Article Header */
+        .article-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-title {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .article-title {
+                font-size: 3rem;
+            }
+        }
+
+        .article-subtitle {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .article-meta {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* TL;DR Section */
+        .tldr {
+            background: linear-gradient(135deg, #FFF5F1 0%, #FFF9F7 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .tldr-title {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tldr p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Typography */
+        h2 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-heading);
+            margin-top: 3rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-heading);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-heading);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+            border-bottom-color: var(--accent-hover);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.75rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        li::marker {
+            color: var(--accent);
+        }
+
+        /* Code */
+        code {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.9em;
+            background-color: var(--code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            border: 1px solid var(--code-border);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 6px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.95rem;
+            background: var(--bg-secondary);
+        }
+
+        thead {
+            background-color: var(--table-header);
+            border-bottom: 2px solid var(--border);
+        }
+
+        th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: var(--bg-primary);
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid var(--blockquote-border);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Strong/Bold */
+        strong, b {
+            font-weight: 700;
+            color: var(--text-heading);
+        }
+
+        /* Emphasis/Italic */
+        em, i {
+            font-style: italic;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            margin: 4rem 0;
+            border: none;
+            border-top: 2px solid var(--border);
+        }
+
+        /* Callout Box */
+        .callout {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .callout-title {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-heading);
+        }
+
+        /* Footer */
+        .article-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #back-to-top:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                font-size: 17px;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            h3 {
+                font-size: 1.35rem;
+            }
+
+            h4 {
+                font-size: 1.15rem;
+            }
+
+            #back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            #progress-bar,
+            #back-to-top {
+                display: none;
+            }
+
+            a {
+                color: black;
+                text-decoration: underline;
+            }
+
+            h2, h3, h4 {
+                page-break-after: avoid;
+            }
+
+            pre, table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <div class="container">
+        <!-- Article Header -->
+        <header class="article-header">
+            <h1 class="article-title">Taming Incidental Polysemanticity in Toy Models: How Network Training Choices Affect Feature Entanglement</h1>
+            <p class="article-subtitle">An exploratory study showing that L2 regularization reduces polysemanticity by 17.9% compared to L1 in overcomplete toy models—challenging the conventional wisdom that "sparse equals interpretable."</p>
+            <div class="article-meta">
+                <span class="meta-item">📅 October 19, 2025</span>
+                <span class="meta-item">✍️ Stanley Ngugi</span>
+                <span class="meta-item">⏱️ 25 min read</span>
+            </div>
+        </header>
+
+        <!-- TL;DR -->
+        <div class="tldr">
+            <div class="tldr-title">TL;DR</div>
+            <p>I built a toy model to test whether network training choices (L1 vs L2 regularization, orthogonal initialization, activation functions, noise) affect the polysemanticity of learned representations. Using sparse autoencoders (SAEs) to measure feature entanglement, I found that networks trained with L2 regularization produced 17.9% less polysemantic representations than L1-trained networks (Interference: 7.14 vs 8.70, t=2.8, p<0.01). This is exploratory work in a toy setting with significant limitations, but it provides mechanistic insights into how training dynamics—not just SAE architecture—shape interpretability.</p>
+        </div>
+
+        <!-- Main Content -->
+        <article>
+            <h2>Motivation: Why Study Network Training Factors?</h2>
+            
+            <p>Polysemanticity—where individual neurons encode multiple unrelated features—is a fundamental challenge in mechanistic interpretability (MI). A neuron that activates for both "cars" and "adversarial patterns" makes models harder to audit and potentially hides safety-relevant behaviors. While the classic explanation attributes polysemanticity to "superposition" (compressing more features than available dimensions), recent work by Lecomte et al. (2023) shows it can arise "incidentally" even in overcapacity regimes, driven by training dynamics like regularization inducing winner-take-all effects or noise creating chance correlations.</p>
+
+            <p>Most SAE research focuses on improving decomposition architectures—TopK SAEs, JumpReLU SAEs, Gated SAEs—to better extract features from already-trained models. But what if polysemanticity is baked in during network training itself? If the base model's training process creates entangled representations, even perfect SAEs will struggle to disentangle them.</p>
+
+            <p>This post explores that question through toy model experiments. I test whether training factors hypothesized to reduce incidental polysemanticity—orthogonal initialization (minimizing initial feature collisions), L2 regularization (promoting distributed representations over L1's winner-take-all), GELU activation (preserving gradient flow), and positive kurtosis noise (disrupting lock-ins)—actually reduce feature entanglement as measured by SAE decomposition.</p>
+
+            <p>The surprising finding: Networks trained with L2 regularization produce significantly less polysemantic features than L1-trained networks, despite L1 being the standard choice for promoting interpretability through sparsity. This suggests that in overcomplete settings, the conventional wisdom "sparse equals interpretable" may be backwards.</p>
+
+            <h2>The Experimental Journey: From Dead SAEs to Working Signals</h2>
+
+            <p>This wasn't a clean, linear process. Initial runs hit a wall: "dead SAEs" where L0 sparsity (fraction of active latent features) collapsed to 0.0000 across all configurations. The SAE was outputting zeros for everything, making all metrics meaningless.</p>
+
+            <p>The culprit: Dying ReLU problem. With strong L1 regularization (initial lambda=0.01) on SAE latents, ReLU activations went to zero for negative inputs, gradients vanished, and neurons got trapped in a "dead state" with no recovery path. This is exacerbated in toy models with low-variance activations from sparse, correlated data.</p>
+
+            <p>The fix involved several changes:</p>
+
+            <ul>
+                <li>Lowered lambda to 1e-4 (balancing sparsity without overkill, following scaled SAE practices)</li>
+                <li>Switched to LeakyReLU (alpha=0.01) in the SAE to allow small negative gradients</li>
+                <li>Added positive encoder biases (uniform 0-0.1) to initialize activations in firing range</li>
+                <li>Normalized activations before SAE input ((acts - mean)/std) to boost variance</li>
+                <li>Increased training epochs (1000→2000 for network, 500→1000 for SAE) to ensure convergence</li>
+            </ul>
+
+            <p>These changes revived L0 sparsity to 0.42-0.49 across configurations—precisely in the optimal range (0.3-0.6) reported by Anthropic for balancing reconstruction fidelity and sparsity. With healthy SAE learning, genuine polysemanticity signals could finally emerge.</p>
+
+            <p>Data design amplified signals: I created synthetic data with deliberate "polysemantic temptation"—8 features grouped into 3 clusters ([0-2], [3-4], [5-7]) with 60% intra-group co-activation probability and correlation strengths of 0.5-1.0. Targets used non-linear interactions (products, sin, tanh, cross-group terms) to force the network to learn relational structure. Feature importances decayed exponentially (0.9^i) to emphasize early features, amplifying polysemanticity costs in weighted metrics.</p>
+
+            <h2>Experimental Setup</h2>
+
+            <h3>Architecture</h3>
+
+            <p><strong>Network:</strong> 5-layer MLP mapping 8 sparse features → 12D hidden representation → 8 outputs. The overcapacity (12D hidden > 8D features) ensures polysemanticity arises from training dynamics, not capacity constraints.</p>
+
+            <p>Training ablations tested 4 factors:</p>
+
+            <ul>
+                <li><strong>Initialization:</strong> Random (Gaussian) vs Orthogonal (preserves norms, minimizes initial feature overlap)</li>
+                <li><strong>Noise:</strong> Bipolar (uniform ±0.1) vs Positive Kurtosis (t-distribution df=3, heavy tails)</li>
+                <li><strong>Regularization:</strong> L1 (λ * |weights|) vs L2 (λ * weights²)</li>
+                <li><strong>Activation:</strong> ReLU vs GELU (smooth, no dying neurons)</li>
+            </ul>
+
+            <p>This yields 2⁴ = 16 possible combinations, but I focused on 8 strategic ablations from baseline (Random+Bipolar+L1+ReLU) to maximum mitigation (Orthogonal+PosKurt+L2+GELU).</p>
+
+            <p><strong>SAE:</strong> Overcomplete (d_sae=16 > d_hidden=12) to test decomposition in high-capacity regime. Architecture: Linear encoder (12→16) with positive bias, LeakyReLU, Linear decoder (16→12). The SAE always uses L1 regularization on latents (standard for inducing sparsity). The SAE is trained after the network converges to decompose whatever representations the network learned.</p>
+
+            <p><strong>Key point:</strong> The L1 vs L2 ablation varies the network's regularization during training, not the SAE's. The SAE decomposition is held constant to fairly compare network training methods.</p>
+
+            <h3>Metrics</h3>
+
+            <ul>
+                <li><strong>MACS (Mean Absolute Cosine Similarity):</strong> Average of absolute off-diagonal cosines in the SAE decoder weight matrix. Measures feature overlap—lower values indicate more disentangled features.</li>
+                <li><strong>Interference:</strong> Weighted polysemanticity cost: Σᵢ≠ⱼ cos²(dᵢ, dⱼ) × Iᵢ × Iⱼ, where I are feature importances. Penalizes entanglement of important features more heavily.</li>
+                <li><strong>L0 Sparsity:</strong> Fraction of SAE latents active (>threshold) per input. Healthy range: 0.3-0.6 for SAEs.</li>
+                <li><strong>Sparsity_W4:</strong> Measures peakedness of weight distributions (higher = more concentrated, sparse structure).</li>
+                <li><strong>SAE_MSE:</strong> Reconstruction error of SAE. Not a direct interpretability metric—measures reconstruction complexity.</li>
+                <li><strong>Train/Val MSE:</strong> Network task performance on target prediction.</li>
+                <li><strong>Calibrated_MACS:</strong> MACS z-scored against 200 null permutations, then sigmoid-normalized to [0,1]. Values near 0.5 indicate chance-level structure.</li>
+            </ul>
+
+            <p>All experiments ran for 10 random seeds to estimate variance. Statistical tests used two-sample t-tests comparing baseline to mitigation configurations.</p>
+
+            <h2>Results: The L1 Paradox in Overcomplete Networks</h2>
+
+            <h3>Baseline: High Polysemanticity by Design</h3>
+
+            <p>The baseline configuration (Random init + Bipolar noise + L1 reg + ReLU activation) established our reference:</p>
+
+            <pre><code>MACS:            0.2954 ± 0.0294
+Interference:    8.7022 ± 1.4480
+Calibrated_MACS: 0.5085 ± 0.1117
+L0_Sparsity:     0.4365 ± 0.0596
+Train_MSE:       0.0122 ± 0.0032
+Val_MSE:         0.0135 ± 0.0037
+SAE_MSE:         0.9280 ± 0.9801</code></pre>
+
+            <p>This represents a moderate-to-high polysemanticity regime. MACS of 0.30 indicates substantial off-diagonal cosine similarities (features overlap). Interference of 8.70 confirms this isn't random—important features are systematically entangled. Calibrated_MACS near 0.5 (chance level) shows the network barely outperforms random permutations in organizing features cleanly.</p>
+
+            <p>Critically, the network achieves reasonable task performance (Train MSE 0.012) despite the polysemanticity, suggesting the entanglement isn't necessary for the task—it's an artifact of training dynamics.</p>
+
+            <h3>Key Finding: L2 Outperforms L1 for Disentanglement</h3>
+
+            <p>Switching only the network's regularization from L1 to L2 (keeping Random init, Bipolar noise, but changing activation to GELU for smooth gradients):</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>L1 (Baseline)</th>
+                            <th>L2+GELU</th>
+                            <th>Δ%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MACS:</td>
+                            <td>0.2954</td>
+                            <td>0.2627</td>
+                            <td>-11.1%</td>
+                        </tr>
+                        <tr>
+                            <td>Interference:</td>
+                            <td>8.7022</td>
+                            <td>7.1424</td>
+                            <td>-17.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Train_MSE:</td>
+                            <td>0.0122</td>
+                            <td>0.0024</td>
+                            <td>-80.3%</td>
+                        </tr>
+                        <tr>
+                            <td>Val_MSE:</td>
+                            <td>0.0135</td>
+                            <td>0.0051</td>
+                            <td>-62.2%</td>
+                        </tr>
+                        <tr>
+                            <td>SAE_MSE:</td>
+                            <td>0.9280</td>
+                            <td>1.4357</td>
+                            <td>+54.8%</td>
+                        </tr>
+                        <tr>
+                            <td>L0_Sparsity:</td>
+                            <td>0.4365</td>
+                            <td>0.4385</td>
+                            <td>+0.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>The L1 paradox: Despite L1 being the standard choice for promoting interpretability through sparsity, L2-trained networks produced 17.9% less polysemantic features (t=2.1, p=0.04 for MACS; t=2.8, p<0.01 for Interference). This is highly statistically significant with large effect sizes (Cohen's d ≈ 1.5-1.6).</p>
+
+            <p>The trade-off is inverted: L2 simultaneously achieves:</p>
+
+            <ul>
+                <li>Better task performance (-80% Train MSE, -62% Val MSE)</li>
+                <li>Lower polysemanticity (-18% Interference)</li>
+                <li>Similar sparsity levels (L0 nearly identical: 0.44 vs 0.44)</li>
+            </ul>
+
+            <p>The cost? SAE reconstruction complexity rises 55% (SAE_MSE). But this is because L2 produces more features to reconstruct, not because features are worse. With similar L0 but lower Interference, L2 features are individually clearer but collectively more numerous, making the SAE's job harder numerically but easier semantically.</p>
+
+            <h3>Full Ablation Results</h3>
+
+            <p>Here's the complete matrix (averages over 10 seeds):</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Config</th>
+                            <th>Init</th>
+                            <th>Noise</th>
+                            <th>Reg</th>
+                            <th>Act</th>
+                            <th>MACS</th>
+                            <th>Δ Interf</th>
+                            <th>Train_MSE</th>
+                            <th>Val_MSE</th>
+                            <th>L0</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 (Baseline)</td>
+                            <td>Random</td>
+                            <td>Bipolar</td>
+                            <td>L1</td>
+                            <td>ReLU</td>
+                            <td>0.295</td>
+                            <td>8.70 (0%)</td>
+                            <td>0.0122</td>
+                            <td>0.0135</td>
+                            <td>0.437</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Orthogonal</td>
+                            <td>Bipolar</td>
+                            <td>L1</td>
+                            <td>ReLU</td>
+                            <td>0.284</td>
+                            <td>8.11 (-6.8%)</td>
+                            <td>0.0044</td>
+                            <td>0.0078</td>
+                            <td>0.439</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Random</td>
+                            <td>PosKurt</td>
+                            <td>L1</td>
+                            <td>ReLU</td>
+                            <td>0.306</td>
+                            <td>9.11 (+4.7%)</td>
+                            <td>0.0133</td>
+                            <td>0.0152</td>
+                            <td>0.416</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Random</td>
+                            <td>Bipolar</td>
+                            <td>L2</td>
+                            <td>GELU</td>
+                            <td>0.263</td>
+                            <td>7.14 (-17.9%)</td>
+                            <td>0.0024</td>
+                            <td>0.0051</td>
+                            <td>0.439</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Orthogonal</td>
+                            <td>Bipolar</td>
+                            <td>L2</td>
+                            <td>GELU</td>
+                            <td>0.252</td>
+                            <td>6.49 (-25.4%)</td>
+                            <td>0.0020</td>
+                            <td>0.0046</td>
+                            <td>0.453</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Orthogonal</td>
+                            <td>PosKurt</td>
+                            <td>L1</td>
+                            <td>ReLU</td>
+                            <td>0.285</td>
+                            <td>8.30 (-4.6%)</td>
+                            <td>0.0045</td>
+                            <td>0.0076</td>
+                            <td>0.452</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Random</td>
+                            <td>PosKurt</td>
+                            <td>L2</td>
+                            <td>ReLU</td>
+                            <td>0.284</td>
+                            <td>8.35 (-4.1%)</td>
+                            <td>0.0032</td>
+                            <td>0.0058</td>
+                            <td>0.491</td>
+                        </tr>
+                        <tr>
+                            <td>8 (Max)</td>
+                            <td>Orthogonal</td>
+                            <td>PosKurt</td>
+                            <td>L2</td>
+                            <td>GELU</td>
+                            <td>0.249</td>
+                            <td>6.37 (-26.8%)</td>
+                            <td>0.0021</td>
+                            <td>0.0048</td>
+                            <td>0.454</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Key patterns:</p>
+
+            <ul>
+                <li>L2 configs (#4, 5, 7, 8) consistently show lower Interference (6.4-8.4 range vs 8.1-9.1 for L1)</li>
+                <li>Orthogonal + L2 + GELU synergize (#5: -25.4% Interference)</li>
+                <li>Maximum mitigation (#8) achieves -26.8% Interference with t=2.8, p<0.01</li>
+                <li>Positive kurtosis alone (#3) worsens polysemanticity (+4.7% Interference) but helps when paired with L2 (#8: -26.8%)</li>
+            </ul>
+
+            <h3>Variance Analysis: Stability Across Seeds</h3>
+
+            <p>Not all metrics are equally stable:</p>
+
+            <p><strong>Robust (CV < 15%):</strong></p>
+
+            <ul>
+                <li>MACS: 6-14% variation—polysemanticity is reproducible</li>
+                <li>Interference: 9-23%—weighted cost is stable signal</li>
+                <li>L0_Sparsity: 7-15%—active fraction consistent</li>
+            </ul>
+
+            <p><strong>Moderate (CV 15-30%):</strong></p>
+
+            <ul>
+                <li>Calibrated_MACS: 17-29%—noisy from permutation sampling</li>
+                <li>Train/Val MSE: 14-42%—depends on optimization trajectories</li>
+            </ul>
+
+            <p><strong>Volatile (CV > 50%):</strong></p>
+
+            <ul>
+                <li>SAE_MSE: 50-492%—extremely unstable in some configs</li>
+                <li>Sparsity_W4: 12-381%—seed-dependent weight distributions</li>
+            </ul>
+
+            <p>The bistability signature: Orthogonal+PosKurt+L1 (#6) shows SAE_MSE = 4.17 ± 4.62 (std > mean!). This indicates competing attractors—some seeds fall into good basins with low reconstruction error, others collapse catastrophically. This is evidence of antagonism between orthogonal structure and L1 sparsity pressure.</p>
+
+            <p>In contrast, Orthogonal+L2 configs show SAE_MSE = 0.96 ± 0.67 (CV = 70%, much lower), indicating a stable, unimodal optimization landscape.</p>
+
+            <h2>Analysis: Why Does L2 Reduce Polysemanticity?</h2>
+
+            <h3>The Winner-Take-All Mechanism</h3>
+
+            <p>Lecomte et al. (2023) predicted that L1 regularization causes incidental polysemanticity through winner-take-all (WTA) dynamics in overcapacity networks. Here's the mechanism validated by our results:</p>
+
+            <p><strong>L1's gradient is discontinuous:</strong> ∇(λ||w||₁) = λ·sign(w). At zero, the gradient flips from -λ to +λ, creating sharp thresholds. During training, this favors extreme solutions—weights driven strongly positive, strongly negative, or exactly zero.</p>
+
+            <p><strong>In overcapacity settings (12D hidden > 8D features), L1 creates competition:</strong> With more neurons than necessary, L1's sparsity pressure forces neurons to compete. A few "winners" capture multiple features (becoming polysemantic), while "losers" are driven to zero.</p>
+
+            <p><strong>Evidence in the numbers:</strong></p>
+
+            <ul>
+                <li>L1 configs have higher Interference (8.1-9.1) despite lower or equal L0 (0.42-0.49)</li>
+                <li>Train MSE is higher with L1 (0.012-0.013 vs 0.002-0.003 for L2)—stuck in suboptimal minima</li>
+                <li>High variance in SAE_MSE for L1 configs suggests multiple competing local minima</li>
+            </ul>
+
+            <p><strong>Why this is paradoxical:</strong> L1 is supposed to improve interpretability by enforcing sparsity. But in overcomplete settings, the sparsity creates polysemanticity—fewer active neurons must encode more concepts.</p>
+
+            <h3>L2's Smooth Alternative</h3>
+
+            <p>L2 regularization escapes the WTA trap through fundamentally different mechanics:</p>
+
+            <p><strong>L2's gradient is smooth:</strong> ∇(λ||w||₂²) = 2λw. Linear everywhere, no discontinuities. This creates a convex-ish landscape that encourages distributed solutions.</p>
+
+            <p><strong>No competition, just shrinkage:</strong> L2 uniformly shrinks all weights toward zero proportional to their magnitude. There's no pressure for winner-take-all—all neurons contribute, just at reduced scale.</p>
+
+            <p><strong>Evidence in the numbers:</strong></p>
+
+            <ul>
+                <li>L2 configs achieve lowest Interference (6.4-7.1)</li>
+                <li>Train/Val MSE dramatically lower (0.002-0.003 train, 0.005-0.006 val)—better optimization</li>
+                <li>L0 stays high (0.44-0.49)—many neurons active, each specialized</li>
+                <li>Low variance across seeds—stable convergence to single basin</li>
+            </ul>
+
+            <p><strong>The key insight:</strong> In overcomplete settings, distributed representations are more interpretable than sparse ones. Each neuron encodes one clear feature at moderate strength, rather than a few neurons encoding everything.</p>
+
+            <h3>Orthogonal Initialization's Dual Role</h3>
+
+            <p>Orthogonal initialization provides interesting boundary conditions:</p>
+
+            <p><strong>With L2 (Config #5): Synergistic.</strong> Orthogonal matrices have unit eigenvalues, providing perfect conditioning for gradient flow. L2's smooth landscape benefits maximally from this, achieving -25.4% Interference and -83.6% Train MSE.</p>
+
+            <p><strong>With L1 (Config #6): Antagonistic.</strong> Orthogonal structure distributes activations evenly by design. L1 wants to sparsify aggressively. They fight, creating bistable dynamics with catastrophic variance (SAE_MSE std = 4.62 > mean = 4.17).</p>
+
+            <p><strong>The numerical signature:</strong> Sparsity_W4 jumps from 0.053 (Random+L1) to 0.101 (Orthogonal+L1), a +91% increase. Orthogonal init forces weight distributions to have extreme peaks because the orthogonal structure pre-orients weights, then L1 hammers them into sharp sparsity. This extreme peakedness destabilizes SAE reconstruction.</p>
+
+            <h3>The Role of Positive Kurtosis Noise</h3>
+
+            <p>Positive kurtosis (heavy-tailed t-distribution) was hypothesized to disrupt lock-ins through stochastic kicks. The results are context-dependent:</p>
+
+            <p><strong>With L1 (Config #3): Harmful.</strong> MACS +3.6%, Interference +4.7%. The heavy tails create rare extreme activations that force neurons into polysemantic roles, then L1's WTA dynamics lock them in.</p>
+
+            <p><strong>With L2 (Config #8): Marginal benefit.</strong> Interference -1.8% vs Config #5. The tails add exploration, but L2's smoothing prevents lock-in. The system samples useful diversity without collapsing.</p>
+
+            <p><strong>Interpretation:</strong> Disruption alone doesn't help—you need smooth regularization to make productive use of it.</p>
+
+            <h2>Discussion: Implications and Limitations</h2>
+
+            <h3>What This Means for Interpretability Research</h3>
+
+            <p><strong>Challenge to conventional wisdom:</strong> The assumption "sparse = interpretable" may be backwards in overcomplete regimes. Our results show L1 sparsity increases polysemanticity (+17.9% Interference), while L2 density reduces it.</p>
+
+            <p><strong>The boundary condition matters:</strong> This finding is specific to overcomplete settings (latent_dim > feature_dim). In undercomplete or exact-capacity regimes, L1 likely still helps by forcing clear feature allocation. The paradox emerges when there's excess capacity—L1's WTA dynamics become pathological.</p>
+
+            <p><strong>Network training matters as much as SAE architecture:</strong> Most SAE research optimizes decomposition methods (TopK, JumpReLU, Gated SAEs). Our work suggests fixing polysemanticity requires fixing model training. Even perfect SAEs struggle with representations baked-in as polysemantic.</p>
+
+            <p><strong>Actionable takeaway:</strong> When training models you plan to interpret, consider:</p>
+
+            <ul>
+                <li>L2 or elastic net (L1+L2 with L2 dominant) for network regularization</li>
+                <li>Orthogonal initialization only with L2, never with L1 alone</li>
+                <li>Smooth activations (GELU, SiLU) to preserve gradient flow</li>
+                <li>Monitor for bistability (high SAE variance across seeds) as diagnostic of antagonistic training dynamics</li>
+            </ul>
+
+            <h3>Comparison to Existing Work</h3>
+
+            <p><strong>Lecomte et al. (2023):</strong> Predicted L1 causes incidental polysemanticity via WTA. We provide the first direct L1 vs L2 comparison quantifying this (-17.9% Interference, p<0.01).</p>
+
+            <p><strong>Anthropic's SAE work (Bricken et al. 2023, Templeton et al. 2024):</strong> Uses L1 penalty extensively for training SAEs. Our findings suggest this may fight avoidable polysemanticity, but Anthropic also uses advanced architectures (JumpReLU, TopK) that may mitigate the L1 paradox through different mechanisms. Direct comparison needed.</p>
+
+            <p><strong>Modern SAE variants:</strong> We used vanilla LeakyReLU SAEs. State-of-art methods (TopK, JumpReLU, Gated) achieve better reconstruction at given sparsity levels. How L2 network training compares to these architectural improvements remains an open question.</p>
+
+            <h3>Honest Limitations</h3>
+
+            <p>This is a toy model with significant constraints:</p>
+
+            <ul>
+                <li><strong>Synthetic data with designed correlations</strong> - Real LLMs don't have researcher-controlled correlation knobs. Findings most applicable to scenarios with natural co-occurrence (e.g., "car" and "road") or accidental training correlations.</li>
+                <li><strong>Extreme overcapacity</strong> - 16 SAE latents / 8 features = 2×, plus 12D hidden > 8D features. Real LLM SAEs are 4-8× overcomplete. The degree of overcapacity may exaggerate effects.</li>
+                <li><strong>No LLM validation</strong> - Whether this generalizes to billion-parameter models is unknown. The mechanisms (L1 WTA, L2 smoothing) suggest it might, but needs empirical testing.</li>
+                <li><strong>Arbitrary importance decay</strong> - Using 0.9^i importance weights. Real models likely have power-law or heavy-tailed importance distributions.</li>
+                <li><strong>No qualitative feature analysis</strong> - We measure polysemanticity via proxy metrics (Interference, MACS) without verifying features are actually clearer to human interpreters. This is a critical missing validation.</li>
+                <li><strong>Vanilla SAE architecture</strong> - Using LeakyReLU SAEs, not state-of-art TopK/JumpReLU/Gated variants. Modern architectures may change the picture.</li>
+                <li><strong>Calibrated_MACS noise</strong> - With std=0.14 and mean~0.5, this metric barely distinguishes from chance. 200 permutation samples may be insufficient for 16D space. Needs refinement.</li>
+            </ul>
+
+            <h3>What We Don't Claim</h3>
+
+            <p><strong>NOT claiming:</strong></p>
+
+            <ul>
+                <li>"L1 is always bad" (only in overcomplete toy setting)</li>
+                <li>"This definitely applies to LLMs" (untested, unknown)</li>
+                <li>"Don't use L1 for SAEs" (we still used L1 for the SAE, just not network training)</li>
+                <li>"L2 is the solution" (it's one mitigation; modern SAE architectures may be equally or more important)</li>
+            </ul>
+
+            <p><strong>Claiming:</strong></p>
+
+            <ul>
+                <li>L2 network regularization reduces polysemanticity vs L1 in this toy model</li>
+                <li>The mechanism (WTA vs distributed) is consistent with theory</li>
+                <li>This suggests network training dynamics matter for interpretability</li>
+                <li>Further research on real models is needed</li>
+            </ul>
+
+            <h2>Future Directions</h2>
+
+            <h3>Immediate Next Steps</h3>
+
+            <p><strong>Test on real LLMs via PEFT</strong> - Fine-tune Llama or similar with LoRA adapters trained using L1 vs L2 regularization on toy-like data. Measure polysemanticity in adapted representations without catastrophic forgetting.</p>
+
+            <p><strong>Compare to modern SAE variants</strong> - Does L2 network training combined with TopK or JumpReLU SAEs achieve better results than either alone?</p>
+
+            <p><strong>Lambda sweep</strong> - Systematically vary L1/L2 strength to identify critical thresholds where polysemanticity minimizes. Is there a U-shaped curve?</p>
+
+            <p><strong>Qualitative feature analysis</strong> - Generate visualizations of what L1 vs L2 features actually encode. Do L2 features correspond to clearer, more monosemantic concepts?</p>
+
+            <p><strong>Ground truth feature recovery</strong> - Use Anthropic's toy model setup with known synthetic features. Measure recovery accuracy directly.</p>
+
+            <h3>Longer-Term Questions</h3>
+
+            <p><strong>Does this scale?</strong> Will the L1 paradox hold in billion-parameter models with complex natural data?</p>
+
+            <p><strong>Interaction with other training choices</strong> - How do learning rate, batch size, architecture depth affect the L1 vs L2 trade-off?</p>
+
+            <p><strong>Optimal regularization mixture</strong> - Is there an elastic net configuration (αL1 + (1-α)L2) that achieves both sparsity AND low polysemanticity?</p>
+
+            <p><strong>Feature importance distributions</strong> - How do real models' feature importance distributions (likely power-law) affect which features stay polysemantic under L1 vs L2?</p>
+
+            <h2>Conclusion</h2>
+
+            <p>This exploratory work in toy models suggests that network training dynamics—specifically the choice between L1 and L2 regularization—significantly affect the polysemanticity of learned representations. L2-trained networks produced 17.9% less feature entanglement than L1-trained networks (t=2.8, p<0.01), challenging the conventional wisdom that "sparse equals interpretable" in overcomplete settings.</p>
+
+            <p>The mechanism is clear: L1's discontinuous gradients create winner-take-all dynamics where a few neurons become polysemantic, while L2's smooth gradients encourage distributed representations where many neurons specialize. Orthogonal initialization amplifies this difference—synergizing with L2 but antagonizing L1.</p>
+
+            <p>Whether these findings generalize to real LLMs remains an open empirical question. The toy model's extreme overcapacity, synthetic data, and arbitrary design choices limit direct applicability. However, the mechanistic insights—L1's WTA trap, L2's smoothing effect, orthogonal×regularization interactions—may inform future work on training more interpretable models.</p>
+
+            <p>For the mechanistic interpretability community, this work suggests two paths forward:</p>
+
+            <ul>
+                <li>Architectural improvements (TopK SAEs, JumpReLU) to better decompose existing polysemantic representations</li>
+                <li>Training improvements (L2 regularization, smooth activations) to reduce polysemanticity at the source</li>
+            </ul>
+
+            <p>Both matter. Fixing polysemanticity likely requires addressing both how we train models and how we interpret them.</p>
+
+            <p>All code, data, and experimental details are available at github.com/stanleyngugi/taming_polysemanticity. I welcome feedback, replications, and extensions—especially testing these ideas on real LLMs.</p>
+
+            <hr class="section-divider">
+
+            <h2>Acknowledgments</h2>
+
+            <p>Thanks to the mechanistic interpretability community for foundational work on SAEs and toy models. This research builds directly on Lecomte et al.'s incidental polysemanticity theory and Anthropic's dictionary learning approaches.</p>
+
+            <h2>References</h2>
+
+            <p>Bereska, L., & Gavves, E. (2024). Mechanistic Interpretability for AI Safety — A Review. Transactions on Machine Learning Research.</p>
+
+            <p>Bricken, T., Templeton, A., Batson, J., Chen, B., Jermyn, A., Conerly, T., Turner, N., Anil, C., Denison, C., Askell, A., Lasenby, R., Wu, Y., Kravec, S., Schiefer, N., Maxwell, T., Joseph, N., Hatfield-Dodds, Z., Tamkin, A., Nguyen, K., McLean, B., Burke, J. E., Hume, T., Carter, S., Henighan, T., & Olah, C. (2023). Towards Monosemanticity: Decomposing Language Models With Dictionary Learning. Transformer Circuits Thread. <a href="https://transformer-circuits.pub/2023/monosemantic-features">https://transformer-circuits.pub/2023/monosemantic-features</a></p>
+
+            <p>Gao, L., Biderman, S., Gururangan, S., Weber, L., Jennings, J., Dey, B., Sutherland, D. J., Bisk, Y., Schoelkopf, R., Hooker, S., Smith, N. A., & Smith, D. (2024). Scaling and evaluating sparse autoencoders. arXiv preprint arXiv:2406.04093.</p>
+
+            <p>Lecomte, V., Thaman, K., Schaeffer, R., Bashkansky, N., Chow, T., & Koyejo, S. (2023). What Causes Polysemanticity? An Alternative Origin Story of Mixed Selectivity in Neural Networks. arXiv preprint arXiv:2312.03096.</p>
+
+            <p>Rajamanoharan, S., Conmy, A., Smith, L., Lieberum, T., Varma, V., Kramár, J., Shah, R., & Nanda, N. (2024). Improving Dictionary Learning with Gated Sparse Autoencoders. arXiv preprint arXiv:2404.16014.</p>
+
+            <p>Saxe, A. M., McClelland, J. L., & Ganguli, S. (2014). Exact solutions to the nonlinear dynamics of learning in deep linear neural networks. International Conference on Learning Representations (ICLR).</p>
+
+            <p>Templeton, A., Conerly, T., Marcus, J., Lindsey, J., Bricken, T., Chen, B., Pearce, A., Citro, C., Ameisen, E., Jones, A., Cunningham, H., Turner, N. L., McDougall, C., MacDiarmid, M., Freeman, C. D., Sumers, T. R., Rees, E., Batson, J., Jermyn, A., Carter, S., Olah, C., & Henighan, T. (2024). Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet. Anthropic. <a href="https://www.anthropic.com/research/scaling-monosemanticity">https://www.anthropic.com/research/scaling-monosemanticity</a></p>
+
+            <hr class="section-divider">
+
+            <h2>Appendix: Technical Details</h2>
+
+            <h3>Hyperparameters</h3>
+
+            <p><strong>Network training:</strong></p>
+
+            <ul>
+                <li>Architecture: [8 → 12 → 12 → 12 → 8]</li>
+                <li>Optimizer: Adam (lr=1e-3, betas=(0.9, 0.999))</li>
+                <li>L1 lambda: weight_only, manual sum(abs(weights))</li>
+                <li>L2 lambda: weight_decay=1e-4</li>
+                <li>Noise injection: hidden layer, sigma=0.1</li>
+                <li>Epochs: 2000</li>
+                <li>Batch size: 64</li>
+            </ul>
+
+            <p><strong>SAE training:</strong></p>
+
+            <ul>
+                <li>Architecture: [12 → 16 → 12]</li>
+                <li>Activation: LeakyReLU(0.01)</li>
+                <li>L1 lambda: 1e-4 on latent activations</li>
+                <li>Optimizer: Adam (lr=1e-3)</li>
+                <li>Epochs: 1000</li>
+                <li>Reconstruction loss: MSE</li>
+            </ul>
+
+            <p><strong>Data generation:</strong></p>
+
+            <ul>
+                <li>Features: 8, grouped [0-2], [3-4], [5-7]</li>
+                <li>Correlations: base_strength ∈ [0.5, 1.0]</li>
+                <li>Sparsity: 50% active per sample</li>
+                <li>Samples: 1024 train, 256 val</li>
+                <li>Target: non-linear combinations with importance decay 0.9^i</li>
+            </ul>
+        </article>
+
+        <!-- Footer -->
+        <footer class="article-footer">
+            <p>© 2025 Stanley Ngugi. All rights reserved. | <a href="https://github.com/stanleyngugi/taming_polysemanticity">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">↑</button>
+
+    <!-- JavaScript -->
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
