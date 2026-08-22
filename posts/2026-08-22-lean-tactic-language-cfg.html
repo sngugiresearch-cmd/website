@@ -59,7 +59,7 @@
 
                 <p>This objection sounds right and is almost exactly backwards. The question was never "how big is Lean's <em>grammar</em>?" (infinite — it's a macro language with a metaprogramming escape hatch, by design). The question is: <strong>how big is the subset of Lean's tactic language that people actually use?</strong> That's an empirical question, and empiricism is cheap: Mathlib is public, it's huge, and it's written by the most expert tactic users on earth.</p>
 
-                <p>So we built a context-free grammar for the Lean 4 tactic sublanguage from scratch, measured it against every tactic line in all of Mathlib, and then checked whether the same methodology transfers to other proof assistants. This post is about what the corpus taught us. (A companion post applies this grammar as a decoder constraint and measures what happens; this one is about its construction and comprehensiveness.)</p>
+                <p>So we built a context-free grammar for the Lean 4 tactic sublanguage from scratch, measured it against every tactic line in all of Mathlib, and then checked whether the same methodology transfers to other proof assistants. This post is about what the corpus taught us. (<a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html">A companion post</a> applies this grammar as a decoder constraint and measures what happens; this one is about its construction and comprehensiveness.)</p>
 
                 <h2>The design: copy Lean's own parser, not a textbook</h2>
 
@@ -226,7 +226,7 @@ macro "discharge_linear" e1:term:max e2:term:max : tactic =&gt;
 
                 <p>Coverage of real text is not constraint strength. Our grammar achieves 99.86% <em>because</em> it is permissive by design — the catch-all admits essentially anything identifier-led, and <code>ARGS</code> swallows arbitrary terms. Accepting nearly everything real mathematicians wrote says little about how much garbage it rejects. Those are different measurements, and the second one is what matters if you want to put the grammar in a decoder's sampling loop as a logit mask.</p>
 
-                <p>We did exactly that. Results — including what fraction of a modern model's tokens die at the parser without the mask, what happens to hallucinated lemma names (spoiler: nothing good, and instructively so), and two infrastructure bugs that silently unmask "constrained" decoding — are in the companion post.</p>
+                <p>We did exactly that. Results — including what fraction of a modern model's tokens die at the parser without the mask, what happens to hallucinated lemma names (spoiler: nothing good, and instructively so), and two infrastructure bugs that silently unmask "constrained" decoding — <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html">are in the companion post</a>.</p>
 
                 <hr style="margin: 48px 0;">
 

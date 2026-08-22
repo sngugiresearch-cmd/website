@@ -7,6 +7,13 @@
     <language>en-us</language>
     <atom:link href="https://stanleyngugi.netlify.app/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>A Quarter of Your Prover's Tokens Never Reach the Judge</title>
+      <link>https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</link>
+      <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</guid>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Grammar-constrained decoding makes 100% of generated Lean tactics parseable at zero latency cost — while hallucination stays at ~50%. That asymmetry is the point.</description>
+    </item>
+    <item>
       <title>Lean's Tactic Language Is Smaller Than It Looks</title>
       <link>https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</guid>
