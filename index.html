@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stanley Ngugi — Mechanistic Interpretability</title>
-    <meta name="description" content="Stanley Ngugi is a mechanistic interpretability researcher reverse-engineering neural networks. Technical writing on interpretability, LLMs, and ML research.">
-    <meta property="og:title" content="Stanley Ngugi — Mechanistic Interpretability">
-    <meta property="og:description" content="Reverse engineering neural networks. Research and technical writing on interpretability and LLMs.">
-    <meta property="og:type" content="website">
+    <title>Stanley Ngugi</title>
+    <meta name="description" content="Stanley Ngugi reverse engineers neural networks — mechanistic interpretability research and technical writing from Nairobi, Kenya.">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
     <script>
@@ -28,130 +25,81 @@
     <div class="container">
         <header>
             <div class="header-inner">
-                <a href="/" class="logo">stanley<span>></span></a>
-                <nav>
-                    <a href="/">home</a>
-                    <a href="/posts.html">blog</a>
-                    <a href="/research.html">research</a>
-                    <a href="/cv.html">cv</a>
-                    <a href="/about.html">about</a>
-                    <button class="theme-btn" aria-label="Toggle theme">
-                        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                    </button>
-                </nav>
+                <a href="/" class="logo">stanley<span>&gt;</span></a>
+                <button class="theme-btn" aria-label="Toggle theme">
+                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
             </div>
         </header>
 
         <main>
-            <section class="hero">
-                <h1>Hi, I'm Stanley.<br>I reverse engineer neural networks <em>&lt;to see how they think&gt;</em></h1>
-                <p class="tagline">
-                    Mechanistic interpretability researcher based in Nairobi, Kenya.
-                    I work on understanding how language models represent knowledge internally —
-                    circuits, features, polysemanticity, and precise knowledge editing — and I write
-                    about it here.
+            <div class="intro">
+                <h1>I reverse engineer neural networks.</h1>
+                <p>
+                    Mechanistic interpretability researcher in Nairobi, Kenya. I study how language
+                    models represent knowledge internally — circuits, features, polysemanticity,
+                    precise knowledge editing — and write about it here.
                 </p>
-                <div class="hero-links">
-                    <a href="/posts/taming_polysemanticity.html" class="pill primary">Latest: Taming Incidental Polysemanticity →</a>
-                    <a href="/cv.html" class="pill">CV</a>
-                    <a href="mailto:sngugi.research@gmail.com" class="pill">Email</a>
-                    <a href="https://github.com/stanleyngugi" class="pill">GitHub</a>
-                    <a href="/rss.xml" class="pill">RSS</a>
+                <div class="links-row">
+                    <a href="mailto:sngugi.research@gmail.com">email</a>
+                    <a href="https://github.com/stanleyngugi">github</a>
+                    <a href="/cv.html">cv</a>
+                    <a href="/rss.xml">rss</a>
                 </div>
+            </div>
+
+            <section class="block">
+                <h2 class="block-title">Writing</h2>
+                <a href="/posts/taming_polysemanticity.html" class="entry">
+                    <div class="entry-title">Taming Incidental Polysemanticity in Toy Models</div>
+                    <div class="entry-meta">Oct 19, 2025 · 20 min</div>
+                    <div class="entry-desc">
+                        Do training choices shape feature entanglement? SAE-based measurements across
+                        regularization, init, activations and noise — L2 beat L1 by 17.9%.
+                    </div>
+                </a>
             </section>
 
-            <section style="margin-bottom: 80px;">
-                <div class="section-header">
-                    <h2 class="section-title">// Research</h2>
-                    <a href="/research.html" class="section-link">all research →</a>
-                </div>
-                <div class="card-list">
-                    <a href="https://arxiv.org/html/2508.07075v1" class="card">
-                        <div class="card-meta">
-                            <span class="venue">arXiv preprint</span>
-                            <span>Aug 2025</span>
-                            <span class="tag">Knowledge Editing</span>
-                        </div>
-                        <h3>Surgical Knowledge Rewrite in Compact LLMs: An 'Unlearn-then-Learn' Strategy with ((IA)³)</h3>
-                        <p class="excerpt">
-                            A mechanistically informed two-stage strategy achieving 98.50% accuracy on new facts
-                            while suppressing conflicting ones (96%) and dramatically mitigating catastrophic forgetting.
-                        </p>
-                    </a>
-
-                    <a href="https://arxiv.org/html/2506.15415v1" class="card">
-                        <div class="card-meta">
-                            <span class="venue">arXiv preprint</span>
-                            <span>Jun 2025</span>
-                            <span class="tag">Cross-lingual Alignment</span>
-                        </div>
-                        <h3>Targeted Lexical Injection: Unlocking Latent Cross-Lingual Alignment in Lugha-Llama via Early-Layer LoRA Fine-Tuning</h3>
-                        <p class="excerpt">
-                            Revealing near-perfect early-layer Swahili–English alignment inside a Swahili-centric LLM,
-                            then amplifying it at output level (+28%) with a contrastive LoRA objective.
-                        </p>
-                    </a>
-
-                    <a href="/posts/taming_polysemanticity.html" class="card">
-                        <div class="card-meta">
-                            <span class="venue">Technical blog post</span>
-                            <span>Oct 2025</span>
-                            <span class="tag">Polysemanticity</span>
-                        </div>
-                        <h3>Taming Incidental Polysemanticity in Toy Models</h3>
-                        <p class="excerpt">
-                            Using sparse autoencoders to measure feature entanglement across training choices:
-                            L2 regularization produced 17.9% less polysemantic representations than L1 (p&lt;0.01).
-                        </p>
-                    </a>
-                </div>
+            <section class="block" id="research">
+                <h2 class="block-title">Research</h2>
+                <a href="https://arxiv.org/abs/2508.07075" class="entry">
+                    <div class="entry-title">Surgical Knowledge Rewrite in Compact LLMs: An 'Unlearn-then-Learn' Strategy with ((IA)³)</div>
+                    <div class="entry-meta">arXiv · Aug 2025</div>
+                    <div class="entry-desc">
+                        Circuit-localized knowledge editing with (IA)³: 98.5% accuracy on new facts,
+                        96% suppression of conflicting ones, catastrophic forgetting nearly eliminated.
+                    </div>
+                </a>
+                <a href="https://arxiv.org/abs/2506.15415" class="entry">
+                    <div class="entry-title">Targeted Lexical Injection: Unlocking Latent Cross-Lingual Alignment in Lugha-Llama via Early-Layer LoRA Fine-Tuning</div>
+                    <div class="entry-meta">arXiv · Jun 2025</div>
+                    <div class="entry-desc">
+                        Lugha-Llama already encodes near-perfect Swahili–English alignment at Layer 2;
+                        a contrastive LoRA objective amplifies it +28% at the output layer.
+                    </div>
+                </a>
+                <a href="/posts/taming_polysemanticity.html" class="entry">
+                    <div class="entry-title">Taming Incidental Polysemanticity in Toy Models</div>
+                    <div class="entry-meta">Blog post · Oct 2025</div>
+                    <div class="entry-desc">
+                        Exploratory ablations with sparse autoencoders showing training dynamics —
+                        not just SAE architecture — shape interpretability outcomes.
+                    </div>
+                </a>
             </section>
 
-            <section style="margin-bottom: 80px;">
-                <div class="section-header">
-                    <h2 class="section-title">// Writing</h2>
-                    <a href="/posts.html" class="section-link">all posts →</a>
-                </div>
-                <div class="card-list">
-                    <a href="/posts/taming_polysemanticity.html" class="card">
-                        <div class="card-meta">
-                            <span>Oct 19, 2025</span>
-                            <span class="tag">Interpretability</span>
-                            <span class="tag">Sparse Autoencoders</span>
-                        </div>
-                        <h3>Taming Incidental Polysemanticity in Toy Models</h3>
-                        <p class="excerpt">
-                            An exploratory ablation study on whether training choices — regularization,
-                            initialization, activation functions, noise — shape the polysemanticity of learned features.
-                        </p>
-                    </a>
-                </div>
-            </section>
-
-            <section>
-                <div class="section-header">
-                    <h2 class="section-title">// Now</h2>
-                </div>
-                <div class="card">
-                    <p class="excerpt" style="font-size: 13.5px;">
-                        Currently investigating <strong>metacognition circuits</strong> in large language models —
-                        whether and where models encode knowledge about their own uncertainty. Broader interests:
-                        polysemanticity, circuit analysis, and safe knowledge editing.
-                    </p>
-                </div>
+            <section class="block">
+                <h2 class="block-title">Now</h2>
+                <p style="font-size: 13px;">
+                    Investigating metacognition circuits in LLMs — whether and where models encode
+                    knowledge about their own uncertainty.
+                </p>
             </section>
         </main>
 
         <footer>
-            <div class="footer-inner">
-                <span>© 2026 Stanley Ngugi</span>
-                <nav>
-                    <a href="mailto:sngugi.research@gmail.com">email</a>
-                    <a href="https://github.com/stanleyngugi">github</a>
-                    <a href="/rss.xml">rss</a>
-                </nav>
-            </div>
+            © 2026 Stanley Ngugi
         </footer>
     </div>
 

@@ -4,8 +4,8 @@
   POST TEMPLATE — how to publish a new post:
   1. Copy this file to /posts/2026-08-22-your-title.html
   2. Fill in title, date, tags, and content below.
-  3. Add a matching card to the list on /posts.html (copy the existing card block,
-     update link/date/tags, and put searchable keywords into data-title).
+  3. Add a matching entry to the list on /posts.html and on the home page
+     (title + date + one-line description, steipete-style).
   4. Add an <item> entry to /rss.xml.
 -->
 <head>
@@ -33,18 +33,11 @@
     <div class="container">
         <header>
             <div class="header-inner">
-                <a href="/" class="logo">stanley<span>></span></a>
-                <nav>
-                    <a href="/">home</a>
-                    <a href="/posts.html">blog</a>
-                    <a href="/research.html">research</a>
-                    <a href="/cv.html">cv</a>
-                    <a href="/about.html">about</a>
-                    <button class="theme-btn" aria-label="Toggle theme">
-                        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                    </button>
-                </nav>
+                <a href="/" class="logo">stanley<span>&gt;</span></a>
+                <button class="theme-btn" aria-label="Toggle theme">
+                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
             </div>
         </header>
 
@@ -54,12 +47,7 @@
             <article class="prose">
                 <header class="article-header">
                     <h1>[Post Title]</h1>
-                    <div class="card-meta">
-                        <span>[Month Day, Year]</span>
-                        <span>[X] min read</span>
-                        <span class="tag">[tag-one]</span>
-                        <span class="tag">[tag-two]</span>
-                    </div>
+                    <div class="entry-meta">[Month Day, Year] · [X] min read · [tag-one], [tag-two]</div>
                 </header>
 
                 <p><strong>TL;DR:</strong> [One or two sentences summarizing the finding and why it matters.]</p>
@@ -67,7 +55,7 @@
                 <h2>Section heading</h2>
                 <p>
                     Body text goes here. Inline <code>code</code>, <em>italics</em>, and
-                    <strong>bold</strong> all work as expected.
+                    <strong>bold</strong> all work as expected. <a href="#">Links are accent-colored</a>.
                 </p>
 
                 <pre><code>python code blocks look like this</code></pre>
@@ -90,14 +78,7 @@
         </main>
 
         <footer>
-            <div class="footer-inner">
-                <span>© 2026 Stanley Ngugi</span>
-                <nav>
-                    <a href="mailto:sngugi.research@gmail.com">email</a>
-                    <a href="https://github.com/stanleyngugi">github</a>
-                    <a href="/rss.xml">rss</a>
-                </nav>
-            </div>
+            © 2026 Stanley Ngugi
         </footer>
     </div>
 

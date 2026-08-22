@@ -22,27 +22,20 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <header class="no-print">
             <div class="header-inner">
-                <a href="/" class="logo">stanley<span>></span></a>
-                <nav>
-                    <a href="/">home</a>
-                    <a href="/posts.html">blog</a>
-                    <a href="/research.html">research</a>
-                    <a href="/cv.html" class="active">cv</a>
-                    <a href="/about.html">about</a>
-                    <button class="theme-btn no-print" aria-label="Toggle theme">
-                        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                    </button>
-                </nav>
+                <a href="/" class="logo">stanley<span>&gt;</span></a>
+                <button class="theme-btn" aria-label="Toggle theme">
+                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
             </div>
         </header>
 
         <main>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;">
-                <span style="color: var(--muted); font-size: 12px;">This page is my CV — print it to PDF for a copy.</span>
-                <button class="print-btn no-print" onclick="window.print()">Download PDF</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px;">
+                <a href="/" style="color: var(--muted); font-size: 13px;">← back home</a>
+                <button class="print-btn" onclick="window.print()">print / save as PDF</button>
             </div>
 
             <div class="cv-page">
@@ -173,14 +166,7 @@
         </main>
 
         <footer class="no-print">
-            <div class="footer-inner">
-                <span>© 2026 Stanley Ngugi</span>
-                <nav>
-                    <a href="mailto:sngugi.research@gmail.com">email</a>
-                    <a href="https://github.com/stanleyngugi">github</a>
-                    <a href="/rss.xml">rss</a>
-                </nav>
-            </div>
+            © 2026 Stanley Ngugi
         </footer>
     </div>
 
