@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Stanley Ngugi</title>
+    <meta name="description" content="Curriculum vitae of Stanley Ngugi, mechanistic interpretability researcher.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-inner">
+                <a href="/" class="logo">stanley<span>></span></a>
+                <nav>
+                    <a href="/">home</a>
+                    <a href="/posts.html">blog</a>
+                    <a href="/research.html">research</a>
+                    <a href="/cv.html" class="active">cv</a>
+                    <a href="/about.html">about</a>
+                    <button class="theme-btn no-print" aria-label="Toggle theme">
+                        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;">
+                <span style="color: var(--muted); font-size: 12px;">This page is my CV — print it to PDF for a copy.</span>
+                <button class="print-btn no-print" onclick="window.print()">Download PDF</button>
+            </div>
+
+            <div class="cv-page">
+                <div class="cv-topbar">
+                    <div>
+                        <div class="cv-name">Stanley Ngugi</div>
+                        <div class="cv-role">Mechanistic Interpretability Researcher</div>
+                    </div>
+                    <div class="cv-contact">
+                        Nairobi, Kenya<br>
+                        <a href="mailto:sngugi.research@gmail.com">sngugi.research@gmail.com</a><br>
+                        <a href="https://github.com/stanleyngugi">github.com/stanleyngugi</a><br>
+                        <a href="https://stanleyngugi.netlify.app">stanleyngugi.netlify.app</a>
+                    </div>
+                </div>
+
+                <section class="cv-section">
+                    <h2>Research Interests</h2>
+                    <p>
+                        Mechanistic interpretability of large language models: knowledge editing and model
+                        editing, polysemanticity and feature entanglement, circuit analysis, cross-lingual
+                        representations in low-resource languages, and metacognition/uncertainty circuits.
+                    </p>
+                </section>
+
+                <section class="cv-section">
+                    <h2>Education</h2>
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title">Self-directed study — machine learning &amp; mechanistic interpretability</span>
+                            <span class="cv-item-sub">2023 – present</span>
+                        </div>
+                        <ul>
+                            <li>Advanced mathematics for ML (linear algebra, calculus, probability, variational inference), transformer architectures, and PEFT methods, built from first principles through hands-on experimentation.</li>
+                            <!-- TODO: add formal education / degree / notable coursework here -->
+                            <li><em>[Add formal education details here]</em></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="cv-section">
+                    <h2>Publications &amp; Preprints</h2>
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title"><a href="https://arxiv.org/abs/2508.07075">Surgical Knowledge Rewrite in Compact LLMs: An 'Unlearn-then-Learn' Strategy with ((IA)³) for Localized Factual Modulation and Catastrophic Forgetting Mitigation</a></span>
+                            <span class="cv-item-sub">2025</span>
+                        </div>
+                        <ul>
+                            <li><span>Solo author. arXiv:2508.07075.</span> Circuit-localized two-stage knowledge editing with (IA)³ on Phi-3-mini; 98.50% new-fact accuracy, 96% suppression of conflicting fact, 72% localization accuracy vs ~20% for direct fine-tuning.</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title"><a href="https://arxiv.org/abs/2506.15415">Targeted Lexical Injection: Unlocking Latent Cross-Lingual Alignment in Lugha-Llama via Early-Layer LoRA Fine-Tuning</a></span>
+                            <span class="cv-item-sub">2025</span>
+                        </div>
+                        <ul>
+                            <li><span>Solo author. arXiv:2506.15415.</span> Discovered latent near-perfect Swahili–English alignment at Layer 2 of Lugha-Llama-8B-wura; contrastive LoRA fine-tuning improved output-level alignment +28% and generalized to unseen word pairs (p &lt; 7.17 × 10⁻²⁷).</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title"><a href="https://stanleyngugi.netlify.app/posts/taming_polysemanticity.html">Taming Incidental Polysemanticity in Toy Models: How Network Training Choices Affect Feature Entanglement</a></span>
+                            <span class="cv-item-sub">2025</span>
+                        </div>
+                        <ul>
+                            <li><span>Technical blog post with full code.</span> SAE-based measurement of feature entanglement across training configurations; L2 regularization reduced polysemanticity 17.9% vs L1 (p&lt;0.01).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="cv-section">
+                    <h2>Research Experience</h2>
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title">Independent Researcher — interpretability of open-weight LLMs</span>
+                            <span class="cv-item-sub">2024 – present</span>
+                        </div>
+                        <ul>
+                            <li>Designed and ran circuit-localization pipelines to identify components encoding specific facts before targeted PEFT interventions (<a href="https://github.com/stanleyngugi/surgical_knowledge_editing">code</a>).</li>
+                            <li>Built contrastive-learning LoRA training setups targeting empirically identified optimal layers for cross-lingual alignment (<a href="https://github.com/stanleyngugi/tli_project">code</a>).</li>
+                            <li>Trained toy overcomplete networks and sparse autoencoders to quantify polysemanticity under different regularization schemes (<a href="https://github.com/stanleyngugi/taming_polysemanticity">code</a>).</li>
+                        </ul>
+                    </div>
+                    <!-- TODO: add internships, collaborations, mentorships if any
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title">[Role] — [Organization]</span>
+                            <span class="cv-item-sub">[Dates]</span>
+                        </div>
+                    </div>
+                    -->
+                </section>
+
+                <section class="cv-section">
+                    <h2>Technical Skills</h2>
+                    <dl class="cv-skills">
+                        <dt>Languages</dt>
+                        <dd>Python, Git, SQL (basic)</dd>
+                        <dt>ML frameworks</dt>
+                        <dd>PyTorch, Hugging Face Transformers, PEFT (LoRA, (IA)³), PEFT/training tooling</dd>
+                        <dt>Interpretability</dt>
+                        <dd>Sparse autoencoders, circuit analysis, activation patching, probing, logit lens</dd>
+                        <dt>Data &amp; analysis</dt>
+                        <dd>NumPy, pandas, matplotlib, statistical testing (scipy)</dd>
+                        <dt>Infra &amp; tooling</dt>
+                        <dd>Linux, Jupyter, Weights &amp; Biases, Google Colab / cloud GPUs</dd>
+                        <dt>Writing</dt>
+                        <dd>LaTeX, technical blogging, research communication</dd>
+                    </dl>
+                </section>
+
+                <section class="cv-section">
+                    <h2>Languages</h2>
+                    <p>English (fluent) · Swahili (native) · <em>[adjust as accurate]</em></p>
+                </section>
+
+                <section class="cv-section">
+                    <h2>References</h2>
+                    <p style="color: inherit;">Available on request.</p>
+                </section>
+
+                <p style="margin-top: 34px; font-size: 11px; color: var(--muted);">
+                    Last updated: August 2026 · Latest version always at
+                    <a href="https://stanleyngugi.netlify.app/cv.html">stanleyngugi.netlify.app/cv.html</a>
+                </p>
+            </div>
+        </main>
+
+        <footer class="no-print">
+            <div class="footer-inner">
+                <span>© 2026 Stanley Ngugi</span>
+                <nav>
+                    <a href="mailto:sngugi.research@gmail.com">email</a>
+                    <a href="https://github.com/stanleyngugi">github</a>
+                    <a href="/rss.xml">rss</a>
+                </nav>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/main.js"></script>
+</body>
+</html>

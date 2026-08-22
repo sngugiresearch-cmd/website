@@ -1,0 +1,2 @@
+/posts/* /archive/posts/:splat 200
+/files/* /archive/files/:splat 200
