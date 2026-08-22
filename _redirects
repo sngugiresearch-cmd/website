@@ -2,3 +2,5 @@
 /files/* /archive/files/:splat 200
 /research.html / 301
 /about.html / 301
+
+/posts.html / 301

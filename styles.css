@@ -120,6 +120,7 @@ main {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .links-row a {
@@ -129,6 +130,32 @@ main {
 
 .links-row a:hover {
   color: var(--text);
+}
+
+.pill-primary {
+  background: var(--accent);
+  color: #0B0B10;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 7px;
+}
+
+.pill-primary:hover {
+  opacity: 0.88;
+}
+
+.pill-primary::after {
+  display: none;
+}
+
+.nav-cv {
+  font-size: 14px;
+  color: var(--subtle);
+  margin-right: 10px;
+}
+
+.nav-cv:hover {
+  color: var(--accent);
 }
 
 /* t3-style animated underline */

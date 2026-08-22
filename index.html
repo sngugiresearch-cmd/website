@@ -26,10 +26,13 @@
         <header>
             <div class="header-inner">
                 <a href="/" class="logo">stanley<span>&gt;</span></a>
-                <button class="theme-btn" aria-label="Toggle theme">
-                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                </button>
+                <div style="display: flex; align-items: center;">
+                    <a href="/cv.html" class="nav-cv">cv</a>
+                    <button class="theme-btn" aria-label="Toggle theme">
+                        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -42,27 +45,12 @@
                     precise knowledge editing — and write about it here.
                 </p>
                 <div class="links-row">
+                    <a href="/cv.html" class="pill-primary">CV</a>
                     <a href="mailto:sngugi.research@gmail.com">email</a>
                     <a href="https://github.com/stanleyngugi">github</a>
-                    <a href="/cv.html">cv</a>
                     <a href="/rss.xml">rss</a>
                 </div>
             </div>
-
-            <section class="block">
-                <h2 class="block-title">Writing</h2>
-                <a href="/posts/taming_polysemanticity.html" class="entry">
-                    <div class="entry-top">
-                        <span class="entry-title">Taming Incidental Polysemanticity in Toy Models</span>
-                        <span class="entry-date">Oct 2025</span>
-                    </div>
-                    <div class="entry-desc">
-                        Do training choices shape feature entanglement? SAE-based measurements across
-                        regularization, init, activations and noise — L2 beat L1 by 17.9%.
-                    </div>
-                </a>
-                <a href="/posts.html" class="more-link">all posts →</a>
-            </section>
 
             <section class="block" id="research">
                 <h2 class="block-title">Research</h2>
@@ -94,6 +82,21 @@
                     <div class="entry-desc">
                         Exploratory ablations with sparse autoencoders showing training dynamics —
                         not just SAE architecture — shape interpretability outcomes.
+                    </div>
+                </a>
+            </section>
+
+            <section class="block">
+                <h2 class="block-title">Writing</h2>
+                <div class="year-label" style="font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 4px;">2025</div>
+                <a href="/posts/taming_polysemanticity.html" class="entry">
+                    <div class="entry-top">
+                        <span class="entry-title">Taming Incidental Polysemanticity in Toy Models</span>
+                        <span class="entry-date">Oct 19</span>
+                    </div>
+                    <div class="entry-desc">
+                        Do training choices shape feature entanglement? SAE-based measurements across
+                        regularization, init, activations and noise — L2 beat L1 by 17.9%.
                     </div>
                 </a>
             </section>
