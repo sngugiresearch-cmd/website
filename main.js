@@ -1,4 +1,13 @@
 (function () {
+  var ANALYTICS_CODE = '';
+  if (ANALYTICS_CODE) {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://gc.zgo.at/count.js';
+    s.setAttribute('data-goatcounter', 'https://' + ANALYTICS_CODE + '.goatcounter.com/count');
+    document.body.appendChild(s);
+  }
+
   var btn = document.querySelector('.theme-btn');
   if (btn) {
     btn.addEventListener('click', function () {

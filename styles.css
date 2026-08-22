@@ -375,6 +375,75 @@ section.block {
   text-decoration: underline;
 }
 
+/* distill-style artifacts */
+.tldr-box {
+  border-left: 3px solid var(--accent);
+  background: rgba(127, 127, 140, 0.08);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+}
+
+.tldr-box .tldr-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.tldr-box p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.7;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 24px 0 28px;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.prose th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--bright);
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.prose td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.prose tbody tr:hover {
+  background: rgba(127, 127, 140, 0.06);
+}
+
+.prose strong {
+  color: var(--bright);
+  font-weight: 600;
+}
+
+.prose li::marker {
+  color: var(--muted);
+}
+
 /* ---------- CV ---------- */
 .cv-page {
   font-size: 14px;

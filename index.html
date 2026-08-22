@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stanley Ngugi</title>
     <meta name="description" content="Stanley Ngugi reverse engineers neural networks — mechanistic interpretability research and technical writing from Nairobi, Kenya.">
+    <meta property="og:title" content="Stanley Ngugi">
+    <meta property="og:description" content="Reverse engineering neural networks. Research & writing on mechanistic interpretability.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stanleyngugi.netlify.app/">
+    <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
     <script>
@@ -75,8 +81,9 @@
                         <span class="entry-date">arXiv · Aug 2025</span>
                     </div>
                     <div class="entry-desc">
-                        Circuit-localized knowledge editing with (IA)³: 98.5% accuracy on new facts,
-                        96% suppression of conflicting ones, catastrophic forgetting nearly eliminated.
+                        Locate a fact's circuit first, then unlearn-then-learn with (IA)³: 98.5% edit
+                        accuracy on Phi-3-mini while control-fact retention more than triples versus
+                        direct fine-tuning (72% vs ~20%) — and suppressed knowledge stays latent, not gone.
                     </div>
                 </a>
                 <a href="https://arxiv.org/abs/2506.15415" class="entry">
@@ -85,8 +92,9 @@
                         <span class="entry-date">arXiv · Jun 2025</span>
                     </div>
                     <div class="entry-desc">
-                        Lugha-Llama already encodes near-perfect Swahili–English alignment at Layer 2;
-                        a contrastive LoRA objective amplifies it +28% at the output layer.
+                        Swahili–English alignment was already near-perfect inside Lugha-Llama at Layer 2
+                        (cosine 0.99998) — just lost by the output layer (0.32). Early-layer contrastive
+                        LoRA brings it back: +28%, generalizing to unseen words.
                     </div>
                 </a>
             </section>
