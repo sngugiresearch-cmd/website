@@ -3,7 +3,7 @@
   <channel>
     <title>Stanley Ngugi</title>
     <link>https://stanleyngugi.netlify.app/</link>
-    <description>Technical writing on mechanistic interpretability, LLMs, and machine learning research.</description>
+    <description>Technical writing by Stanley Ngugi on AI for formal methods — LLM theorem proving, grammar-constrained decoding, RL environments — and machine learning research.</description>
     <language>en-us</language>
     <atom:link href="https://stanleyngugi.netlify.app/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
