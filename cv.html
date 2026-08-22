@@ -57,7 +57,8 @@
                     <p>
                         Mechanistic interpretability of large language models: knowledge editing and model
                         editing, polysemanticity and feature entanglement, circuit analysis, cross-lingual
-                        representations in low-resource languages, and metacognition/uncertainty circuits.
+                        representations in low-resource languages, grammar-constrained decoding for LLM
+                        theorem proving, and metacognition/uncertainty circuits.
                     </p>
                 </section>
 
@@ -78,6 +79,24 @@
 
                 <section class="cv-section">
                     <h2>Publications &amp; Preprints</h2>
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title"><a href="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html">A Quarter of Your Prover's Tokens Never Reach the Judge</a></span>
+                            <span class="cv-item-sub">2026</span>
+                        </div>
+                        <ul>
+                            <li><span>Technical blog post with artifacts.</span> First application of grammar-constrained decoding (vLLM + llguidance) to Lean tactic generation: 100% syntactic validity at zero latency cost, ~50% more effective RL rollouts, and a documented silent-fallback failure mode in serving stacks.</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-head">
+                            <span class="cv-item-title"><a href="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html">Lean's Tactic Language Is Smaller Than It Looks</a></span>
+                            <span class="cv-item-sub">2026</span>
+                        </div>
+                        <ul>
+                            <li><span>Technical blog post with artifacts.</span> 53-production context-free grammar covering 99.86% of all 144,154 tactic lines in Mathlib; methodology cross-validated on Rocq (98.81%) and Isabelle (95.47%).</li>
+                        </ul>
+                    </div>
                     <div class="cv-item">
                         <div class="cv-item-head">
                             <span class="cv-item-title"><a href="https://arxiv.org/abs/2508.07075">Surgical Knowledge Rewrite in Compact LLMs: An 'Unlearn-then-Learn' Strategy with ((IA)³) for Localized Factual Modulation and Catastrophic Forgetting Mitigation</a></span>
@@ -118,6 +137,7 @@
                             <li>Designed and ran circuit-localization pipelines to identify components encoding specific facts before targeted PEFT interventions (<a href="https://github.com/stanleyngugi/surgical_knowledge_editing">code</a>).</li>
                             <li>Built contrastive-learning LoRA training setups targeting empirically identified optimal layers for cross-lingual alignment (<a href="https://github.com/stanleyngugi/tli_project">code</a>).</li>
                             <li>Trained toy overcomplete networks and sparse autoencoders to quantify polysemanticity under different regularization schemes (<a href="https://github.com/stanleyngugi/taming_polysemanticity">code</a>).</li>
+                            <li>Built a context-free grammar and corpus extractor for the Lean 4 tactic sublanguage (99.86% coverage of Mathlib; cross-validated on Rocq and Isabelle), then benchmarked grammar-constrained decoding of Qwen2.5-Coder-7B and Goedel-Prover-V2 via vLLM + llguidance.</li>
                         </ul>
                     </div>
                     <!-- TODO: add internships, collaborations, mentorships if any
@@ -139,6 +159,8 @@
                         <dd>PyTorch, Hugging Face Transformers, PEFT (LoRA, (IA)³)</dd>
                         <dt>Interpretability</dt>
                         <dd>Sparse autoencoders, circuit analysis, activation patching, probing, logit lens</dd>
+                        <dt>Formal methods &amp; decoding</dt>
+                        <dd>Lean 4 tactic language tooling, context-free grammar engineering, vLLM structured outputs (llguidance), constrained decoding; Rocq/Isabelle corpus extraction</dd>
                         <dt>Data &amp; analysis</dt>
                         <dd>NumPy, pandas, matplotlib, statistical testing (scipy)</dd>
                         <dt>Infra &amp; tooling</dt>
