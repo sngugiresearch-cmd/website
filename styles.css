@@ -122,7 +122,13 @@ main {
 
 /* ---------- Sections ---------- */
 section.block {
-  margin-top: 74px;
+  margin-top: 52px;
+  padding-top: 42px;
+  border-top: 1px solid var(--border);
+}
+
+.intro + section.block {
+  margin-top: 56px;
 }
 
 .block-title {
