@@ -228,10 +228,59 @@ macro "discharge_linear" e1:term:max e2:term:max : tactic =&gt;
 
                 <p>We did exactly that. Results — including what fraction of a modern model's tokens die at the parser without the mask, what happens to hallucinated lemma names (spoiler: nothing good, and instructively so), and two infrastructure bugs that silently unmask "constrained" decoding — <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html">are in the companion post</a>.</p>
 
+                <h2>Addendum: we measured constraint strength the same day</h2>
+
+                <p>This post deliberately declines to claim constraint strength. It took a few hours to measure, so here it is. We mutated 5,000 real tactic lines into six corruption classes and scored each against the same grammar:</p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>corruption class</th>
+                                <th>rejected</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>truncation at random point</td>
+                                <td><strong>0.1%</strong></td>
+                            </tr>
+                            <tr>
+                                <td>English-word lead (prose start)</td>
+                                <td><strong>0.0%</strong></td>
+                            </tr>
+                            <tr>
+                                <td>leading keyword swapped for a <em>different real tactic</em></td>
+                                <td><strong>0.0%</strong></td>
+                            </tr>
+                            <tr>
+                                <td>argument tokens shuffled</td>
+                                <td><strong>0.1%</strong></td>
+                            </tr>
+                            <tr>
+                                <td>full token shuffle</td>
+                                <td>31.0%</td>
+                            </tr>
+                            <tr>
+                                <td>random identifier soup</td>
+                                <td><strong>0.0%</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>combined</strong></td>
+                                <td><strong>3.5%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Read alongside the coverage number, this pins down what the grammar actually is: not a syntax gate but a <strong>category gate</strong>. It enforces that a generation is a tactic-<em>shaped event</em> — a keyword-led line — and essentially nothing more. Which turns out to be precisely the failure mode that matters for modern models: they rarely emit subtly-broken tactics, but they frequently emit prose, markdown, or meta-commentary <em>instead of</em> tactics. The companion post's yield numbers are unchanged by this (same oracle on both arms); its interpretation just gets sharper — constrained decoding forces every generation into the one category the kernel can adjudicate.</p>
+
                 <hr style="margin: 48px 0;">
 
                 <p style="font-size: 15px;">
-                    <em>Artifacts: grammar definition, extractor, per-line classifications, and the full failure audit available alongside the companion post. Corpus: mathlib4 @ current master, batteries, math-comp, AFP excerpts.</em>
+                    <em>Artifacts: <a href="https://github.com/stanleyngugi/lean-tactic-research">github.com/stanleyngugi/lean-tactic-research</a> →
+                    <code>post1-tactic-cfg/</code> (grammar definition, extractor, mutation battery) and <code>data/</code>.
+                    Corpus: mathlib4 @ current master, batteries, math-comp, AFP excerpts.</em>
                 </p>
 
                 <p style="margin-top: 40px;">
@@ -242,7 +291,7 @@ macro "discharge_linear" e1:term:max e2:term:max : tactic =&gt;
         </main>
 
         <footer>
-            © 2026 Stanley Ngugi
+            © 2026 Stanley Ngugi · <a href="https://github.com/stanleyngugi/lean-tactic-research">code</a>
         </footer>
     </div>
 

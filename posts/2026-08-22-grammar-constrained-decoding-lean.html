@@ -74,7 +74,7 @@
                     <li><strong>Problems</strong>: 80 statements sampled mechanically (seeded) from a fresh clone of current Mathlib (~8,900 files). No cherry-picking; the same sample validates externally — the top-20 leading-keyword share of real Mathlib tactic lines came out at 82.4%, in line with three earlier independent measurements (~83–85%), so the corpus wasn't weird.</li>
                     <li><strong>Models</strong>: Qwen2.5-Coder-7B-Instruct (a generalist coder) and Goedel-Prover-V2-8B (a model explicitly trained to emit Lean proofs).</li>
                     <li><strong>Constraint</strong>: a hand-written CFG for the Lean tactic sublanguage (53 keyword-dispatched productions plus a permissive arguments catch-all). Its construction and comprehensiveness — 99.86% structural coverage across all of Mathlib, cross-validated on Rocq and Isabelle — are the subject of <a href="/posts/2026-08-22-lean-tactic-language-cfg.html">the companion post</a>; this one treats it as a given. Served through vLLM's structured-output backend backed by llguidance — genuine logit masking, not prompting.</li>
-                    <li><strong>Scoring</strong>: every generation parsed post-hoc against the same CFG; leading keywords checked against the corpus frequency table; referenced identifiers checked against 163,731 real declaration names extracted from Mathlib + Batteries source.</li>
+                    <li><strong>Scoring</strong>: every generation parsed post-hoc against the same CFG; leading keywords checked against the corpus frequency table; referenced identifiers checked against 163,631 real declaration names extracted from Mathlib + Batteries source.</li>
                     <li>8 samples per problem, temperature 0.8, both conditions identical except for the mask.</li>
                 </ul>
 
@@ -182,7 +182,7 @@
 
                 <p><strong>1. Your constraint may be silently off.</strong> Our first "constrained" runs contained markdown fences and English prose — impossible under the grammar. Cause: vLLM drops grammar enforcement for parallel-sampling requests (<code>n &gt; 1</code>), and separately can <em>silently fall back to unconstrained decoding</em> when the backend hits a per-request error (<code>disable_fallback=False</code> is the default). Nothing errors; you just get unmasked tokens wearing a constrained label. The Goedel row above carries an asterisk precisely because of this — it's a partial-enforcement run, honestly degraded. If you do this yourself: request <code>n=1</code>, pin the backend server-side, and <strong>assert enforcement post-hoc</strong> (zero fences in constrained output is a cheap smoke test). A verifier layer that can fail toward false confidence will, given time — this is the same lesson we've hit before, now confirmed from the serving side too.</p>
 
-                <p><strong>2. Permissive grammars quietly un-forbid.</strong> We deliberately left <code>sorry</code> out of the grammar. It showed up anyway: 2.5% of constrained generations contained it (vs 0.3% unconstrained), because the generic <code>IDENT ARGS</code> catch-all re-admits any keyword-shaped string <em>as an argument</em> — <code>exact sorry</code> parses fine. If you want hard guarantees ("never emit sorry"), a catch-all is a soft guarantee at best. Hardening means excluding reserved words from the ident terminal, and auditing what your fallback admits, not just what your named productions accept.</p>
+                <p><strong>2. Permissive grammars quietly un-forbid.</strong> We deliberately left <code>sorry</code> out of the grammar. It showed up anyway: 2.5% of constrained generations contained it (vs 0.3% unconstrained), because the generic <code>IDENT ARGS</code> catch-all re-admits any keyword-shaped string <em>as an argument</em> — <code>exact sorry</code> parses fine. If you want hard guarantees ("never emit sorry"), a catch-all is a soft guarantee at best — and since llguidance's regex engine has no lookaheads, in-grammar exclusion isn't even expressible; the fix is generate→validate→resample (<code>hardened_generate.py</code> in the repo), which costs ~1.03 generations per sample at the observed violation rate. More generally: auditing what your fallback admits matters as much as what your named productions accept.</p>
 
                 <p>Also worth stating plainly: "reaches the kernel" here means <em>crosses the syntactic gate</em> — guaranteed parseable as a tactic application, hence submittable for evaluation. It is not a promise the proof succeeds, nor that our CFG's permissive argument slots match Lean's own parser exactly. And the hallucination checker is a name-table lookup with known edge cases; it's the same oracle for both arms, so the comparison stands, but individual percentages carry ±few-point uncertainty.</p>
 
@@ -197,7 +197,10 @@
                 <hr style="margin: 48px 0;">
 
                 <p style="font-size: 15px;">
-                    <em>Artifacts: raw generations, scoring code, the grammar, the sampled goal set, and the name table are bundled for reproduction. Stack: vLLM 0.10.2 + llguidance on a single RTX A5000; total compute ≈ 2.5 GPU-hours.</em>
+                    <em>Artifacts: <a href="https://github.com/stanleyngugi/lean-tactic-research">github.com/stanleyngugi/lean-tactic-research</a> →
+                    <code>post2-constrained-decoding/</code> (generation, scoring and yield scripts, raw generations, score CSVs) plus shared
+                    <code>data/</code> (goal set, keyword table, 163k-declaration name table). Stack: vLLM 0.10.2 + llguidance on a single
+                    RTX A5000; total compute ≈ 2.5 GPU-hours.</em>
                 </p>
 
                 <p style="font-size: 15px;">
@@ -212,7 +215,7 @@
         </main>
 
         <footer>
-            © 2026 Stanley Ngugi
+            © 2026 Stanley Ngugi · <a href="https://github.com/stanleyngugi/lean-tactic-research">code</a>
         </footer>
     </div>
 
