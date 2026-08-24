@@ -445,51 +445,34 @@ section.block {
 }
 
 /* cite this post */
-details.cite-box {
+.cite-box {
   border: 1px solid var(--border);
   border-radius: 8px;
   margin: 30px 0;
+  padding: 14px 18px 16px;
 }
 
-details.cite-box summary {
+.cite-box .cite-label {
   font-family: 'Geist Mono', monospace;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  cursor: pointer;
-  padding: 13px 18px;
   color: var(--muted);
-  user-select: none;
-  list-style: none;
+  margin-bottom: 10px;
 }
 
-details.cite-box summary::-webkit-details-marker {
-  display: none;
-}
-
-details.cite-box summary::before {
-  content: '+ ';
-}
-
-details.cite-box[open] summary::before {
-  content: '− ';
-}
-
-details.cite-box summary:hover {
-  color: var(--accent);
-}
-
-details.cite-box pre {
+.cite-box pre {
   background: none;
+  border: none;
   margin: 0;
-  padding: 2px 18px 16px;
+  padding: 0;
   font-size: 12.5px;
   line-height: 1.6;
   overflow-x: auto;
 }
 
-details.cite-box pre code {
+.cite-box pre code {
   background: none;
   border: none;
   padding: 0;
