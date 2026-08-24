@@ -13,6 +13,10 @@
     <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="citation_title" content="A Quarter of Your Prover's Tokens Never Reach the Judge">
+    <meta name="citation_author" content="Ngugi, Stanley">
+    <meta name="citation_publication_date" content="2026-08-22">
+    <meta name="citation_online_date" content="2026-08-22">
     <script>
         (function () {
             try {
@@ -45,7 +49,7 @@
             <article class="prose">
                 <header class="article-header">
                     <h1>A Quarter of Your Prover's Tokens Never Reach the Judge</h1>
-                    <div class="entry-date">August 22, 2026 · 13 min read · formal methods, LLMs, constrained decoding</div>
+                    <div class="entry-date">August 22, 2026 · 13 min read · formal methods, LLMs, constrained decoding · <a href="https://github.com/stanleyngugi/lean-tactic-research">code ↗</a></div>
                 </header>
 
                 <div class="tldr-box">
@@ -193,6 +197,29 @@
                 <p>The architecture this points at has three parts, each doing one job: <strong>the grammar maximizes contact</strong> between generator and oracle; <strong>the kernel converts contact into graded, per-step truth</strong>; and an interaction layer (Pantograph-style state DAG) turns each contact into step-level rewards rather than pass/fail verdicts. None of the three makes the model smarter. Together they decide how much of what the model already knows can be converted into learning signal per GPU-hour.</p>
 
                 <p>The next experiment is obvious and cheap: wire the same constrained decoder into a closed loop against a real kernel and measure pass@k on core-Lean goals — feedback <em>quality</em>, not just contact rate. But the yield result alone justifies the machinery: if you're training a prover and a quarter to half of your sampled tokens die at the parser, the cheapest capability gain available isn't a bigger model. It's making sure every token gets to speak to the judge.</p>
+
+                <h2>References</h2>
+
+                <div class="refs">
+                    <p>Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X., et al. (2024). <a href="https://arxiv.org/abs/2402.03300">DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</a>. arXiv:2402.03300. <span style="color: var(--muted);">(introduces GRPO)</span></p>
+                    <p>Hui, B., Yang, J., Cui, Z., Yang, J., Liu, D., Zhang, L., et al. (2024). <a href="https://arxiv.org/abs/2409.12186">Qwen2.5-Coder Technical Report</a>. arXiv:2409.12186.</p>
+                    <p>Lin, Y., Wang, H., Liu, H., et al. (2024). <a href="https://arxiv.org/abs/2405.04088">Goedel-Prover: An Open-Source Tool for Automated Theorem Proving</a>. arXiv:2405.04088. <span style="color: var(--muted);">(Goedel-Prover-V2 is a later checkpoint from the same team)</span></p>
+                    <p>Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C. H., et al. (2023). <a href="https://arxiv.org/abs/2309.06180">Efficient Memory Management for Large Language Model Serving with PagedAttention</a>. SOSP 2023. <span style="color: var(--muted);">(vLLM)</span></p>
+                    <p>Microsoft. <a href="https://github.com/microsoft/llguidance">llguidance</a>: Foundation for structured outputs in vLLM and guidance-based constrained decoding.</p>
+                    <p>Aniva, L., et al. <a href="https://github.com/leanprover/Pantograph">Pantograph</a>: A Machine-to-Machine Interaction System for Lean 4.</p>
+                    <p>Ngugi, S. (2026). <a href="/posts/2026-08-22-lean-tactic-language-cfg.html">Lean's Tactic Language Is Smaller Than It Looks</a>. Companion post.</p>
+                </div>
+
+                <details class="cite-box">
+                    <summary>Cite this post</summary>
+                    <pre><code>@misc{ngugi2026quarter,
+  title        = {A Quarter of Your Prover's Tokens Never Reach the Judge},
+  author       = {Ngugi, Stanley},
+  year         = {2026},
+  howpublished = {\url{https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html}},
+  note         = {Companion code: \url{https://github.com/stanleyngugi/lean-tactic-research}}
+}</code></pre>
+                </details>
 
                 <hr style="margin: 48px 0;">
 

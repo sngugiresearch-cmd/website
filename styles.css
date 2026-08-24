@@ -444,6 +444,64 @@ section.block {
   color: var(--muted);
 }
 
+/* cite this post */
+details.cite-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 30px 0;
+}
+
+details.cite-box summary {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  padding: 13px 18px;
+  color: var(--muted);
+  user-select: none;
+  list-style: none;
+}
+
+details.cite-box summary::-webkit-details-marker {
+  display: none;
+}
+
+details.cite-box summary::before {
+  content: '+ ';
+}
+
+details.cite-box[open] summary::before {
+  content: '− ';
+}
+
+details.cite-box summary:hover {
+  color: var(--accent);
+}
+
+details.cite-box pre {
+  background: none;
+  margin: 0;
+  padding: 2px 18px 16px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+details.cite-box pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* references */
+.prose .refs p {
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
 /* ---------- CV ---------- */
 .cv-page {
   font-size: 14px;

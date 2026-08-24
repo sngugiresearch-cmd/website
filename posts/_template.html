@@ -14,6 +14,16 @@
     <title>[Post Title] - Stanley Ngugi</title>
     <meta name="description" content="[One-sentence summary of the post.]">
     <meta name="author" content="Stanley Ngugi">
+    <meta property="og:title" content="[Post Title]">
+    <meta property="og:description" content="[One-sentence summary of the post.]">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/[filename].html">
+    <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="citation_title" content="[Post Title]">
+    <meta name="citation_author" content="Ngugi, Stanley">
+    <meta name="citation_publication_date" content="[YYYY-MM-DD]">
+    <meta name="citation_online_date" content="[YYYY-MM-DD]">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <script>
         (function () {
@@ -47,7 +57,7 @@
             <article class="prose">
                 <header class="article-header">
                     <h1>[Post Title]</h1>
-                    <div class="entry-date">[Month Day, Year] · [X] min read · [tag-one], [tag-two]</div>
+                    <div class="entry-date">[Month Day, Year] · [X] min read · [tag-one], [tag-two] · <a href="[repo-url]">code ↗</a></div>
                 </header>
 
                 <p><strong>TL;DR:</strong> [One or two sentences summarizing the finding and why it matters.]</p>
@@ -69,6 +79,22 @@
                     <li>List item one</li>
                     <li>List item two</li>
                 </ul>
+
+                <h2>References</h2>
+                <div class="refs">
+                    <p>[Any works cited in the post, with links. Delete if none.]</p>
+                </div>
+
+                <details class="cite-box">
+                    <summary>Cite this post</summary>
+                    <pre><code>@misc{ngugi[year][shortname],
+  title        = {[Post Title]},
+  author       = {Ngugi, Stanley},
+  year         = {[Year]},
+  howpublished = {\url{https://stanleyngugi.netlify.app/posts/[filename].html}},
+  note         = {Code: \url{[repo-url]}}
+}</code></pre>
+                </details>
 
                 <p style="margin-top: 40px;">
                     <em>If you build on this, I'd love to hear about it —

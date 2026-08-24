@@ -13,6 +13,10 @@
     <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="citation_title" content="Lean's Tactic Language Is Smaller Than It Looks">
+    <meta name="citation_author" content="Ngugi, Stanley">
+    <meta name="citation_publication_date" content="2026-08-22">
+    <meta name="citation_online_date" content="2026-08-22">
     <script>
         (function () {
             try {
@@ -45,7 +49,7 @@
             <article class="prose">
                 <header class="article-header">
                     <h1>Lean's Tactic Language Is Smaller Than It Looks</h1>
-                    <div class="entry-date">August 22, 2026 · 11 min read · formal methods, LLMs, constrained decoding</div>
+                    <div class="entry-date">August 22, 2026 · 11 min read · formal methods, LLMs, constrained decoding · <a href="https://github.com/stanleyngugi/lean-tactic-research">code ↗</a></div>
                 </header>
 
                 <div class="tldr-box">
@@ -153,7 +157,7 @@
                                 <td>82.4%</td>
                             </tr>
                             <tr>
-                                <td>external citation (Lean4trace, ICML 2024)</td>
+                                <td>external citation (<a href="https://openreview.net/forum?id=sjLWmLeJ6R">Lean4trace</a>, ICML 2024)</td>
                                 <td>not ours</td>
                                 <td>~83%</td>
                             </tr>
@@ -274,6 +278,25 @@ macro "discharge_linear" e1:term:max e2:term:max : tactic =&gt;
                 </div>
 
                 <p>Read alongside the coverage number, this pins down what the grammar actually is: not a syntax gate but a <strong>category gate</strong>. It enforces that a generation is a tactic-<em>shaped event</em> — a keyword-led line — and essentially nothing more. Which turns out to be precisely the failure mode that matters for modern models: they rarely emit subtly-broken tactics, but they frequently emit prose, markdown, or meta-commentary <em>instead of</em> tactics. The companion post's yield numbers are unchanged by this (same oracle on both arms); its interpretation just gets sharper — constrained decoding forces every generation into the one category the kernel can adjudicate.</p>
+
+                <h2>References</h2>
+
+                <div class="refs">
+                    <p>Nesterov, V., Kapushev, Y., &amp; Burtsev, M. (2024). <a href="https://openreview.net/forum?id=sjLWmLeJ6R">Lean4trace: Data Augmentation for Neural Theorem Proving in Lean</a>. ICML 2024 Workshop on AI for Mathematics.</p>
+                    <p>Lean community. <a href="https://github.com/leanprover-community/mathlib4">Mathlib: The Lean 4 mathematical library</a>.</p>
+                    <p>Lean community. <a href="https://github.com/leanprover/lean4">Lean 4</a>: The Lean Theorem Prover.</p>
+                </div>
+
+                <details class="cite-box">
+                    <summary>Cite this post</summary>
+                    <pre><code>@misc{ngugi2026lean,
+  title        = {Lean's Tactic Language Is Smaller Than It Looks},
+  author       = {Ngugi, Stanley},
+  year         = {2026},
+  howpublished = {\url{https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html}},
+  note         = {Companion code: \url{https://github.com/stanleyngugi/lean-tactic-research}}
+}</code></pre>
+                </details>
 
                 <hr style="margin: 48px 0;">
 
