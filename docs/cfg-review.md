@@ -19,3 +19,11 @@ website assets. This review covers Chromium, not every browser or assistive tool
 The posts retain their original URLs/publication dates and archive links. The
 current changes are intended for author review before deployment. Companion
 code links target its `revise-cfg-articles` branch.
+
+## Publication pass
+
+The articles ship as **The Shape of a Lean Tactic** and **Lean Tactics Under
+Constraint**. The companion is renamed **Tactic Grammar Lab**. Compact reference
+lists are restored, with corrected Goedel-Prover-V2 attribution. Each article
+includes a human-readable citation, downloadable BibTeX, companion-code URL,
+and machine-readable citation metadata. Existing post URLs remain unchanged.

@@ -17,7 +17,7 @@ POSTS = [
     {'source': '02-constrained-decoding.md', 'slug': '2026-08-22-grammar-constrained-decoding-lean',
      'description': 'How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.'},
 ]
-CODE = 'https://github.com/stanleyngugi/lean-tactic-research/tree/revise-cfg-articles'
+CODE = 'https://github.com/stanleyngugi/tactic-grammar-lab'
 BASE = 'https://stanleyngugi.netlify.app'
 
 
@@ -66,12 +66,24 @@ def main():
                 'mainEntityOfPage':canonical}
         meta = f'<link rel="canonical" href="{canonical}">\n<meta property="article:modified_time" content="2026-09-05T00:00:00Z">\n<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>\n'
         prefix = prefix.replace('</head>', meta+'</head>')
+        prefix = prefix.replace('https://github.com/stanleyngugi/lean-tactic-research', CODE)
+        suffix = suffix.replace('https://github.com/stanleyngugi/lean-tactic-research', CODE)
+        bibkey = 'ngugi2026lean' if post == POSTS[0] else 'ngugi2026quarter'
+        bib = ('@misc{' + bibkey + ',\n  title = {' + title + '},\n'
+               '  author = {Ngugi, Stanley},\n  year = {2026},\n'
+               '  month = {aug},\n  url = {' + canonical + '},\n'
+               '  howpublished = {Stanley Ngugi},\n'
+               '  note = {Revised September 5, 2026. Companion code: ' + CODE + '}\n}\n')
+        (ROOT/'citations').mkdir(exist_ok=True)
+        (ROOT/'citations'/f"{post['slug']}.bib").write_text(bib)
         article = f'''<article class="prose cfg-article">
 <header class="article-header"><h1>{escape(title)}</h1>
 <div class="entry-date">August 22, 2026 · updated September 5 · {minutes} min read · <a href="{CODE}">code ↗</a></div></header>
 {rendered}
-<div class="cite-box"><div class="cite-label">Cite this revision</div>
-<pre><code>{escape('@misc{ngugi2026' + ('cfg' if post == POSTS[0] else 'decoding') + ',\n  title = {' + title + '},\n  author = {Ngugi, Stanley},\n  year = {2026},\n  url = {' + canonical + '},\n  note = {Revised September 5, 2026}\n}')}</code></pre></div>
+<div class="cite-box"><div class="cite-label">Cite this post</div>
+<p class="citation-text">Ngugi, Stanley. “{escape(title)}.” August 22, 2026. Revised September 5, 2026.</p>
+<p><a href="/citations/{post['slug']}.bib" download>Download BibTeX</a></p>
+<pre><code>{escape(bib)}</code></pre></div>
 <p class="article-artifacts"><a href="{CODE}">Companion code and evidence</a> · <a href="/content/{post['source']}">Markdown source</a></p>
 </article>'''
         (ROOT/'posts'/f"{post['slug']}.html").write_text(prefix+article+suffix)

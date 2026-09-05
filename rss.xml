@@ -7,14 +7,14 @@
     <language>en-us</language>
     <atom:link href="https://stanleyngugi.netlify.app/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Grammar-Constrained Decoding for Lean Tactics: An Experiment with vLLM and llguidance</title>
+      <title>Lean Tactics Under Constraint</title>
       <link>https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
       <description>How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.</description>
     </item>
     <item>
-      <title>Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength</title>
+      <title>The Shape of a Lean Tactic</title>
       <link>https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>

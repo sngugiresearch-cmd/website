@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength - Stanley Ngugi</title>
+    <title>The Shape of a Lean Tactic - Stanley Ngugi</title>
     <meta name="description" content="A worked study of Lean tactic grammars: explicit syntax, permissive fallbacks, corpus extraction, mutation tests, and a reduced-grammar ablation.">
     <meta name="author" content="Stanley Ngugi">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <meta property="og:title" content="Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength">
+    <meta property="og:title" content="The Shape of a Lean Tactic">
     <meta property="og:description" content="A worked study of Lean tactic grammars: explicit syntax, permissive fallbacks, corpus extraction, mutation tests, and a reduced-grammar ablation.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="citation_title" content="Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength">
+    <meta name="citation_title" content="The Shape of a Lean Tactic">
     <meta name="citation_author" content="Ngugi, Stanley">
     <meta name="citation_publication_date" content="2026-08-22">
     <meta name="citation_online_date" content="2026-08-22">
@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="/styles.css">
 <link rel="canonical" href="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html">
 <meta property="article:modified_time" content="2026-09-05T00:00:00Z">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength", "description": "A worked study of Lean tactic grammars: explicit syntax, permissive fallbacks, corpus extraction, mutation tests, and a reduced-grammar ablation.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The Shape of a Lean Tactic", "description": "A worked study of Lean tactic grammars: explicit syntax, permissive fallbacks, corpus extraction, mutation tests, and a reduced-grammar ablation.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html"}</script>
 </head>
 <body>
     <div class="container">
@@ -50,11 +50,11 @@
             <a href="/" class="back-link">← back home</a>
 
             <article class="prose cfg-article">
-<header class="article-header"><h1>Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength</h1>
-<div class="entry-date">August 22, 2026 · updated September 5 · 17 min read · <a href="https://github.com/stanleyngugi/lean-tactic-research/tree/revise-cfg-articles">code ↗</a></div></header>
+<header class="article-header"><h1>The Shape of a Lean Tactic</h1>
+<div class="entry-date">August 22, 2026 · updated September 5 · 17 min read · <a href="https://github.com/stanleyngugi/tactic-grammar-lab">code ↗</a></div></header>
 <p><em>What a small grammar captures, what its fallback gives away, and how to measure the difference.</em></p>
 <blockquote>
-<p><strong>Updated September 5, 2026.</strong> Expanded from the August 22 article with executable examples, a grammar ablation, and explicit measurement definitions. The original corpus figures are retained as historical observations, with their extraction limitations explained below. <a href="/archive/revisions/2026-08-22-lean-tactic-language-cfg-original.html">Original version</a> · <a href="https://github.com/stanleyngugi/lean-tactic-research/blob/revise-cfg-articles/docs/evidence.md">Evidence and reproduction</a>.</p>
+<p><strong>Updated September 5, 2026.</strong> Expanded from the August 22 article with executable examples, a grammar ablation, and explicit measurement definitions. The original corpus figures are retained as historical observations, with their extraction limitations explained below. <a href="/archive/revisions/2026-08-22-lean-tactic-language-cfg-original.html">Original version</a> · <a href="https://github.com/stanleyngugi/tactic-grammar-lab/blob/main/docs/evidence.md">Evidence and reproduction</a>.</p>
 </blockquote>
 <p>A grammar for Lean tactics begins with an attractive observation. Many proof steps start with a familiar word: <code>rw</code>, <code>simp</code>, <code>exact</code>, <code>apply</code>, <code>intro</code>. Behind a large mathematical library there appears to be a comparatively small vocabulary of actions. If a language model repeatedly uses those actions, perhaps a compact grammar can guide its generation without representing the entirety of Lean.</p>
 <p>The interesting work begins when we ask what “representing a tactic” means. Consider three lines:</p>
@@ -79,6 +79,7 @@
 <li><a href="#designing-an-output-language-instead-of-only-describing-one">Designing an output language instead of only describing one</a></li>
 <li><a href="#what-transfers-to-rocq-and-isabelle">What transfers to Rocq and Isabelle</a></li>
 <li><a href="#reproducing-the-revised-checks">Reproducing the revised checks</a></li>
+<li><a href="#references">References</a></li>
 </ul>
 </nav></details>
 <h2 id="a-useful-subset-is-a-design-decision">A useful subset is a design decision</h2>
@@ -371,20 +372,31 @@ python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w">
 
 <p>That command intentionally uses the historical heuristic extractor. Its output is labelled accordingly; repairing arithmetic and paths does not turn extraction into a Lean parser. The provenance document explains which figures can be regenerated from saved outputs and which remain historical report entries.</p>
 <p>A compact grammar is still a useful object to investigate. The stronger account of this work is that we can now inspect what its compactness means: a small vocabulary of named forms, a broad fallback, and a measurable tradeoff between coverage and rejection. The next question is what happens when that exact accepted language changes the model’s sampling distribution. That is the subject of the companion article.</p>
-<div class="cite-box"><div class="cite-label">Cite this revision</div>
-<pre><code>@misc{ngugi2026cfg,
-  title = {Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength},
+<h2 id="references">References</h2>
+<div class="refs">
+<p>Lean contributors. <a href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Custom-Tactics/">Custom Tactics</a>. The Lean Language Reference. Syntax extensions, macros, and elaboration.</p>
+<p>Nesterov, V., Kapushev, Y., and Burtsev, M. (2024). <a href="https://openreview.net/forum?id=sjLWmLeJ6R">Lean4trace: Data Augmentation for Neural Theorem Proving in Lean</a>. ICML Workshop on AI for Mathematics.</p>
+<p>Lean community. <a href="https://github.com/leanprover-community/mathlib4">Mathlib</a>. The Lean 4 mathematical library. The dated mutation rerun uses revision 53c82c1c23ec418ebf7290390bc8108957bef853.</p>
+</div>
+<div class="cite-box"><div class="cite-label">Cite this post</div>
+<p class="citation-text">Ngugi, Stanley. “The Shape of a Lean Tactic.” August 22, 2026. Revised September 5, 2026.</p>
+<p><a href="/citations/2026-08-22-lean-tactic-language-cfg.bib" download>Download BibTeX</a></p>
+<pre><code>@misc{ngugi2026lean,
+  title = {The Shape of a Lean Tactic},
   author = {Ngugi, Stanley},
   year = {2026},
+  month = {aug},
   url = {https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html},
-  note = {Revised September 5, 2026}
-}</code></pre></div>
-<p class="article-artifacts"><a href="https://github.com/stanleyngugi/lean-tactic-research/tree/revise-cfg-articles">Companion code and evidence</a> · <a href="/content/01-tactic-cfg.md">Markdown source</a></p>
+  howpublished = {Stanley Ngugi},
+  note = {Revised September 5, 2026. Companion code: https://github.com/stanleyngugi/tactic-grammar-lab}
+}
+</code></pre></div>
+<p class="article-artifacts"><a href="https://github.com/stanleyngugi/tactic-grammar-lab">Companion code and evidence</a> · <a href="/content/01-tactic-cfg.md">Markdown source</a></p>
 </article>
         </main>
 
         <footer>
-            © 2026 Stanley Ngugi · <a href="https://github.com/stanleyngugi/lean-tactic-research">code</a>
+            © 2026 Stanley Ngugi · <a href="https://github.com/stanleyngugi/tactic-grammar-lab">code</a>
         </footer>
     </div>
 
