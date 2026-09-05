@@ -1,0 +1,14 @@
+{
+  "01-tactic-cfg.md": {
+    "sha256": "8a90ac3e1c59c736e99a35fdb350e0d64a88300540e4cc53f2640db6b3432343",
+    "output": "posts/2026-08-22-lean-tactic-language-cfg.html",
+    "title": "The Shape of a Lean Tactic",
+    "reading_minutes": 17
+  },
+  "02-constrained-decoding.md": {
+    "sha256": "ed0f1cdce77fd5ff09e52cab11c1b38ab7bcc4c7cdfff431f990da7b06213ce1",
+    "output": "posts/2026-08-22-grammar-constrained-decoding-lean.html",
+    "title": "Lean Tactics Under Constraint",
+    "reading_minutes": 21
+  }
+}
