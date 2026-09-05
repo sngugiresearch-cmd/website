@@ -47,8 +47,8 @@
                 <h1>I build AI for formal methods.</h1>
                 <p>
                     Researcher in Nairobi, Kenya working at the intersection of LLMs and theorem
-                    proving: grammar-constrained decoding, kernel-in-the-loop training, and RL
-                    environments where every generated proof step reaches the judge. Background in
+                    proving: tactic grammars, constrained decoding, and the measurement of
+                    model outputs and proof-assistant interaction. Background in
                     mechanistic interpretability — I like knowing what the model is doing on the inside.
                 </p>
                 <div class="links-row">
@@ -64,24 +64,21 @@
                 <div class="year-label" style="font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 4px;">2026</div>
                 <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html" class="entry">
                     <div class="entry-top">
-                        <span class="entry-title">A Quarter of Your Prover's Tokens Never Reach the Judge</span>
-                        <span class="entry-date">Aug 22</span>
+                        <span class="entry-title">Grammar-Constrained Decoding for Lean Tactics: An Experiment with vLLM and llguidance</span>
+                        <span class="entry-date">Aug 22 · revised Sep 5</span>
                     </div>
                     <div class="entry-desc">
-                        Grammar-constrained decoding makes 100% of generated Lean tactics parseable at
-                        zero latency cost — while hallucination stays at ~50%. That asymmetry is the point.
-                    </div>
+How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.
+</div>
                 </a>
                 <a href="/posts/2026-08-22-lean-tactic-language-cfg.html" class="entry">
                     <div class="entry-top">
-                        <span class="entry-title">Lean's Tactic Language Is Smaller Than It Looks</span>
-                        <span class="entry-date">Aug 22</span>
+                        <span class="entry-title">Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength</span>
+                        <span class="entry-date">Aug 22 · revised Sep 5</span>
                     </div>
                     <div class="entry-desc">
-                        We built a 53-production context-free grammar for Lean 4 tactics and measured it
-                        against every tactic line in Mathlib: 99.86% coverage. The methodology transfers
-                        to Rocq and Isabelle.
-                    </div>
+A worked study of Lean tactic grammars: explicit syntax, permissive fallbacks, corpus extraction, mutation tests, and a reduced-grammar ablation.
+</div>
                 </a>
                 <div class="year-label" style="font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 4px; margin-top: 28px;">2025</div>
                 <a href="/posts/taming_polysemanticity.html" class="entry">
@@ -125,9 +122,8 @@
             <section class="block">
                 <h2 class="block-title">Now</h2>
                 <p style="font-size: 14px;">
-                    Building RL environments for formal methods — closed training loops where a
-                    grammar-constrained generator talks to a real Lean kernel and every contact
-                    becomes step-level learning signal.
+                    Developing reproducible studies of Lean tactic grammars and constrained
+                    generation, with future work on proof-state feedback documented separately.
                 </p>
             </section>
         </main>

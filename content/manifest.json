@@ -1,0 +1,14 @@
+{
+  "01-tactic-cfg.md": {
+    "sha256": "a11d734da66e03ba1a639048f836dedfc9306eaed9a8a0a132092c3710ad69f6",
+    "output": "posts/2026-08-22-lean-tactic-language-cfg.html",
+    "title": "Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength",
+    "reading_minutes": 17
+  },
+  "02-constrained-decoding.md": {
+    "sha256": "e7158ab3c0be7603895b2b166978b756419c8331b226686f17ede22014c2776d",
+    "output": "posts/2026-08-22-grammar-constrained-decoding-lean.html",
+    "title": "Grammar-Constrained Decoding for Lean Tactics: An Experiment with vLLM and llguidance",
+    "reading_minutes": 20
+  }
+}

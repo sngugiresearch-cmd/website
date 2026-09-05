@@ -7,18 +7,18 @@
     <language>en-us</language>
     <atom:link href="https://stanleyngugi.netlify.app/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>A Quarter of Your Prover's Tokens Never Reach the Judge</title>
+      <title>Grammar-Constrained Decoding for Lean Tactics: An Experiment with vLLM and llguidance</title>
       <link>https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
-      <description>Grammar-constrained decoding makes 100% of generated Lean tactics parseable at zero latency cost — while hallucination stays at ~50%. That asymmetry is the point.</description>
+      <description>How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.</description>
     </item>
     <item>
-      <title>Lean's Tactic Language Is Smaller Than It Looks</title>
+      <title>Building a Grammar for Lean Tactics: Coverage, Structure, and Constraint Strength</title>
       <link>https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
-      <description>A 53-production context-free grammar for Lean 4 tactics covers 99.86% of every tactic line in Mathlib — and the methodology transfers to Rocq and Isabelle.</description>
+      <description>A worked study of Lean tactic grammars: explicit syntax, permissive fallbacks, corpus extraction, mutation tests, and a reduced-grammar ablation.</description>
     </item>
     <item>
       <title>Taming Incidental Polysemanticity in Toy Models: How Network Training Choices Affect Feature Entanglement</title>
