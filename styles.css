@@ -743,3 +743,4 @@ footer a:hover {
   .cfg-article .article-header h1 { font-size: 28px; }
 }
 .cfg-article .article-header .entry-date { white-space: normal; }
+.cfg-article pre code { font-size: inherit; }
