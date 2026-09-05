@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lean Tactics Under Constraint - Stanley Ngugi</title>
+    <title>How a Grammar Changes AI-Generated Mathematical Proof Steps - Stanley Ngugi</title>
     <meta name="description" content="How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.">
     <meta name="author" content="Stanley Ngugi">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <meta property="og:title" content="Lean Tactics Under Constraint">
+    <meta property="og:title" content="How a Grammar Changes AI-Generated Mathematical Proof Steps">
     <meta property="og:description" content="How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="citation_title" content="Lean Tactics Under Constraint">
+    <meta name="citation_title" content="How a Grammar Changes AI-Generated Mathematical Proof Steps">
     <meta name="citation_author" content="Ngugi, Stanley">
     <meta name="citation_publication_date" content="2026-08-22">
     <meta name="citation_online_date" content="2026-08-22">
@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="/styles.css">
 <link rel="canonical" href="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html">
 <meta property="article:modified_time" content="2026-09-05T00:00:00Z">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Lean Tactics Under Constraint", "description": "How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How a Grammar Changes AI-Generated Mathematical Proof Steps", "description": "How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html"}</script>
 </head>
 <body>
     <div class="container">
@@ -50,11 +50,12 @@
             <a href="/" class="back-link">← back home</a>
 
             <article class="prose cfg-article">
-<header class="article-header"><h1>Lean Tactics Under Constraint</h1>
-<div class="entry-date">August 22, 2026 · updated September 5 · 21 min read · <a href="https://github.com/stanleyngugi/tactic-grammar-lab">code ↗</a></div></header>
+<header class="article-header"><h1>How a Grammar Changes AI-Generated Mathematical Proof Steps</h1>
+<div class="entry-date">August 22, 2026 · updated September 5 · 21 min read · <a href="https://github.com/stanleyngugi/ai-proof-grammars">code ↗</a></div></header>
 <p><em>The sampling mechanism, the saved results, and the boundary between grammar acceptance and Lean correctness.</em></p>
+<p>Lean is a language and tool for writing computer-checked mathematical proofs. A <em>tactic</em> is a command that advances a proof; this article studies grammars for those individual proof steps.</p>
 <blockquote>
-<p><strong>Updated September 5, 2026.</strong> Expanded from the August 22 article with decoding mechanics, traceable examples, exact counts, and corrected metric definitions. CFG acceptance is not measured Lean validity; latency and line fractions are reported accordingly. <a href="/archive/revisions/2026-08-22-grammar-constrained-decoding-lean-original.html">Original version</a> · <a href="https://github.com/stanleyngugi/tactic-grammar-lab/blob/main/docs/evidence.md">Evidence and reproduction</a>.</p>
+<p><strong>Updated September 5, 2026.</strong> Expanded from the August 22 article with decoding mechanics, traceable examples, exact counts, and corrected metric definitions. CFG acceptance is not measured Lean validity; latency and line fractions are reported accordingly. <a href="/archive/revisions/2026-08-22-grammar-constrained-decoding-lean-original.html">Original version</a> · <a href="https://github.com/stanleyngugi/ai-proof-grammars/blob/main/docs/evidence.md">Evidence and reproduction</a>.</p>
 </blockquote>
 <p>A grammar changes which next tokens a language model is allowed to sample. That sounds like a formatting intervention, but its consequences propagate: once a different token is chosen, every later prediction sees a different prefix. The useful experimental question is how that change affects the outputs we actually receive.</p>
 <p>I tested a permissive Lean tactic grammar using Qwen2.5-Coder-7B-Instruct, vLLM, and llguidance. The constrained run produced 640 outputs whose first cleaned lines were accepted by the scoring grammar, compared with 420 out of 640 in the unconstrained run. The same prompts were used in both conditions.</p>
@@ -479,24 +480,24 @@ python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w">
 <p>University of Washington AI for Math. <a href="https://ai.math.uw.edu/projects/spring-2026/">LeanGCD</a>. Spring 2026 project listing; cited as related ongoing work.</p>
 </div>
 <div class="cite-box"><div class="cite-label">Cite this post</div>
-<p class="citation-text">Ngugi, Stanley. “Lean Tactics Under Constraint.” August 22, 2026. Revised September 5, 2026.</p>
+<p class="citation-text">Ngugi, Stanley. “How a Grammar Changes AI-Generated Mathematical Proof Steps.” August 22, 2026. Revised September 5, 2026.</p>
 <p><a href="/citations/2026-08-22-grammar-constrained-decoding-lean.bib" download>Download BibTeX</a></p>
 <pre><code>@misc{ngugi2026quarter,
-  title = {Lean Tactics Under Constraint},
+  title = {How a Grammar Changes AI-Generated Mathematical Proof Steps},
   author = {Ngugi, Stanley},
   year = {2026},
   month = {aug},
   url = {https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html},
   howpublished = {Stanley Ngugi},
-  note = {Revised September 5, 2026. Companion code: https://github.com/stanleyngugi/tactic-grammar-lab}
+  note = {Revised September 5, 2026. Companion code: https://github.com/stanleyngugi/ai-proof-grammars}
 }
 </code></pre></div>
-<p class="article-artifacts"><a href="https://github.com/stanleyngugi/tactic-grammar-lab">Companion code and evidence</a> · <a href="/content/02-constrained-decoding.md">Markdown source</a></p>
+<p class="article-artifacts"><a href="https://github.com/stanleyngugi/ai-proof-grammars">Companion code and evidence</a> · <a href="/content/02-constrained-decoding.md">Markdown source</a></p>
 </article>
         </main>
 
         <footer>
-            © 2026 Stanley Ngugi · <a href="https://github.com/stanleyngugi/tactic-grammar-lab">code</a>
+            © 2026 Stanley Ngugi · <a href="https://github.com/stanleyngugi/ai-proof-grammars">code</a>
         </footer>
     </div>
 

@@ -1,14 +1,14 @@
 {
   "01-tactic-cfg.md": {
-    "sha256": "8a90ac3e1c59c736e99a35fdb350e0d64a88300540e4cc53f2640db6b3432343",
+    "sha256": "7008f32714877851a8e447227ae24d72a43ba7e853110c6f0f65a41e8a1c4f06",
     "output": "posts/2026-08-22-lean-tactic-language-cfg.html",
-    "title": "The Shape of a Lean Tactic",
+    "title": "Building a Grammar for AI-Generated Mathematical Proof Steps",
     "reading_minutes": 17
   },
   "02-constrained-decoding.md": {
-    "sha256": "ed0f1cdce77fd5ff09e52cab11c1b38ab7bcc4c7cdfff431f990da7b06213ce1",
+    "sha256": "6e86e7aad3c11e3778ae033feda6f2e9db14bc495cc4d2694bcaf17e61b62aa6",
     "output": "posts/2026-08-22-grammar-constrained-decoding-lean.html",
-    "title": "Lean Tactics Under Constraint",
+    "title": "How a Grammar Changes AI-Generated Mathematical Proof Steps",
     "reading_minutes": 21
   }
 }

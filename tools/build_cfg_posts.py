@@ -17,7 +17,7 @@ POSTS = [
     {'source': '02-constrained-decoding.md', 'slug': '2026-08-22-grammar-constrained-decoding-lean',
      'description': 'How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.'},
 ]
-CODE = 'https://github.com/stanleyngugi/tactic-grammar-lab'
+CODE = 'https://github.com/stanleyngugi/ai-proof-grammars'
 BASE = 'https://stanleyngugi.netlify.app'
 
 
