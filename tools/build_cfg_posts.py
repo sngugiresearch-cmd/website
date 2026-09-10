@@ -78,7 +78,7 @@ def main():
         (ROOT/'citations'/f"{post['slug']}.bib").write_text(bib)
         article = f'''<article class="prose cfg-article">
 <header class="article-header"><h1>{escape(title)}</h1>
-<div class="entry-date">August 22, 2026 · updated September 5 · {minutes} min read · <a href="{CODE}">code ↗</a></div></header>
+<div class="entry-date">{minutes} min read · formal methods · <a href="{CODE}">code ↗</a></div></header>
 {rendered}
 <div class="cite-box"><div class="cite-label">Cite this post</div>
 <p class="citation-text">Ngugi, Stanley. “{escape(title)}.” August 22, 2026. Revised September 5, 2026.</p>
