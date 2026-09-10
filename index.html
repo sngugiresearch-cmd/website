@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stanley Ngugi</title>
-    <meta name="description" content="Stanley Ngugi builds AI for formal methods — LLM theorem proving, grammar-constrained decoding, and RL environments. Research and technical writing from Nairobi, Kenya.">
+    <meta name="description" content="Independent AI research in reinforcement-learning environments, formal methods, constrained generation, and executable verification.">
     <meta property="og:title" content="Stanley Ngugi">
-    <meta property="og:description" content="Building AI for formal methods: LLM theorem proving, grammar-constrained decoding, RL environments.">
+    <meta property="og:description" content="Independent research in reinforcement-learning environments, formal methods, constrained generation, and executable verification.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://stanleyngugi.netlify.app/">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
@@ -44,12 +44,11 @@
 
         <main>
             <div class="intro">
-                <h1>I build AI for formal methods.</h1>
+                <h1>I build reinforcement-learning environments and tools for formal reasoning.</h1>
                 <p>
-                    Researcher in Nairobi, Kenya working at the intersection of LLMs and theorem
-                    proving: tactic grammars, constrained decoding, and the measurement of
-                    model outputs and proof-assistant interaction. Background in
-                    mechanistic interpretability — I like knowing what the model is doing on the inside.
+                    I'm a 20-year-old self-taught independent AI researcher working on
+                    reinforcement-learning environments, constrained generation, theorem-proving
+                    systems, and executable verification. I left college to focus on independent research.
                 </p>
                 <div class="links-row">
                     <a href="/cv.html" class="pill-primary">CV</a>
@@ -59,13 +58,36 @@
                 </div>
             </div>
 
+            <section class="block" id="research">
+                <h2 class="block-title">Current work</h2>
+                <a href="https://github.com/stanleyngugi/native-verify" class="entry">
+                    <div class="entry-top">
+                        <span class="entry-title">native-verify</span>
+                        <span class="entry-date">active project</span>
+                    </div>
+                    <div class="entry-desc">
+                        An execution-as-verification RL environment where model outputs are sanitized,
+                        tested, compiled into Lean, and rewarded from execution.
+                    </div>
+                </a>
+                <a href="https://github.com/stanleyngugi/ai-proof-grammars" class="entry">
+                    <div class="entry-top">
+                        <span class="entry-title">Grammars for AI-Generated Proof Steps</span>
+                        <span class="entry-date">research + code</span>
+                    </div>
+                    <div class="entry-desc">
+                        Lean tactic grammars, corpus extraction, mutation testing, and experiments
+                        in grammar-constrained generation.
+                    </div>
+                </a>
+            </section>
+
             <section class="block">
-                <h2 class="block-title">Writing</h2>
-                <div class="year-label" style="font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 4px;">2026</div>
+                <h2 class="block-title">Selected writing</h2>
                 <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">How a Grammar Changes AI-Generated Mathematical Proof Steps</span>
-                        <span class="entry-date">Aug 22 · revised Sep 5</span>
+                        <span class="entry-date">formal methods · 21 min</span>
                     </div>
                     <div class="entry-desc">
 How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison, token-level mechanics, exact denominators, latency, and exploratory Goedel runs.
@@ -74,58 +96,48 @@ How grammar masking changes Lean tactic outputs: a reproducible Qwen comparison,
                 <a href="/posts/2026-08-22-lean-tactic-language-cfg.html" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">Building a Grammar for AI-Generated Mathematical Proof Steps</span>
-                        <span class="entry-date">Aug 22 · revised Sep 5</span>
+                        <span class="entry-date">formal methods · 17 min</span>
                     </div>
                     <div class="entry-desc">
 A worked study of Lean tactic grammars: explicit syntax, permissive fallbacks, corpus extraction, mutation tests, and a reduced-grammar ablation.
 </div>
                 </a>
-                <div class="year-label" style="font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 4px; margin-top: 28px;">2025</div>
                 <a href="/posts/taming_polysemanticity.html" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">Taming Incidental Polysemanticity in Toy Models</span>
-                        <span class="entry-date">Oct 19</span>
+                        <span class="entry-date">interpretability · 25 min</span>
                     </div>
                     <div class="entry-desc">
-                        Do training choices shape feature entanglement? SAE-based measurements across
-                        regularization, init, activations and noise — L2 beat L1 by 17.9%.
-                    </div>
-                </a>
-            </section>
-
-            <section class="block" id="research">
-                <h2 class="block-title">Research</h2>
-                <a href="https://arxiv.org/abs/2508.07075" class="entry">
-                    <div class="entry-top">
-                        <span class="entry-title">Surgical Knowledge Rewrite in Compact LLMs: An 'Unlearn-then-Learn' Strategy with ((IA)³)</span>
-                        <span class="entry-date">arXiv · Aug 2025</span>
-                    </div>
-                    <div class="entry-desc">
-                        Locate a fact's circuit first, then unlearn-then-learn with (IA)³: 98.5% edit
-                        accuracy on Phi-3-mini while control-fact retention more than triples versus
-                        direct fine-tuning (72% vs ~20%) — and suppressed knowledge stays latent, not gone.
-                    </div>
-                </a>
-                <a href="https://arxiv.org/abs/2506.15415" class="entry">
-                    <div class="entry-top">
-                        <span class="entry-title">Targeted Lexical Injection: Unlocking Latent Cross-Lingual Alignment in Lugha-Llama via Early-Layer LoRA Fine-Tuning</span>
-                        <span class="entry-date">arXiv · Jun 2025</span>
-                    </div>
-                    <div class="entry-desc">
-                        Swahili–English alignment was already near-perfect inside Lugha-Llama at Layer 2
-                        (cosine 0.99998) — just lost by the output layer (0.32). Early-layer contrastive
-                        LoRA brings it back: +28%, generalizing to unseen words.
+                        A toy-model study of how training configurations affect feature-entanglement
+                        proxies measured with sparse autoencoders.
                     </div>
                 </a>
             </section>
 
             <section class="block">
-                <h2 class="block-title">Now</h2>
-                <p style="font-size: 14px;">
-                    Developing reproducible studies of Lean tactic grammars and constrained
-                    generation, with future work on proof-state feedback documented separately.
-                </p>
+                <h2 class="block-title">Earlier research</h2>
+                <a href="https://arxiv.org/abs/2508.07075" class="entry">
+                    <div class="entry-top">
+                        <span class="entry-title">Surgical Knowledge Rewrite in Compact LLMs: An 'Unlearn-then-Learn' Strategy with ((IA)³)</span>
+                        <span class="entry-date">preprint</span>
+                    </div>
+                    <div class="entry-desc">
+                        An exploratory two-stage (IA)³ pipeline that localizes a target association,
+                        suppresses it, and then learns a replacement in Phi-3-mini.
+                    </div>
+                </a>
+                <a href="https://arxiv.org/abs/2506.15415" class="entry">
+                    <div class="entry-top">
+                        <span class="entry-title">Targeted Lexical Injection: Unlocking Latent Cross-Lingual Alignment in Lugha-Llama via Early-Layer LoRA Fine-Tuning</span>
+                        <span class="entry-date">preprint</span>
+                    </div>
+                    <div class="entry-desc">
+                        An early-layer LoRA study of Swahili–English lexical alignment in
+                        Lugha-Llama, evaluated on trained and unseen word pairs.
+                    </div>
+                </a>
             </section>
+
         </main>
 
         <footer>

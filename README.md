@@ -6,7 +6,7 @@ Static HTML, CSS, and JavaScript. Serve this directory locally with
 ## Editing the two CFG articles
 
 Their canonical Markdown and figure generator live in the sibling
-`lean-tactic-research` repository, under `articles/` and `analysis/figures.py`.
+`ai-proof-grammars` repository, under `articles/` and `analysis/figures.py`.
 This website keeps a synchronized copy in `content/` and generated HTML in
 `posts/`. Edit the canonical Markdown, then rebuild:
 
@@ -14,7 +14,7 @@ This website keeps a synchronized copy in `content/` and generated HTML in
 python3.12 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements-build.txt
-python tools/build_cfg_posts.py --source ../lean-tactic-research
+python tools/build_cfg_posts.py --source ../ai-proof-grammars
 python tools/check_cfg_posts.py
 ```
 
@@ -34,3 +34,11 @@ Original August 22 posts remain in `archive/revisions/`, with a visible revision
 notice and `noindex` metadata. The existing public article URLs and original
 publication dates are preserved. Review changes on a branch before merging into
 the deployment branch.
+
+## Publication dates
+
+The homepage uses topics and reading time instead of dates, keeping attention on
+the work rather than publishing cadence. RSS, citation metadata, sitemap records,
+and article history retain the real publication and revision dates. Revisions use
+an accurate `dateModified`; original publication dates are never backdated or
+redistributed for presentation.
