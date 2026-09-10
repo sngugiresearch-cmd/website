@@ -532,7 +532,7 @@ SAE_MSE:         0.9280 ± 0.9801</code></pre>
 
                 <div class="tldr-box">
                 <div class="tldr-label">Retrospective note</div>
-                <p>On later review, I identified limitations that weaken the causal interpretation of these results. In particular, the headline comparison changed both regularization and activation function, while some of the experimental metrics require stronger validation. The numerical results below should therefore be read as descriptive observations from an exploratory toy-model study—not as evidence that L2 regularization alone reduces polysemanticity. I am preserving the original discussion as a record of the experiment and the hypotheses it generated.</p>
+                <p>This exploratory study compared full training configurations rather than isolating every factor. Because the headline L1/ReLU and L2/GELU settings differ in both regularization and activation, the 17.9% result is best read as a configuration-level observation that motivates the proposed mechanism, rather than a controlled estimate of the effect of L2 alone. The project remains valuable for its experimental findings, debugging process, and the hypotheses it generated.</p>
                 </div>
 
 
