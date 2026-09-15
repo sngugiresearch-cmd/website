@@ -3,6 +3,24 @@
 Static HTML, CSS, and JavaScript. Serve this directory locally with
 `python3 -m http.server 8765`, then visit `http://localhost:8765`.
 
+## Current research articles
+
+`content/mathcheck-engine.md`, `content/mathcheck-rl.md`, and
+`content/formally-verified-c.md` are unchanged copies of their canonical GitHub
+articles. `content/research-posts-manifest.json` records source URLs and hashes.
+To update them, sync the source copies, then run
+`python3 tools/build_mathcheck_posts.py` (Pandoc 3 is required). The renderer
+creates a distinct page and BibTeX file for each article, repairs repo-relative
+evidence links, and links companion posts together. Update homepage, RSS, and
+sitemap entries for any title or date changes. The GitHub articles remain
+available until the website pages are live; only then replace the repository
+articles with pointers if desired.
+
+Visible post headers and homepage cards have no publication dates. Metadata and
+RSS use September 12, 2026 for the MathCheck articles and September 13, 2026
+for Formally Verified C, matching their public GitHub publication/release dates;
+the website does not backdate unrelated work.
+
 ## Editing the two CFG articles
 
 Their canonical Markdown and figure generator live in the sibling
