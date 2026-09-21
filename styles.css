@@ -744,3 +744,5 @@ footer a:hover {
 }
 .cfg-article .article-header .entry-date { white-space: normal; }
 .cfg-article pre code { font-size: inherit; }
+.mathcheck-article .mermaid { overflow-x: auto; font-size: 14px; }
+.mathcheck-article .mermaid svg { display: block; max-width: 100%; height: auto; margin: auto; }
