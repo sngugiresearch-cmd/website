@@ -630,6 +630,7 @@ section.block {
   color: #6b727c;
   white-space: nowrap;
   font-size: 9.25pt;
+  margin-left: 4mm;
 }
 
 .cv-item ul {
@@ -763,6 +764,10 @@ footer a:hover {
   .cv-item-head {
     flex-direction: column;
     gap: 1px;
+  }
+
+  .cv-item-sub {
+    margin-left: 0;
   }
 }
 
