@@ -67,8 +67,8 @@
                     </div>
                     <div class="entry-desc">
                         An RL environment where models write C functions and reward comes from
-                        proving that the code meets a fixed specification—not just passing a test
-                        suite. The public release includes 64 tasks and an isolated Frama-C judge.
+                        proving that the code satisfies a fixed specification, rather than from
+                        passing a test suite. The public release includes 64 tasks and an isolated Frama-C judge.
                     </div>
                 </a>
                 <a href="/posts/mathcheck-rl.html" class="entry">
@@ -77,9 +77,9 @@
                         <span class="entry-date">RL · 19 min</span>
                     </div>
                     <div class="entry-desc">
-                        A math RL environment that does not store hidden answer keys. Each problem
-                        and its Lean-based check come from the same specification, so reward is based
-                        on verifying the model's submitted answer.
+                        A math RL environment for bounded integer problems that does not store
+                        expected answers. Models return an integer or a complete finite certificate,
+                        and reward comes from checking that submission against the full encoded problem.
                     </div>
                 </a>
                 <a href="/posts/mathcheck-engine.html" class="entry">
@@ -88,9 +88,9 @@
                         <span class="entry-date">formal methods · 17 min</span>
                     </div>
                     <div class="entry-desc">
-                        The verification layer behind MathCheck RL. It turns a bounded math problem
-                        and a candidate answer into a Lean program, checks the full finite search
-                        space, and returns a clear result.
+                        A verification engine for bounded integer problems. It turns a problem
+                        specification and candidate answer into executable Lean code, checks the
+                        entire finite domain, and gives a definitive result without requiring a proof from the model.
                     </div>
                 </a>
                 <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html" class="entry">
@@ -99,9 +99,9 @@
                         <span class="entry-date">formal methods · 21 min</span>
                     </div>
                     <div class="entry-desc">
-                        A controlled Qwen study of what grammar masking changes during Lean tactic
-                        generation. Across 640 samples per setting, well-formed first lines rose
-                        from 65.6% to 100%—without claiming that the resulting proofs were correct.
+                        What changes when a language model is constrained to generate only text
+                        shaped like Lean tactics? The study examines how grammar masking prevents
+                        malformed proof steps without mistaking valid syntax for a correct proof.
 </div>
                 </a>
                 <a href="/posts/2026-08-22-lean-tactic-language-cfg.html" class="entry">
@@ -110,9 +110,9 @@
                         <span class="entry-date">formal methods · 17 min</span>
                     </div>
                     <div class="entry-desc">
-                        How I built and stress-tested a Lean tactic grammar, including the loophole
-                        that made it look more restrictive than it was. The article separates broad
-                        corpus coverage from genuine constraint strength.
+                        A practical study of Lean's tactic language: extracting tactic forms from
+                        real proofs, designing a grammar around them, and stress-testing what the
+                        grammar accepts and rejects.
 </div>
                 </a>
                 <a href="/posts/taming_polysemanticity.html" class="entry">
@@ -121,9 +121,9 @@
                         <span class="entry-date">interpretability · 25 min</span>
                     </div>
                     <div class="entry-desc">
-                        A toy-model study asking whether training choices can reduce feature
-                        entanglement before interpretability methods are applied. Across ten seeds,
-                        L2+GELU produced 17.9% lower measured interference than L1+ReLU.
+                        How training choices shape feature entanglement in overcomplete toy networks,
+                        using sparse autoencoders to compare the representations learned across
+                        different configurations and random seeds.
                     </div>
                 </a>
             </section>

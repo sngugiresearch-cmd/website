@@ -3,7 +3,7 @@
   <channel>
     <title>Stanley Ngugi</title>
     <link>https://stanleyngugi.netlify.app/</link>
-    <description>Technical writing by Stanley Ngugi on AI for formal methods — LLM theorem proving, grammar-constrained decoding, RL environments — and machine learning research.</description>
+    <description>Technical writing by Stanley Ngugi on AI for formal methods, LLM theorem proving, grammar-constrained decoding, RL environments, and machine learning research.</description>
     <language>en-us</language>
     <atom:link href="https://stanleyngugi.netlify.app/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
@@ -11,35 +11,35 @@
       <link>https://stanleyngugi.netlify.app/posts/formally-verified-c.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/formally-verified-c.html</guid>
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0000</pubDate>
-      <description>A code RL environment where models complete C functions under fixed specifications and earn reward from Frama-C proofs of functional correctness and runtime safety—not sampled tests.</description>
+      <description>An RL environment where models write C functions and reward comes from proving the code satisfies a fixed specification, rather than from passing a test suite.</description>
     </item>
     <item>
       <title>How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</title>
       <link>https://stanleyngugi.netlify.app/posts/mathcheck-rl.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/mathcheck-rl.html</guid>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
-      <description>Math RL without hidden answer keys: prompts and Lean checks come from the same bounded specification, while models submit ordinary answers or complete finite certificates.</description>
+      <description>A math RL environment for bounded integer problems that replaces stored expected answers with full verification of each model submission against the encoded problem.</description>
     </item>
     <item>
       <title>Building a Lean-Backed Verifier for Bounded Mathematical Answers</title>
       <link>https://stanleyngugi.netlify.app/posts/mathcheck-engine.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/mathcheck-engine.html</guid>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
-      <description>A verifier that turns bounded mathematical specifications and candidate answers into Lean programs, checks the complete finite domain in isolation, and records what each verdict means.</description>
+      <description>A verification engine that fully checks answers to bounded integer problems by generating executable Lean code over the entire finite domain, without requiring model-written proofs.</description>
     </item>
     <item>
       <title>How a Grammar Changes AI-Generated Mathematical Proof Steps</title>
       <link>https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
-      <description>Across 640 samples per condition, grammar masking moved Qwen first-line CFG acceptance from 65.6% to 100% and familiar tactic starts from 60.2% to 91.3%—without claiming Lean correctness.</description>
+      <description>A study of how grammar masking keeps language-model generations inside the shape of Lean tactics, preventing malformed proof steps without confusing valid syntax with proof correctness.</description>
     </item>
     <item>
       <title>Building a Grammar for AI-Generated Mathematical Proof Steps</title>
       <link>https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
-      <description>An audit of a Lean tactic grammar using executable counterexamples, extraction analysis, and 6,413 mutation and prose probes—separating corpus fit from actual constraint strength.</description>
+      <description>A practical study of Lean's tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects.</description>
     </item>
     <item>
       <title>Taming Incidental Polysemanticity in Toy Models: How Network Training Choices Affect Feature Entanglement</title>

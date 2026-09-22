@@ -20,7 +20,7 @@ POSTS = (
     {
         "name": "MathCheck RL",
         "slug": "mathcheck-rl",
-        "description": "Math RL without hidden answer keys: prompts and Lean checks come from the same bounded specification, while models submit ordinary answers or complete finite certificates.",
+        "description": "A math RL environment for bounded integer problems that replaces stored expected answers with full verification of each model submission against the encoded problem.",
         "repo": "https://github.com/stanleyngugi/mathcheck-rl",
         "source_path": "TECHNICAL_ARTICLE.md",
         "publication": "2026-09-12",
@@ -29,7 +29,7 @@ POSTS = (
     {
         "name": "MathCheck Engine",
         "slug": "mathcheck-engine",
-        "description": "A verifier that turns bounded mathematical specifications and candidate answers into Lean programs, checks the complete finite domain in isolation, and records what each verdict means.",
+        "description": "A verification engine that fully checks answers to bounded integer problems by generating executable Lean code over the entire finite domain, without requiring model-written proofs.",
         "repo": "https://github.com/stanleyngugi/mathcheck-engine",
         "source_path": "TECHNICAL_ARTICLE.md",
         "publication": "2026-09-12",
@@ -38,7 +38,7 @@ POSTS = (
     {
         "name": "Formally Verified C",
         "slug": "formally-verified-c",
-        "description": "A code RL environment where models complete C functions under fixed specifications and earn reward from Frama-C proofs of functional correctness and runtime safety—not sampled tests.",
+        "description": "An RL environment where models write C functions and reward comes from proving the code satisfies a fixed specification, rather than from passing a test suite.",
         "repo": "https://github.com/stanleyngugi/formally-verified-code-rl",
         "source_path": "docs/BLOG_POST_DRAFT.md",
         "publication": "2026-09-13",
