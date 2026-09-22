@@ -1,44 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - Stanley Ngugi</title>
     <meta name="description" content="Curriculum vitae of Stanley Ngugi, researcher working on AI for formal methods and reinforcement learning environments.">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <script>
-        (function () {
-            try {
-                var t = localStorage.getItem('theme');
-                if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', t);
-            } catch (e) {}
-        })();
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
-    <div class="container">
-        <header class="no-print">
-            <div class="header-inner">
-                <a href="/" class="logo">stanley<span>&gt;</span></a>
-                <button class="theme-btn" aria-label="Toggle theme">
-                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                </button>
-            </div>
-        </header>
+<body class="cv-body">
+    <nav class="cv-toolbar no-print" aria-label="CV actions">
+        <a href="/">← back home</a>
+        <button class="print-btn" onclick="window.print()">print / save as PDF</button>
+    </nav>
 
-        <main>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px;">
-                <a href="/" style="color: var(--muted); font-size: 13px;">← back home</a>
-                <button class="print-btn" onclick="window.print()">print / save as PDF</button>
-            </div>
-
-            <div class="cv-page">
+    <main class="cv-document">
+            <article class="cv-page cv-sheet" data-page="1 / 2">
                 <div class="cv-topbar">
                     <div>
                         <div class="cv-name">Stanley Ngugi</div>
@@ -82,8 +62,8 @@
                         </div>
                         <ul>
                             <li>Built an RL environment where models write C functions and reward comes from Frama-C proving that the implementation satisfies a fixed specification, including runtime safety.</li>
-                            <li>Released 64 tasks, an isolated judge, adversarial tests, reproducible proof records, and public packages. The published source passed 57/57 tests.</li>
-                            <li>Article: <a href="/posts/formally-verified-c.html">An RL Environment Where C Code Has to Be Proved, Not Just Tested</a>.</li>
+                            <li>Released 64 tasks, an isolated Frama-C judge, adversarial tests, and reproducible proof records. The published source passed 57/57 tests.</li>
+                            <li>Article: <a href="https://stanleyngugi.netlify.app/posts/formally-verified-c">An RL Environment Where C Code Has to Be Proved, Not Just Tested</a>.</li>
                         </ul>
                     </div>
                     <div class="cv-item">
@@ -93,7 +73,7 @@
                         </div>
                         <ul>
                             <li>Built a math RL environment for bounded integer problems that does not store expected answers. Models submit integers or complete finite certificates, and reward comes from checking each submission against the full encoded problem rather than requiring a model-written proof.</li>
-                            <li>Article: <a href="/posts/mathcheck-rl.html">How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</a>.</li>
+                            <li>Article: <a href="https://stanleyngugi.netlify.app/posts/mathcheck-rl">How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</a>.</li>
                         </ul>
                     </div>
                     <div class="cv-item">
@@ -103,9 +83,15 @@
                         </div>
                         <ul>
                             <li>Built the reusable verification engine behind MathCheck RL. It generates executable Lean checks for bounded integer problems, evaluates the entire finite domain, and returns definitive results for the encoded problem without asking models to produce proofs.</li>
-                            <li>Article: <a href="/posts/mathcheck-engine.html">Building a Lean-Backed Verifier for Bounded Mathematical Answers</a>.</li>
+                            <li>Article: <a href="https://stanleyngugi.netlify.app/posts/mathcheck-engine">Building a Lean-Backed Verifier for Bounded Mathematical Answers</a>.</li>
                         </ul>
                     </div>
+                </section>
+            </article>
+
+            <article class="cv-page cv-sheet" data-page="2 / 2">
+                <section class="cv-section cv-section-first">
+                    <h2>Selected Projects &amp; Technical Writing, continued</h2>
                     <div class="cv-item">
                         <div class="cv-item-head">
                             <span class="cv-item-title"><a href="https://github.com/stanleyngugi/ai-proof-grammars">Grammars for AI-Generated Mathematical Proof Steps</a></span>
@@ -161,14 +147,7 @@
                     </dl>
                 </section>
 
-            </div>
-        </main>
-
-        <footer class="no-print">
-            © 2026 Stanley Ngugi
-        </footer>
-    </div>
-
-    <script src="/main.js"></script>
+            </article>
+    </main>
 </body>
 </html>
