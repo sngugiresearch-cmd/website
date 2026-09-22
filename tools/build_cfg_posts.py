@@ -13,9 +13,9 @@ import markdown
 ROOT = Path(__file__).resolve().parents[1]
 POSTS = [
     {'source': '01-tactic-cfg.md', 'slug': '2026-08-22-lean-tactic-language-cfg',
-     'description': 'An audit of a Lean tactic grammar using executable counterexamples, extraction analysis, and 6,413 mutation and prose probes—separating corpus fit from actual constraint strength.'},
+     'description': "A practical study of Lean's tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects."},
     {'source': '02-constrained-decoding.md', 'slug': '2026-08-22-grammar-constrained-decoding-lean',
-     'description': 'Across 640 samples per condition, grammar masking moved Qwen first-line CFG acceptance from 65.6% to 100% and familiar tactic starts from 60.2% to 91.3%—without claiming Lean correctness.'},
+     'description': 'A study of how grammar masking keeps language-model generations inside the shape of Lean tactics, preventing malformed proof steps without confusing valid syntax with proof correctness.'},
 ]
 CODE = 'https://github.com/stanleyngugi/ai-proof-grammars'
 BASE = 'https://stanleyngugi.netlify.app'

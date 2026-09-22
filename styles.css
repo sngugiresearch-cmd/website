@@ -133,16 +133,29 @@ main {
 }
 
 .pill-primary {
-  background: var(--accent);
-  color: #0B0B10;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 11px 24px;
-  border-radius: 8px;
+  background: rgba(247, 140, 108, 0.08);
+  color: var(--text);
+  border: 1px solid rgba(247, 140, 108, 0.25);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .pill-primary:hover {
-  opacity: 0.88;
+  background: rgba(247, 140, 108, 0.14);
+  border-color: var(--accent);
+  color: var(--bright);
+}
+
+[data-theme="light"] .pill-primary {
+  background: rgba(193, 95, 60, 0.06);
+  border-color: rgba(193, 95, 60, 0.22);
+}
+
+[data-theme="light"] .pill-primary:hover {
+  background: rgba(193, 95, 60, 0.11);
 }
 
 .pill-primary::after {
