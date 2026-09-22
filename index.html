@@ -66,10 +66,9 @@
                         <span class="entry-date">RL, formal methods · 17 min</span>
                     </div>
                     <div class="entry-desc">
-                        Code RL beyond sampled tests: models complete C functions under fixed
-                        specifications and earn reward from Frama-C proofs of functional correctness
-                        and runtime safety. The public release includes 64 tasks, an isolated judge,
-                        negative controls, and reproducible proof evidence.
+                        An RL environment where models write C functions and reward comes from
+                        proving that the code meets a fixed specification—not just passing a test
+                        suite. The public release includes 64 tasks and an isolated Frama-C judge.
                     </div>
                 </a>
                 <a href="/posts/mathcheck-rl.html" class="entry">
@@ -78,9 +77,9 @@
                         <span class="entry-date">RL · 19 min</span>
                     </div>
                     <div class="entry-desc">
-                        Math RL without hidden answer keys: prompts and Lean checks come from the
-                        same bounded specification, while models submit ordinary answers or complete
-                        finite certificates.
+                        A math RL environment that does not store hidden answer keys. Each problem
+                        and its Lean-based check come from the same specification, so reward is based
+                        on verifying the model's submitted answer.
                     </div>
                 </a>
                 <a href="/posts/mathcheck-engine.html" class="entry">
@@ -89,9 +88,9 @@
                         <span class="entry-date">formal methods · 17 min</span>
                     </div>
                     <div class="entry-desc">
-                        The verifier behind MathCheck RL turns bounded specifications and candidate
-                        answers into Lean programs, checks the complete finite domain in isolation,
-                        and records exactly what each verdict means.
+                        The verification layer behind MathCheck RL. It turns a bounded math problem
+                        and a candidate answer into a Lean program, checks the full finite search
+                        space, and returns a clear result.
                     </div>
                 </a>
                 <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html" class="entry">
@@ -100,7 +99,9 @@
                         <span class="entry-date">formal methods · 21 min</span>
                     </div>
                     <div class="entry-desc">
-Across 640 samples per condition, grammar masking moved Qwen first-line CFG acceptance from 65.6% to 100% and familiar tactic starts from 60.2% to 91.3%—without claiming Lean correctness.
+                        A controlled Qwen study of what grammar masking changes during Lean tactic
+                        generation. Across 640 samples per setting, well-formed first lines rose
+                        from 65.6% to 100%—without claiming that the resulting proofs were correct.
 </div>
                 </a>
                 <a href="/posts/2026-08-22-lean-tactic-language-cfg.html" class="entry">
@@ -109,7 +110,9 @@ Across 640 samples per condition, grammar masking moved Qwen first-line CFG acce
                         <span class="entry-date">formal methods · 17 min</span>
                     </div>
                     <div class="entry-desc">
-An audit of a Lean tactic grammar using executable counterexamples, extraction analysis, and 6,413 mutation and prose probes—separating corpus fit from actual constraint strength.
+                        How I built and stress-tested a Lean tactic grammar, including the loophole
+                        that made it look more restrictive than it was. The article separates broad
+                        corpus coverage from genuine constraint strength.
 </div>
                 </a>
                 <a href="/posts/taming_polysemanticity.html" class="entry">
@@ -118,9 +121,9 @@ An audit of a Lean tactic grammar using executable counterexamples, extraction a
                         <span class="entry-date">interpretability · 25 min</span>
                     </div>
                     <div class="entry-desc">
-                        Can feature entanglement be shaped during model training, not only decomposed
-                        afterward? Across ten seeds in overcomplete toy networks, an L2+GELU
-                        configuration showed 17.9% lower SAE-measured interference than L1+ReLU.
+                        A toy-model study asking whether training choices can reduce feature
+                        entanglement before interpretability methods are applied. Across ten seeds,
+                        L2+GELU produced 17.9% lower measured interference than L1+ReLU.
                     </div>
                 </a>
             </section>
@@ -133,9 +136,9 @@ An audit of a Lean tactic grammar using executable counterexamples, extraction a
                         <span class="entry-date">preprint</span>
                     </div>
                     <div class="entry-desc">
-                        An early Phi-3-mini experiment that uses circuit analysis to localize one
-                        factual association, suppress it with IA³, and then learn a counterfactual
-                        replacement; the code preserves the full experimental pipeline.
+                        An early experiment in changing one factual association in Phi-3-mini:
+                        first locate and suppress the original association, then train a replacement.
+                        The complete experimental pipeline is public.
                     </div>
                 </a>
                 <a href="https://arxiv.org/abs/2506.15415" class="entry">
@@ -144,9 +147,9 @@ An audit of a Lean tactic grammar using executable counterexamples, extraction a
                         <span class="entry-date">preprint</span>
                     </div>
                     <div class="entry-desc">
-                        An early-layer LoRA method for propagating Swahili–English lexical alignment
-                        already present inside Lugha-Llama toward its output representations,
-                        evaluated on 623 training pairs and 63 unseen controls.
+                        An early experiment using small adapters to strengthen Swahili–English word
+                        alignment already present inside Lugha-Llama, evaluated on training pairs
+                        and a separate set of unseen words.
                     </div>
                 </a>
             </section>
