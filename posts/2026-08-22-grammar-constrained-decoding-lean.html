@@ -10,7 +10,7 @@
     <meta property="og:title" content="How a Grammar Changes AI-Generated Mathematical Proof Steps">
     <meta property="og:description" content="A study of how grammar masking keeps language-model generations inside the shape of Lean tactics, preventing malformed proof steps without confusing valid syntax with proof correctness.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html">
+    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="citation_title" content="How a Grammar Changes AI-Generated Mathematical Proof Steps">
@@ -30,9 +30,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
-<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html">
+<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean">
 <meta property="article:modified_time" content="2026-09-05T00:00:00Z">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How a Grammar Changes AI-Generated Mathematical Proof Steps", "description": "A study of how grammar masking keeps language-model generations inside the shape of Lean tactics, preventing malformed proof steps without confusing valid syntax with proof correctness.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How a Grammar Changes AI-Generated Mathematical Proof Steps", "description": "A study of how grammar masking keeps language-model generations inside the shape of Lean tactics, preventing malformed proof steps without confusing valid syntax with proof correctness.", "author": {"@type": "Person", "@id": "https://stanleyngugi.netlify.app/#person", "name": "Stanley Ngugi", "url": "https://stanleyngugi.netlify.app/", "sameAs": ["https://github.com/stanleyngugi"]}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean", "@id": "https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean#article"}</script>
 </head>
 <body>
     <div class="container">
@@ -51,7 +51,7 @@
 
             <article class="prose cfg-article">
 <header class="article-header"><h1>How a Grammar Changes AI-Generated Mathematical Proof Steps</h1>
-<div class="entry-date">21 min read · formal methods · <a href="https://github.com/stanleyngugi/ai-proof-grammars">code ↗</a></div></header>
+<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · 21 min read · formal methods · <a href="https://github.com/stanleyngugi/ai-proof-grammars">code ↗</a></div></header>
 <p><em>The sampling mechanism, the saved results, and the boundary between grammar acceptance and Lean correctness.</em></p>
 <p>Lean is a language and tool for writing computer-checked mathematical proofs. A <em>tactic</em> is a command that advances a proof; this article studies grammars for those individual proof steps.</p>
 <blockquote>
@@ -59,7 +59,7 @@
 </blockquote>
 <p>A grammar changes which next tokens a language model is allowed to sample. That sounds like a formatting intervention, but its consequences propagate: once a different token is chosen, every later prediction sees a different prefix. The useful experimental question is how that change affects the outputs we actually receive.</p>
 <p>I tested a permissive Lean tactic grammar using Qwen2.5-Coder-7B-Instruct, vLLM, and llguidance. The constrained run produced 640 outputs whose first cleaned lines were accepted by the scoring grammar, compared with 420 out of 640 in the unconstrained run. The same prompts were used in both conditions.</p>
-<p>This article follows that result from the sampling mechanism to the exact scoring procedure. The <a href="/posts/2026-08-22-lean-tactic-language-cfg.html">first article</a> explains why the grammar’s broad fallback matters. Here we examine what the intervention changed, what the saved files let us measure, and how output format can change the apparent result.</p>
+<p>This article follows that result from the sampling mechanism to the exact scoring procedure. The <a href="/posts/2026-08-22-lean-tactic-language-cfg">first article</a> explains why the grammar’s broad fallback matters. Here we examine what the intervention changed, what the saved files let us measure, and how output format can change the apparent result.</p>
 <p>The experiment is an output-distribution study. It did not execute these generations against Lean or train a model. That boundary leaves plenty to investigate: familiar keywords, incomplete arguments, admissions, string diversity, request latency, and the difference between first-line and whole-output measurements.</p>
 <details class="article-contents"><summary>In this article</summary><nav aria-label="Article contents">
 <ul>
@@ -487,7 +487,7 @@ python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w">
   author = {Ngugi, Stanley},
   year = {2026},
   month = {aug},
-  url = {https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html},
+  url = {https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean},
   howpublished = {Stanley Ngugi},
   note = {Revised September 5, 2026. Companion code: https://github.com/stanleyngugi/ai-proof-grammars}
 }

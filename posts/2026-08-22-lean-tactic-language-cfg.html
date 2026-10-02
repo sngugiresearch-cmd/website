@@ -10,7 +10,7 @@
     <meta property="og:title" content="Building a Grammar for AI-Generated Mathematical Proof Steps">
     <meta property="og:description" content="A practical study of Lean's tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html">
+    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="citation_title" content="Building a Grammar for AI-Generated Mathematical Proof Steps">
@@ -30,9 +30,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
-<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html">
+<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg">
 <meta property="article:modified_time" content="2026-09-05T00:00:00Z">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Grammar for AI-Generated Mathematical Proof Steps", "description": "A practical study of Lean's tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Grammar for AI-Generated Mathematical Proof Steps", "description": "A practical study of Lean's tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects.", "author": {"@type": "Person", "@id": "https://stanleyngugi.netlify.app/#person", "name": "Stanley Ngugi", "url": "https://stanleyngugi.netlify.app/", "sameAs": ["https://github.com/stanleyngugi"]}, "datePublished": "2026-08-22", "dateModified": "2026-09-05", "url": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg", "@id": "https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg#article"}</script>
 </head>
 <body>
     <div class="container">
@@ -51,7 +51,7 @@
 
             <article class="prose cfg-article">
 <header class="article-header"><h1>Building a Grammar for AI-Generated Mathematical Proof Steps</h1>
-<div class="entry-date">17 min read · formal methods · <a href="https://github.com/stanleyngugi/ai-proof-grammars">code ↗</a></div></header>
+<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · 17 min read · formal methods · <a href="https://github.com/stanleyngugi/ai-proof-grammars">code ↗</a></div></header>
 <p><em>What a small grammar captures, what its fallback gives away, and how to measure the difference.</em></p>
 <p>Lean is a language and tool for writing computer-checked mathematical proofs. A <em>tactic</em> is a command that advances a proof; this article studies grammars for those individual proof steps.</p>
 <blockquote>
@@ -66,7 +66,7 @@
 
 <p>Recognizing their leading words is easy. Checking that the rewrite list closes, that <code>at</code> has an appropriate location, and that the term after <code>exact</code> is syntactically well formed is a different task. Determining whether <code>f x</code> proves the current goal is another task again.</p>
 <p>I built a small Lark grammar, extracted tactic-like text from Mathlib, and measured how often the grammar accepted that text. The original report recorded 99.86% acceptance on 144,154 extracted entries. That was an encouraging corpus-fit result. Subsequent inspection showed why it cannot stand alone: the grammar is permissive, the extraction has structural limitations, and an English sentence can receive the same acceptance verdict as a real tactic.</p>
-<p>The central question is what we want the grammar to do: label familiar syntax, exclude unwanted outputs, or define an interface for a model. Those jobs can share code while requiring different evaluations. This article develops the distinctions with the actual grammar and examples. The <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html">companion experiment</a> examines what happened when a related grammar was used during model generation. Together they study a particular representation and its effects; they do not establish a complete theorem prover.</p>
+<p>The central question is what we want the grammar to do: label familiar syntax, exclude unwanted outputs, or define an interface for a model. Those jobs can share code while requiring different evaluations. This article develops the distinctions with the actual grammar and examples. The <a href="/posts/2026-08-22-grammar-constrained-decoding-lean">companion experiment</a> examines what happened when a related grammar was used during model generation. Together they study a particular representation and its effects; they do not establish a complete theorem prover.</p>
 <details class="article-contents"><summary>In this article</summary><nav aria-label="Article contents">
 <ul>
 <li><a href="#a-useful-subset-is-a-design-decision">A useful subset is a design decision</a></li>
@@ -387,7 +387,7 @@ python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w">
   author = {Ngugi, Stanley},
   year = {2026},
   month = {aug},
-  url = {https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html},
+  url = {https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg},
   howpublished = {Stanley Ngugi},
   note = {Revised September 5, 2026. Companion code: https://github.com/stanleyngugi/ai-proof-grammars}
 }

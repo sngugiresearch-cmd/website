@@ -9,7 +9,7 @@
     <meta property="og:title" content="Building a Lean-Backed Verifier for Bounded Mathematical Answers">
     <meta property="og:description" content="A verification engine that fully checks answers to bounded integer problems by generating executable Lean code over the entire finite domain, without requiring model-written proofs.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/mathcheck-engine.html">
+    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/mathcheck-engine">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="citation_title" content="Building a Lean-Backed Verifier for Bounded Mathematical Answers">
@@ -30,8 +30,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
-<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/mathcheck-engine.html">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Lean-Backed Verifier for Bounded Mathematical Answers", "description": "A verification engine that fully checks answers to bounded integer problems by generating executable Lean code over the entire finite domain, without requiring model-written proofs.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-09-12", "url": "https://stanleyngugi.netlify.app/posts/mathcheck-engine.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/mathcheck-engine.html"}</script>
+<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/mathcheck-engine">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Lean-Backed Verifier for Bounded Mathematical Answers", "description": "A verification engine that fully checks answers to bounded integer problems by generating executable Lean code over the entire finite domain, without requiring model-written proofs.", "@id": "https://stanleyngugi.netlify.app/posts/mathcheck-engine#article", "author": {"@type": "Person", "@id": "https://stanleyngugi.netlify.app/#person", "name": "Stanley Ngugi", "url": "https://stanleyngugi.netlify.app/", "sameAs": ["https://github.com/stanleyngugi"]}, "datePublished": "2026-09-12", "url": "https://stanleyngugi.netlify.app/posts/mathcheck-engine", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/mathcheck-engine"}</script>
 </head>
 <body>
     <div class="container">
@@ -50,7 +50,7 @@
 
             <article class="prose cfg-article mathcheck-article">
 <header class="article-header"><h1>Building a Lean-Backed Verifier for Bounded Mathematical Answers</h1>
-<div class="entry-date">17 min read · formal methods · <a href="https://github.com/stanleyngugi/mathcheck-engine">code ↗</a></div></header>
+<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · 17 min read · formal methods · <a href="https://github.com/stanleyngugi/mathcheck-engine">code ↗</a></div></header>
 <blockquote>
 <p>MathCheck Engine turns restricted integer specifications and candidate answers into generated Lean 4 programs, evaluates them with <code>native_decide</code> inside a fail-closed sandbox, and reports exactly what the resulting verdict establishes.</p>
 </blockquote>
@@ -299,7 +299,7 @@ finally:
 <p>Formal verification is often introduced through universal theorems and handwritten proofs. Those are important, but they are not the only useful entry point. Many evaluation and training tasks already have finite mathematical structure. If the environment can state that structure completely, a model can submit the mathematical object it found while a trusted checker constructs the formal proposition.</p>
 <p>The result is modest but meaningful. We do not learn that the model understood the original prose, that its reasoning was sound, or that a pattern continues forever. We learn that one exact candidate satisfies one exact bounded contract, under one recorded toolchain and execution boundary.</p>
 <p>That is less glamorous than “verified mathematics.” It is also far more useful than a green check mark whose meaning no one can reconstruct later.</p>
-<p>MathCheck Engine is public under the MIT license at <a href="https://github.com/stanleyngugi/mathcheck-engine">https://github.com/stanleyngugi/mathcheck-engine</a>. Version 0.3.2 and its artifacts are available at <a href="https://github.com/stanleyngugi/mathcheck-engine/releases/tag/v0.3.2">https://github.com/stanleyngugi/mathcheck-engine/releases/tag/v0.3.2</a>. The companion article, <a href="/posts/mathcheck-rl.html">How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</a>, shows how this checking boundary becomes a reinforcement-learning reward.</p>
+<p>MathCheck Engine is public under the MIT license at <a href="https://github.com/stanleyngugi/mathcheck-engine">https://github.com/stanleyngugi/mathcheck-engine</a>. Version 0.3.2 and its artifacts are available at <a href="https://github.com/stanleyngugi/mathcheck-engine/releases/tag/v0.3.2">https://github.com/stanleyngugi/mathcheck-engine/releases/tag/v0.3.2</a>. The companion article, <a href="/posts/mathcheck-rl">How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</a>, shows how this checking boundary becomes a reinforcement-learning reward.</p>
 
 <div class="cite-box"><div class="cite-label">Cite this post</div>
 <p><a href="/citations/mathcheck-engine.bib" download>Download BibTeX</a></p>
@@ -308,7 +308,7 @@ finally:
   author = {Ngugi, Stanley},
   year = {2026},
   month = {sep},
-  url = {https://stanleyngugi.netlify.app/posts/mathcheck-engine.html},
+  url = {https://stanleyngugi.netlify.app/posts/mathcheck-engine},
   note = {Companion code and evidence: https://github.com/stanleyngugi/mathcheck-engine}
 }
 </code></pre></div>

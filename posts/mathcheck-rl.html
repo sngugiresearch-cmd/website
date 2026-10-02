@@ -9,7 +9,7 @@
     <meta property="og:title" content="How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards">
     <meta property="og:description" content="A math RL environment for bounded integer problems that replaces stored expected answers with full verification of each model submission against the encoded problem.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/mathcheck-rl.html">
+    <meta property="og:url" content="https://stanleyngugi.netlify.app/posts/mathcheck-rl">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="citation_title" content="How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards">
@@ -30,8 +30,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
-<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/mathcheck-rl.html">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards", "description": "A math RL environment for bounded integer problems that replaces stored expected answers with full verification of each model submission against the encoded problem.", "author": {"@type": "Person", "name": "Stanley Ngugi"}, "datePublished": "2026-09-12", "url": "https://stanleyngugi.netlify.app/posts/mathcheck-rl.html", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/mathcheck-rl.html"}</script>
+<link rel="canonical" href="https://stanleyngugi.netlify.app/posts/mathcheck-rl">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards", "description": "A math RL environment for bounded integer problems that replaces stored expected answers with full verification of each model submission against the encoded problem.", "@id": "https://stanleyngugi.netlify.app/posts/mathcheck-rl#article", "author": {"@type": "Person", "@id": "https://stanleyngugi.netlify.app/#person", "name": "Stanley Ngugi", "url": "https://stanleyngugi.netlify.app/", "sameAs": ["https://github.com/stanleyngugi"]}, "datePublished": "2026-09-12", "url": "https://stanleyngugi.netlify.app/posts/mathcheck-rl", "mainEntityOfPage": "https://stanleyngugi.netlify.app/posts/mathcheck-rl"}</script>
 </head>
 <body>
     <div class="container">
@@ -50,14 +50,14 @@
 
             <article class="prose cfg-article mathcheck-article">
 <header class="article-header"><h1>How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</h1>
-<div class="entry-date">19 min read · RL, formal methods · <a href="https://github.com/stanleyngugi/mathcheck-rl">code ↗</a></div></header>
+<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · 19 min read · RL, formal methods · <a href="https://github.com/stanleyngugi/mathcheck-rl">code ↗</a></div></header>
 <blockquote>
 <p>Inside an answer-key-free math RL environment that turns complete bounded specifications into generated Lean checks, evaluates them with <code>native_decide</code>, and asks models for answers or certificates—not proof scripts.</p>
 </blockquote>
 <p>Reinforcement learning needs a reward. Mathematics seems unusually well suited to this requirement: answers are often short, exact, and easy to compare. Put a number in a dataset, ask a model to solve the problem, and return 1 when the strings agree.</p>
 <p>That works until the answer is written as <code>33.0</code>, the problem admits several equivalent forms, or the task asks for a structured object rather than a scalar. It becomes more fragile when the reference program encodes the wrong boundary, when a hidden test suite covers only familiar cases, or when the verifier times out and the training system records “wrong answer.” Most importantly, the answer key says what output was expected but often hides the contract that made that output correct.</p>
 <p>MathCheck RL explores a different arrangement for a deliberately bounded slice of mathematics. Each task stores a complete machine-readable specification: a finite domain and the expression, predicate, objective, or relation to evaluate over it. The model sees a human-readable prompt derived from that specification and submits only an integer candidate or a complete finite certificate. The environment sends both objects to MathCheck Engine, which generates the Lean checker and returns a typed verdict.</p>
-<p>The companion article, <a href="/posts/mathcheck-engine.html">Building a Lean-Backed Verifier for Bounded Mathematical Answers</a>, develops the verifier and trust boundary in detail. This article concentrates on the task, reward, evaluation, and distribution layers built on top of it.</p>
+<p>The companion article, <a href="/posts/mathcheck-engine">Building a Lean-Backed Verifier for Bounded Mathematical Answers</a>, develops the verifier and trust boundary in detail. This article concentrates on the task, reward, evaluation, and distribution layers built on top of it.</p>
 <p>There is no expected candidate stored in the primary task contract.</p>
 <p>This does not make the environment ground-truth-free. The specification is the ground truth. It also does not make the system a universal math verifier. The current families are exact integer evaluation, bounded sums, bounded counts, bounded minima, and complete relations over bounded integer pairs. The point is to make the reward's meaning unusually clear inside that surface.</p>
 <details class="article-contents"><summary>In this article</summary><nav aria-label="Article contents"><ul><li><a href="#why-a-correct-reward-can-still-be-a-bad-scientific-instrument">Why a correct reward can still be a bad scientific instrument</a></li>
@@ -335,7 +335,7 @@ python -m pytest tests -q</code></pre>
   author = {Ngugi, Stanley},
   year = {2026},
   month = {sep},
-  url = {https://stanleyngugi.netlify.app/posts/mathcheck-rl.html},
+  url = {https://stanleyngugi.netlify.app/posts/mathcheck-rl},
   note = {Companion code and evidence: https://github.com/stanleyngugi/mathcheck-rl}
 }
 </code></pre></div>

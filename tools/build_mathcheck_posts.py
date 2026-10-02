@@ -54,7 +54,7 @@ def render(post):
     if not heading.startswith("# "):
         raise ValueError(f"Expected first-level title in {source}")
     title = heading[2:].strip()
-    url = f"{BASE}/posts/{post['slug']}.html"
+    url = f"{BASE}/posts/{post['slug']}"
     minutes = (len(original.split()) + 219) // 220
 
     result = subprocess.run(
@@ -79,7 +79,7 @@ def render(post):
     for other in POSTS:
         original_link = f"{other['repo']}/blob/main/{other['source_path']}"
         article_body = article_body.replace(
-            f'href="{original_link}"', f'href="/posts/{other["slug"]}.html"'
+            f'href="{original_link}"', f'href="/posts/{other["slug"]}"'
         )
 
     headings = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', article_body)
@@ -116,7 +116,9 @@ def render(post):
     metadata = {
         "@context": "https://schema.org", "@type": "Article", "headline": title,
         "description": post["description"],
-        "author": {"@type": "Person", "name": "Stanley Ngugi"},
+        "@id": url + "#article",
+        "author": {"@type": "Person", "@id": BASE + "/#person", "name": "Stanley Ngugi",
+                   "url": BASE + "/", "sameAs": ["https://github.com/stanleyngugi"]},
         "datePublished": post["publication"], "url": url,
         "mainEntityOfPage": url,
     }
@@ -136,7 +138,7 @@ def render(post):
     html = (
         '<article class="prose cfg-article mathcheck-article">\n'
         f'<header class="article-header"><h1>{escape(title)}</h1>\n'
-        f'<div class="entry-date">{minutes} min read · {post["topics"]} · '
+        f'<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · {minutes} min read · {post["topics"]} · '
         f'<a href="{post["repo"]}">code ↗</a></div></header>\n'
         f'{article_body}\n'
         '<div class="cite-box"><div class="cite-label">Cite this post</div>\n'

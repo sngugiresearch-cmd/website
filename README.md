@@ -60,3 +60,29 @@ the work rather than publishing cadence. RSS, citation metadata, sitemap records
 and article history retain the real publication and revision dates. Revisions use
 an accurate `dateModified`; original publication dates are never backdated or
 redistributed for presentation.
+
+
+## Search visibility
+
+The live site's canonical address is `https://stanleyngugi.netlify.app/`.
+Article and CV canonical URLs use Netlify's extensionless Pretty URLs. The
+homepage, article metadata, sitemap, citation URLs, and feed links agree on
+those addresses. Existing RSS GUIDs remain stable for subscribers.
+
+The homepage identifies Stanley Ngugi through Person, ProfilePage, and WebSite
+structured data. Articles link their author back to the same identity. Update
+the verified `sameAs` links if another public author profile is added.
+
+Retired `/research`, `/posts`, and `/about` overview routes redirect permanently
+to the current homepage or its corresponding section. Legacy essays redirect
+to `/archive/`. Archive pages use an `X-Robots-Tag: noindex` header. They remain
+crawlable so search engines can read that instruction; a robots.txt crawl block
+would prevent them from seeing it.
+
+After deployment, open Google Search Console for this site's URL-prefix
+property, submit `sitemap.xml`, and inspect the homepage, `/cv`, and the six
+current articles. Request indexing for the current homepage and three new
+project articles first. Check the live redirects for `/research` and `/posts`,
+and confirm an archived page returns the noindex header. Keep the existing
+Google verification file. Source changes cannot submit indexing requests on
+their own, and search engines choose when to refresh snippets.

@@ -840,7 +840,17 @@ footer a:hover {
   .cfg-article figure img { min-width: 520px; }
   .cfg-article .article-header h1 { font-size: 28px; }
 }
-.cfg-article .article-header .entry-date { white-space: normal; }
+.article-header .entry-date { white-space: normal; }
 .cfg-article pre code { font-size: inherit; }
 .mathcheck-article .mermaid { overflow-x: auto; font-size: 14px; }
 .mathcheck-article .mermaid svg { display: block; max-width: 100%; height: auto; margin: auto; }
+
+
+/* Keep the full author name visible beside the research introduction. */
+.intro .intro-name {
+  font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--subtle);
+  margin-bottom: 16px;
+}

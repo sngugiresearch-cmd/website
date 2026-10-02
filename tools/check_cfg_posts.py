@@ -38,6 +38,8 @@ for name, record in manifest.items():
         target = ROOT/unquote(url.path.lstrip('/')) if url.path.startswith('/') else path.parent/unquote(url.path)
         if not url.path: target = path
         if target.is_dir(): target = target/'index.html'
+        if not target.is_file() and not target.suffix:
+            target = target.with_suffix('.html')
         assert target.is_file(), f'{path.name}: missing {ref}'
         if url.fragment and target.suffix == '.html':
             assert unquote(url.fragment) in Page(target.read_text()).ids, f'{path.name}: missing anchor {ref}'

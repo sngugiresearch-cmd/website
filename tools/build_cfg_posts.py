@@ -59,13 +59,14 @@ def main():
                            ('og:description', post['description']), ('citation_title', title)]:
             prefix = re.sub(r'(<meta (?:name|property)="'+re.escape(key)+r'" content=")[^"]*(">)',
                             lambda m:m[1]+escape(value, quote=True)+m[2], prefix)
-        canonical = f"{BASE}/posts/{post['slug']}.html"
+        canonical = f"{BASE}/posts/{post['slug']}"
         data = {'@context':'https://schema.org', '@type':'Article', 'headline':title,
-                'description':post['description'], 'author':{'@type':'Person','name':'Stanley Ngugi'},
+                'description':post['description'], '@id':canonical+'#article', 'author':{'@type':'Person','@id':BASE+'/#person','name':'Stanley Ngugi','url':BASE+'/','sameAs':['https://github.com/stanleyngugi']},
                 'datePublished':'2026-08-22', 'dateModified':'2026-09-05', 'url':canonical,
                 'mainEntityOfPage':canonical}
         meta = f'<link rel="canonical" href="{canonical}">\n<meta property="article:modified_time" content="2026-09-05T00:00:00Z">\n<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>\n'
         prefix = prefix.replace('</head>', meta+'</head>')
+        prefix = prefix.replace(f'{BASE}/posts/{post["slug"]}.html', canonical)
         prefix = prefix.replace('https://github.com/stanleyngugi/lean-tactic-research', CODE)
         suffix = suffix.replace('https://github.com/stanleyngugi/lean-tactic-research', CODE)
         bibkey = 'ngugi2026lean' if post == POSTS[0] else 'ngugi2026quarter'
@@ -78,7 +79,7 @@ def main():
         (ROOT/'citations'/f"{post['slug']}.bib").write_text(bib)
         article = f'''<article class="prose cfg-article">
 <header class="article-header"><h1>{escape(title)}</h1>
-<div class="entry-date">{minutes} min read · formal methods · <a href="{CODE}">code ↗</a></div></header>
+<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · {minutes} min read · formal methods · <a href="{CODE}">code ↗</a></div></header>
 {rendered}
 <div class="cite-box"><div class="cite-label">Cite this post</div>
 <p class="citation-text">Ngugi, Stanley. “{escape(title)}.” August 22, 2026. Revised September 5, 2026.</p>
@@ -88,7 +89,7 @@ def main():
 </article>'''
         (ROOT/'posts'/f"{post['slug']}.html").write_text(prefix+article+suffix)
         # Update only the corresponding homepage entry.
-        pattern = r'(<a href="/posts/'+re.escape(post['slug'])+r'\.html" class="entry">)(.*?)(</a>)'
+        pattern = r'(<a href="/posts/'+re.escape(post['slug'])+r'(?:\.html)?" class="entry">)(.*?)(</a>)'
         def entry(m):
             inner = re.sub(r'(<span class="entry-title">).*?(</span>)', lambda x:x[1]+escape(title)+x[2],m[2],flags=re.S)
             inner = re.sub(r'(<div class="entry-desc">).*?(</div>)', lambda x:x[1]+'\n'+escape(post['description'])+'\n'+x[2],inner,flags=re.S)
