@@ -8,42 +8,42 @@
     <atom:link href="https://stanleyngugi.netlify.app/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>An RL Environment Where C Code Has to Be Proved, Not Just Tested</title>
-      <link>https://stanleyngugi.netlify.app/posts/formally-verified-c.html</link>
+      <link>https://stanleyngugi.netlify.app/posts/formally-verified-c</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/formally-verified-c.html</guid>
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0000</pubDate>
       <description>An RL environment where models write C functions and reward comes from proving the code satisfies a fixed specification, rather than from passing a test suite.</description>
     </item>
     <item>
-      <title>How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</title>
-      <link>https://stanleyngugi.netlify.app/posts/mathcheck-rl.html</link>
+      <title>Grading Mathematical Answers Without Answer Keys</title>
+      <link>https://stanleyngugi.netlify.app/posts/mathcheck-rl</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/mathcheck-rl.html</guid>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
-      <description>A math RL environment for bounded integer problems that replaces stored expected answers with full verification of each model submission against the encoded problem.</description>
+      <description>Formal verification of bounded mathematical submissions against frozen specifications, producing RL rewards without stored answer keys.</description>
     </item>
     <item>
       <title>Building a Lean-Backed Verifier for Bounded Mathematical Answers</title>
-      <link>https://stanleyngugi.netlify.app/posts/mathcheck-engine.html</link>
+      <link>https://stanleyngugi.netlify.app/posts/mathcheck-engine</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/mathcheck-engine.html</guid>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
-      <description>A verification engine that fully checks answers to bounded integer problems by generating executable Lean code over the entire finite domain, without requiring model-written proofs.</description>
+      <description>A verifier that turns bounded mathematical specifications and candidate answers into Lean programs, checks the complete finite domain, and records the scope and outcome of each verdict.</description>
     </item>
     <item>
       <title>How a Grammar Changes AI-Generated Mathematical Proof Steps</title>
-      <link>https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</link>
+      <link>https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-grammar-constrained-decoding-lean.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
       <description>A study of how grammar masking keeps language-model generations inside the shape of Lean tactics, preventing malformed proof steps without confusing valid syntax with proof correctness.</description>
     </item>
     <item>
       <title>Building a Grammar for AI-Generated Mathematical Proof Steps</title>
-      <link>https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</link>
+      <link>https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/2026-08-22-lean-tactic-language-cfg.html</guid>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
-      <description>A practical study of Lean's tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects.</description>
+      <description>A practical study of Lean&#x27;s tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects.</description>
     </item>
     <item>
       <title>Taming Incidental Polysemanticity in Toy Models: How Network Training Choices Affect Feature Entanglement</title>
-      <link>https://stanleyngugi.netlify.app/posts/taming_polysemanticity.html</link>
+      <link>https://stanleyngugi.netlify.app/posts/taming_polysemanticity</link>
       <guid isPermaLink="true">https://stanleyngugi.netlify.app/posts/taming_polysemanticity.html</guid>
       <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
       <description>A toy-model investigation of whether feature entanglement is shaped during model training, with a ten-seed configuration comparison measured using sparse autoencoders.</description>

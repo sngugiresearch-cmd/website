@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Render verbatim copies of the current research articles with Pandoc.
+"""Render the committed research articles with Pandoc.
 
-Sync each content file from its corresponding GitHub article before publishing
-a revision. Keep the author's technical claims in those sources unchanged;
+MathCheck sources are copies of their canonical GitHub articles. The C article
+is a website editorial revision. Preserve technical claims in either source;
 only rewrite links and add website navigation here.
 """
 
@@ -20,7 +20,8 @@ POSTS = (
     {
         "name": "MathCheck RL",
         "slug": "mathcheck-rl",
-        "description": "A math RL environment for bounded integer problems that replaces stored expected answers with full verification of each model submission against the encoded problem.",
+        "description": "Formal verification of bounded mathematical submissions against frozen specifications, producing RL rewards without stored answer keys.",
+        "previous_title": "Grading Mathematical Answers Without Precomputed Answer Keys",
         "repo": "https://github.com/stanleyngugi/mathcheck-rl",
         "source_path": "TECHNICAL_ARTICLE.md",
         "publication": "2026-09-12",
@@ -29,7 +30,7 @@ POSTS = (
     {
         "name": "MathCheck Engine",
         "slug": "mathcheck-engine",
-        "description": "A verification engine that fully checks answers to bounded integer problems by generating executable Lean code over the entire finite domain, without requiring model-written proofs.",
+        "description": "A verifier that turns bounded mathematical specifications and candidate answers into Lean programs, checks the complete finite domain, and records the scope and outcome of each verdict.",
         "repo": "https://github.com/stanleyngugi/mathcheck-engine",
         "source_path": "TECHNICAL_ARTICLE.md",
         "publication": "2026-09-12",
@@ -54,14 +55,21 @@ def render(post):
     if not heading.startswith("# "):
         raise ValueError(f"Expected first-level title in {source}")
     title = heading[2:].strip()
-    url = f"{BASE}/posts/{post['slug']}.html"
+    url = f"{BASE}/posts/{post['slug']}"
     minutes = (len(original.split()) + 219) // 220
 
     result = subprocess.run(
-        ["pandoc", "--from=gfm", "--to=html", "--wrap=none", "--no-highlight"],
+        ["pandoc", "--from=gfm+tex_math_dollars", "--to=html", "--mathml", "--wrap=none", "--no-highlight"],
         input=body, text=True, capture_output=True, check=True,
     )
     article_body = result.stdout
+    # Keep long native MathML formulas inside the article on narrow screens.
+    article_body = re.sub(
+        r'<p>(<math display="block".*?</math>)</p>',
+        r'<div class="math-display" tabindex="0" role="region" '
+        r'aria-label="Scrollable mathematical formula">\1</div>',
+        article_body, flags=re.S,
+    )
     # Mermaid expects graph text directly inside its container, not a nested
     # Pandoc code element. If the module cannot load, this still shows source.
     article_body = re.sub(
@@ -79,7 +87,7 @@ def render(post):
     for other in POSTS:
         original_link = f"{other['repo']}/blob/main/{other['source_path']}"
         article_body = article_body.replace(
-            f'href="{original_link}"', f'href="/posts/{other["slug"]}.html"'
+            f'href="{original_link}"', f'href="/posts/{other["slug"]}"'
         )
 
     headings = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', article_body)
@@ -116,15 +124,22 @@ def render(post):
     metadata = {
         "@context": "https://schema.org", "@type": "Article", "headline": title,
         "description": post["description"],
-        "author": {"@type": "Person", "name": "Stanley Ngugi"},
+        "@id": url + "#article",
+        "author": {"@type": "Person", "@id": BASE + "/#person", "name": "Stanley Ngugi",
+                   "url": BASE + "/", "sameAs": ["https://github.com/stanleyngugi"]},
         "datePublished": post["publication"], "url": url,
-        "mainEntityOfPage": url,
+        "mainEntityOfPage": url, "dateModified": "2026-10-06",
     }
     prefix = prefix.replace(
         "</head>",
         f'<link rel="canonical" href="{url}">\n'
         f'<script type="application/ld+json">{json.dumps(metadata, ensure_ascii=False)}</script>\n'
         "</head>",
+    )
+    title_history = (
+        f'<p class="entry-date article-title-history">Previously titled '
+        f'“{escape(post["previous_title"])}”. The article URL is unchanged.</p>\n'
+        if post.get("previous_title") else ""
     )
     bib = (
         f"@misc{{ngugi2026{post['slug'].replace('-', '')},\n"
@@ -136,8 +151,9 @@ def render(post):
     html = (
         '<article class="prose cfg-article mathcheck-article">\n'
         f'<header class="article-header"><h1>{escape(title)}</h1>\n'
-        f'<div class="entry-date">{minutes} min read · {post["topics"]} · '
-        f'<a href="{post["repo"]}">code ↗</a></div></header>\n'
+        f'<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · {minutes} min read · {post["topics"]} · '
+        f'<a href="{post["repo"]}">code ↗</a></div>\n'
+        f'{title_history}</header>\n'
         f'{article_body}\n'
         '<div class="cite-box"><div class="cite-label">Cite this post</div>\n'
         f'<p><a href="/citations/{post["slug"]}.bib" download>Download BibTeX</a></p>\n'
@@ -151,6 +167,7 @@ def render(post):
     )
     return {
         "source": f"{post['repo']}/blob/main/{post['source_path']}",
+        "source_relation": "website editorial revision" if post['slug'] == 'formally-verified-c' else "canonical copy",
         "sha256": sha256(original.encode("utf-8")).hexdigest(),
         "output": f"posts/{post['slug']}.html", "title": title,
         "reading_minutes": minutes,
@@ -162,7 +179,31 @@ def main():
     (ROOT / "content" / "research-posts-manifest.json").write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    print("Rendered three research posts from unchanged Markdown copies.")
+    index = (ROOT / "index.html").read_text()
+    rss = (ROOT / "rss.xml").read_text()
+    sitemap = (ROOT / "sitemap.xml").read_text()
+    for post in POSTS:
+        record = manifest[f"{post['slug']}.md"]
+        canonical = f"{BASE}/posts/{post['slug']}"
+        pattern = r'(<a href="/posts/' + re.escape(post['slug']) + r'(?:\.html)?" class="entry">)(.*?)(</a>)'
+        def entry(match):
+            inner = re.sub(r'(<span class="entry-title">).*?(</span>)', lambda m:m[1]+escape(record['title'])+m[2], match[2], flags=re.S)
+            inner = re.sub(r'(<span class="entry-date">).*?(</span>)', lambda m:m[1]+f'{post["topics"]} · {record["reading_minutes"]} min'+m[2], inner, flags=re.S)
+            return match[1]+inner+match[3]
+        index, count = re.subn(pattern, entry, index, flags=re.S)
+        if count != 1:
+            raise RuntimeError(f"Expected one homepage entry for {post['slug']}")
+        def item(match):
+            if f'<link>{canonical}</link>' not in match[0]:
+                return match[0]
+            value = re.sub(r'<title>.*?</title>', lambda m:'<title>'+escape(record['title'])+'</title>', match[0], flags=re.S)
+            return re.sub(r'<description>.*?</description>', lambda m:'<description>'+escape(post['description'])+'</description>', value, flags=re.S)
+        rss = re.sub(r'<item>.*?</item>', item, rss, flags=re.S)
+        sitemap = re.sub(r'(<url>\s*<loc>'+re.escape(canonical)+r'</loc>\s*<lastmod>).*?(</lastmod>)', lambda m:m[1]+'2026-10-06'+m[2], sitemap, flags=re.S)
+    (ROOT / "index.html").write_text(index)
+    (ROOT / "rss.xml").write_text(rss)
+    (ROOT / "sitemap.xml").write_text(sitemap)
+    print("Rendered three research posts; synchronized homepage, RSS, and sitemap.")
 
 
 if __name__ == "__main__":

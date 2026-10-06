@@ -19,6 +19,8 @@ POSTS = [
 ]
 CODE = 'https://github.com/stanleyngugi/ai-proof-grammars'
 BASE = 'https://stanleyngugi.netlify.app'
+MODIFIED = '2026-10-06'
+REVISION = 'October 6, 2026'
 
 
 def main():
@@ -59,13 +61,14 @@ def main():
                            ('og:description', post['description']), ('citation_title', title)]:
             prefix = re.sub(r'(<meta (?:name|property)="'+re.escape(key)+r'" content=")[^"]*(">)',
                             lambda m:m[1]+escape(value, quote=True)+m[2], prefix)
-        canonical = f"{BASE}/posts/{post['slug']}.html"
+        canonical = f"{BASE}/posts/{post['slug']}"
         data = {'@context':'https://schema.org', '@type':'Article', 'headline':title,
-                'description':post['description'], 'author':{'@type':'Person','name':'Stanley Ngugi'},
-                'datePublished':'2026-08-22', 'dateModified':'2026-09-05', 'url':canonical,
+                'description':post['description'], '@id':canonical+'#article', 'author':{'@type':'Person','@id':BASE+'/#person','name':'Stanley Ngugi','url':BASE+'/','sameAs':['https://github.com/stanleyngugi']},
+                'datePublished':'2026-08-22', 'dateModified':MODIFIED, 'url':canonical,
                 'mainEntityOfPage':canonical}
-        meta = f'<link rel="canonical" href="{canonical}">\n<meta property="article:modified_time" content="2026-09-05T00:00:00Z">\n<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>\n'
+        meta = f'<link rel="canonical" href="{canonical}">\n<meta property="article:modified_time" content="{MODIFIED}T00:00:00Z">\n<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>\n'
         prefix = prefix.replace('</head>', meta+'</head>')
+        prefix = prefix.replace(f'{BASE}/posts/{post["slug"]}.html', canonical)
         prefix = prefix.replace('https://github.com/stanleyngugi/lean-tactic-research', CODE)
         suffix = suffix.replace('https://github.com/stanleyngugi/lean-tactic-research', CODE)
         bibkey = 'ngugi2026lean' if post == POSTS[0] else 'ngugi2026quarter'
@@ -73,26 +76,27 @@ def main():
                '  author = {Ngugi, Stanley},\n  year = {2026},\n'
                '  month = {aug},\n  url = {' + canonical + '},\n'
                '  howpublished = {Stanley Ngugi},\n'
-               '  note = {Revised September 5, 2026. Companion code: ' + CODE + '}\n}\n')
+               '  note = {Revised ' + REVISION + '. Companion code: ' + CODE + '}\n}\n')
         (ROOT/'citations').mkdir(exist_ok=True)
         (ROOT/'citations'/f"{post['slug']}.bib").write_text(bib)
         article = f'''<article class="prose cfg-article">
 <header class="article-header"><h1>{escape(title)}</h1>
-<div class="entry-date">{minutes} min read · formal methods · <a href="{CODE}">code ↗</a></div></header>
+<div class="entry-date">By <a href="/" rel="author">Stanley Ngugi</a> · {minutes} min read · formal methods · <a href="{CODE}">code ↗</a></div></header>
 {rendered}
 <div class="cite-box"><div class="cite-label">Cite this post</div>
-<p class="citation-text">Ngugi, Stanley. “{escape(title)}.” August 22, 2026. Revised September 5, 2026.</p>
+<p class="citation-text">Ngugi, Stanley. “{escape(title)}.” August 22, 2026. Revised {REVISION}.</p>
 <p><a href="/citations/{post['slug']}.bib" download>Download BibTeX</a></p>
 <pre><code>{escape(bib)}</code></pre></div>
 <p class="article-artifacts"><a href="{CODE}">Companion code and evidence</a> · <a href="/content/{post['source']}">Markdown source</a></p>
 </article>'''
         (ROOT/'posts'/f"{post['slug']}.html").write_text(prefix+article+suffix)
         # Update only the corresponding homepage entry.
-        pattern = r'(<a href="/posts/'+re.escape(post['slug'])+r'\.html" class="entry">)(.*?)(</a>)'
+        pattern = r'(<a href="/posts/'+re.escape(post['slug'])+r'(?:\.html)?" class="entry">)(.*?)(</a>)'
         def entry(m):
             inner = re.sub(r'(<span class="entry-title">).*?(</span>)', lambda x:x[1]+escape(title)+x[2],m[2],flags=re.S)
             inner = re.sub(r'(<div class="entry-desc">).*?(</div>)', lambda x:x[1]+'\n'+escape(post['description'])+'\n'+x[2],inner,flags=re.S)
-            inner = inner.replace('>Aug 22</span>', '>Aug 22 · revised Sep 5</span>')
+            inner = re.sub(r'(<span class="entry-date">).*?(</span>)',
+                           lambda x:x[1]+f'formal methods · {minutes} min'+x[2],inner,flags=re.S)
             return m[1]+inner+m[3]
         index, n = re.subn(pattern,entry,index,flags=re.S)
         if n != 1:raise RuntimeError(f"Expected one homepage entry for {post['slug']}")
@@ -106,7 +110,10 @@ def main():
                                      'output':f"posts/{post['slug']}.html", 'title':title,'reading_minutes':minutes}
     (ROOT/'index.html').write_text(index)
     (ROOT/'rss.xml').write_text(rss)
-    sitemap = (ROOT/'sitemap.xml').read_text().replace('<lastmod>2026-08-22</lastmod>','<lastmod>2026-09-05</lastmod>')
+    sitemap = (ROOT/'sitemap.xml').read_text()
+    for post in POSTS:
+        sitemap = re.sub(r'(<url>\s*<loc>'+re.escape(BASE+'/posts/'+post['slug'])+r'</loc>\s*<lastmod>).*?(</lastmod>)',
+                         lambda m:m[1]+MODIFIED+m[2],sitemap,flags=re.S)
     (ROOT/'sitemap.xml').write_text(sitemap)
     (ROOT/'content/manifest.json').write_text(json.dumps(manifests,indent=2,ensure_ascii=False)+'\n')
     print('Rendered two articles; synchronized homepage, RSS, sitemap, and metadata.')

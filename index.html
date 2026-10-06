@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stanley Ngugi</title>
-    <meta name="description" content="Independent AI research in post-training with reinforcement learning, RL environments, formal methods, and executable verification.">
-    <meta property="og:title" content="Stanley Ngugi">
-    <meta property="og:description" content="Independent research in post-training with reinforcement learning, RL environments, formal methods, and executable verification.">
+    <title>Stanley Ngugi | RL Environments and Formal Verification</title>
+    <meta name="description" content="Stanley Ngugi is an independent AI researcher working on post-training with reinforcement learning and formal verification for mathematical reasoning and code.">
+    <meta property="og:title" content="Stanley Ngugi | RL Environments and Formal Verification">
+    <meta property="og:description" content="Stanley Ngugi is an independent AI researcher working on post-training with reinforcement learning and formal verification for mathematical reasoning and code.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://stanleyngugi.netlify.app/">
     <meta property="og:image" content="https://stanleyngugi.netlify.app/og-image.png">
@@ -26,6 +26,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
+    <meta name="author" content="Stanley Ngugi">
+    <meta name="twitter:title" content="Stanley Ngugi | RL Environments and Formal Verification">
+    <meta name="twitter:description" content="Stanley Ngugi is an independent AI researcher working on post-training with reinforcement learning and formal verification for mathematical reasoning and code.">
+    <link rel="canonical" href="https://stanleyngugi.netlify.app/">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://stanleyngugi.netlify.app/#website", "url": "https://stanleyngugi.netlify.app/", "name": "Stanley Ngugi", "description": "Stanley Ngugi is an independent AI researcher working on post-training with reinforcement learning and formal verification for mathematical reasoning and code.", "publisher": {"@id": "https://stanleyngugi.netlify.app/#person"}}, {"@type": "Person", "@id": "https://stanleyngugi.netlify.app/#person", "name": "Stanley Ngugi", "url": "https://stanleyngugi.netlify.app/", "sameAs": ["https://github.com/stanleyngugi"], "description": "Stanley Ngugi is an independent AI researcher working on post-training with reinforcement learning and formal verification for mathematical reasoning and code."}, {"@type": "ProfilePage", "@id": "https://stanleyngugi.netlify.app/#profile", "url": "https://stanleyngugi.netlify.app/", "name": "Stanley Ngugi | RL Environments and Formal Verification", "mainEntity": {"@id": "https://stanleyngugi.netlify.app/#person"}, "isPartOf": {"@id": "https://stanleyngugi.netlify.app/#website"}}]}</script>
 </head>
 <body>
     <div class="container">
@@ -33,7 +38,7 @@
             <div class="header-inner">
                 <a href="/" class="logo">stanley<span>&gt;</span></a>
                 <div style="display: flex; align-items: center;">
-                    <a href="/cv.html" class="nav-cv">cv</a>
+                    <a href="/cv" class="nav-cv">cv</a>
                     <button class="theme-btn" aria-label="Toggle theme">
                         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -44,6 +49,7 @@
 
         <main>
             <div class="intro">
+                <p class="intro-name">Stanley Ngugi</p>
                 <h1>I build reinforcement-learning environments and tools for formal reasoning.</h1>
                 <p>
                     I'm a 20-year-old self-taught independent AI researcher working on
@@ -51,19 +57,23 @@
                     methods, and executable verification. I left college to focus on independent research.
                 </p>
                 <div class="links-row">
-                    <a href="/cv.html" class="pill-primary">CV</a>
-                    <span class="copy-email" id="copy-email" title="click to copy">sngugi.research@gmail.com</span>
-                    <a href="https://github.com/stanleyngugi">github</a>
+                    <a href="/cv" class="pill-primary">CV</a>
+                    <span class="email-contact">
+                        <a href="mailto:sngugi.research@gmail.com">sngugi.research@gmail.com</a>
+                        <button type="button" class="copy-email" id="copy-email" data-email="sngugi.research@gmail.com" aria-label="Copy email address">copy</button>
+                    </span>
+                    <span id="email-copy-status" class="visually-hidden" role="status"></span>
+                    <a href="https://github.com/stanleyngugi" rel="me">github</a>
                     <a href="/rss.xml">rss</a>
                 </div>
             </div>
 
-            <section class="block">
+            <section class="block" id="selected-writing">
                 <h2 class="block-title">Selected writing</h2>
-                <a href="/posts/formally-verified-c.html" class="entry">
+                <a href="/posts/formally-verified-c" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">An RL Environment Where C Code Has to Be Proved, Not Just Tested</span>
-                        <span class="entry-date">RL, formal methods · 17 min</span>
+                        <span class="entry-date">RL, formal methods · 20 min</span>
                     </div>
                     <div class="entry-desc">
                         An RL environment where models write C functions and reward comes from
@@ -71,10 +81,10 @@
                         passing a test suite. The public release includes 64 tasks and an isolated Frama-C judge.
                     </div>
                 </a>
-                <a href="/posts/mathcheck-rl.html" class="entry">
+                <a href="/posts/mathcheck-rl" class="entry">
                     <div class="entry-top">
-                        <span class="entry-title">How MathCheck RL Replaces Hidden Answer Keys with Lean-Checked Rewards</span>
-                        <span class="entry-date">RL · 19 min</span>
+                        <span class="entry-title">Grading Mathematical Answers Without Answer Keys</span>
+                        <span class="entry-date">RL, formal methods · 17 min</span>
                     </div>
                     <div class="entry-desc">
                         A math RL environment for bounded integer problems that does not store
@@ -82,10 +92,10 @@
                         and reward comes from checking that submission against the full encoded problem.
                     </div>
                 </a>
-                <a href="/posts/mathcheck-engine.html" class="entry">
+                <a href="/posts/mathcheck-engine" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">Building a Lean-Backed Verifier for Bounded Mathematical Answers</span>
-                        <span class="entry-date">formal methods · 17 min</span>
+                        <span class="entry-date">formal methods · 12 min</span>
                     </div>
                     <div class="entry-desc">
                         A verification engine for bounded integer problems. It turns a problem
@@ -93,29 +103,25 @@
                         entire finite domain, and gives a definitive result without requiring a proof from the model.
                     </div>
                 </a>
-                <a href="/posts/2026-08-22-grammar-constrained-decoding-lean.html" class="entry">
+                <a href="/posts/2026-08-22-grammar-constrained-decoding-lean" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">How a Grammar Changes AI-Generated Mathematical Proof Steps</span>
-                        <span class="entry-date">formal methods · 21 min</span>
+                        <span class="entry-date">formal methods · 26 min</span>
                     </div>
                     <div class="entry-desc">
-                        What changes when a language model is constrained to generate only text
-                        shaped like Lean tactics? The study examines how grammar masking prevents
-                        malformed proof steps without mistaking valid syntax for a correct proof.
+A study of how grammar masking keeps language-model generations inside the shape of Lean tactics, preventing malformed proof steps without confusing valid syntax with proof correctness.
 </div>
                 </a>
-                <a href="/posts/2026-08-22-lean-tactic-language-cfg.html" class="entry">
+                <a href="/posts/2026-08-22-lean-tactic-language-cfg" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">Building a Grammar for AI-Generated Mathematical Proof Steps</span>
-                        <span class="entry-date">formal methods · 17 min</span>
+                        <span class="entry-date">formal methods · 19 min</span>
                     </div>
                     <div class="entry-desc">
-                        A practical study of Lean's tactic language: extracting tactic forms from
-                        real proofs, designing a grammar around them, and stress-testing what the
-                        grammar accepts and rejects.
+A practical study of Lean&#x27;s tactic language: extracting tactic forms from real proofs, designing a grammar around them, and stress-testing what the grammar accepts and rejects.
 </div>
                 </a>
-                <a href="/posts/taming_polysemanticity.html" class="entry">
+                <a href="/posts/taming_polysemanticity" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">Taming Incidental Polysemanticity in Toy Models</span>
                         <span class="entry-date">interpretability · 25 min</span>
@@ -129,7 +135,7 @@
             </section>
 
             <section class="block">
-                <h2 class="block-title">Earlier research</h2>
+                <h2 class="block-title" id="earlier-research">Earlier research</h2>
                 <a href="https://arxiv.org/abs/2508.07075" class="entry">
                     <div class="entry-top">
                         <span class="entry-title">Unlearn, Then Learn: A Circuit-Informed Knowledge-Editing Experiment</span>
@@ -164,3 +170,4 @@
     <script src="/main.js"></script>
 </body>
 </html>
+
