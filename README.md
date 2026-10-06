@@ -5,14 +5,18 @@ Static HTML, CSS, and JavaScript. Serve this directory locally with
 
 ## Current research articles
 
-`content/mathcheck-engine.md`, `content/mathcheck-rl.md`, and
-`content/formally-verified-c.md` are unchanged copies of their canonical GitHub
-articles. `content/research-posts-manifest.json` records source URLs and hashes.
-To update them, sync the source copies, then run
+`content/mathcheck-engine.md` and `content/mathcheck-rl.md` are copies of their
+canonical GitHub articles. `content/formally-verified-c.md` is the author's
+website editorial revision of the companion repository article.
+`content/research-posts-manifest.json` records source locations and local hashes;
+a hash verifies the committed website input, not equivalence to a remote file.
+To update them, review and update the committed sources, then run
 `python3 tools/build_mathcheck_posts.py` (Pandoc 3 is required). The renderer
 creates a distinct page and BibTeX file for each article, repairs repo-relative
-evidence links, and links companion posts together. Update homepage, RSS, and
-sitemap entries for any title or date changes. The GitHub articles remain
+evidence links, renders formulas with native MathML, and links companion posts
+together. It synchronizes homepage titles and reading times, RSS titles and
+descriptions, and sitemap revision dates without changing RSS GUIDs or original
+publication dates. The GitHub articles remain
 available until the website pages are live; only then replace the repository
 articles with pointers if desired.
 
@@ -25,8 +29,10 @@ the website does not backdate unrelated work.
 
 Their canonical Markdown and figure generator live in the sibling
 `ai-proof-grammars` repository, under `articles/` and `analysis/figures.py`.
-This website keeps a synchronized copy in `content/` and generated HTML in
-`posts/`. Edit the canonical Markdown, then rebuild:
+This website keeps author-edited revisions in `content/` and generated HTML in
+`posts/`. These revisions preserve the measurements and evidence links while
+using the author's website voice. To explicitly replace them with companion
+sources, then rebuild:
 
 ```bash
 python3.12 -m venv .venv
@@ -60,3 +66,35 @@ the work rather than publishing cadence. RSS, citation metadata, sitemap records
 and article history retain the real publication and revision dates. Revisions use
 an accurate `dateModified`; original publication dates are never backdated or
 redistributed for presentation.
+
+## Consolidated review
+
+See `docs/consolidation-review.md` for branch coverage, integration fixes, and
+validation limits. Run `python3 tools/check_cfg_posts.py` after either renderer;
+the checker covers all five Markdown hashes and all eight active pages.
+
+
+## Search visibility
+
+The live site's canonical address is `https://stanleyngugi.netlify.app/`.
+Article and CV canonical URLs use Netlify's extensionless Pretty URLs. The
+homepage, article metadata, sitemap, citation URLs, and feed links agree on
+those addresses. Existing RSS GUIDs remain stable for subscribers.
+
+The homepage identifies Stanley Ngugi through Person, ProfilePage, and WebSite
+structured data. Articles link their author back to the same identity. Update
+the verified `sameAs` links if another public author profile is added.
+
+Retired `/research`, `/posts`, and `/about` overview routes redirect permanently
+to the current homepage or its corresponding section. Legacy essays redirect
+to `/archive/`. Archive pages use an `X-Robots-Tag: noindex` header. They remain
+crawlable so search engines can read that instruction; a robots.txt crawl block
+would prevent them from seeing it.
+
+After deployment, open Google Search Console for this site's URL-prefix
+property, submit `sitemap.xml`, and inspect the homepage, `/cv`, and the six
+current articles. Request indexing for the current homepage and three new
+project articles first. Check the live redirects for `/research` and `/posts`,
+and confirm an archived page returns the noindex header. Keep the existing
+Google verification file. Source changes cannot submit indexing requests on
+their own, and search engines choose when to refresh snippets.

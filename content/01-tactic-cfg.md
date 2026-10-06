@@ -1,10 +1,10 @@
 # Building a Grammar for AI-Generated Mathematical Proof Steps
 
-*What a small grammar captures, what its fallback gives away, and how to measure the difference.*
+_What a small grammar captures, what its fallback gives away, and how to measure the difference._
 
-Lean is a language and tool for writing computer-checked mathematical proofs. A *tactic* is a command that advances a proof; this article studies grammars for those individual proof steps.
+Lean is a language and tool for writing computer-checked mathematical proofs. A _tactic_ is a command that advances a proof; this article studies grammars for those individual proof steps.
 
-> **Updated September 5, 2026.** Expanded from the August 22 article with executable examples, a grammar ablation, and explicit measurement definitions. The original corpus figures are retained as historical observations, with their extraction limitations explained below. [Original version](/archive/revisions/2026-08-22-lean-tactic-language-cfg-original.html) · [Evidence and reproduction](https://github.com/stanleyngugi/ai-proof-grammars/blob/main/docs/evidence.md).
+> **Updated September 5, 2026.** Expanded from the August 22 article with executable examples, a grammar ablation, and explicit measurement definitions. The original corpus figures are retained as historical observations, with their extraction limitations explained below. [Original version](https://stanleyngugi.netlify.app/archive/revisions/2026-08-22-lean-tactic-language-cfg-original) · [Evidence and reproduction](https://github.com/stanleyngugi/ai-proof-grammars/blob/main/docs/evidence.md).
 
 A grammar for Lean tactics begins with an attractive observation. Many proof steps start with a familiar word: `rw`, `simp`, `exact`, `apply`, `intro`. Behind a large mathematical library there appears to be a comparatively small vocabulary of actions. If a language model repeatedly uses those actions, perhaps a compact grammar can guide its generation without representing the entirety of Lean.
 
@@ -20,23 +20,21 @@ Recognizing their leading words is easy. Checking that the rewrite list closes, 
 
 I built a small Lark grammar, extracted tactic-like text from Mathlib, and measured how often the grammar accepted that text. The original report recorded 99.86% acceptance on 144,154 extracted entries. That was an encouraging corpus-fit result. Subsequent inspection showed why it cannot stand alone: the grammar is permissive, the extraction has structural limitations, and an English sentence can receive the same acceptance verdict as a real tactic.
 
-The central question is what we want the grammar to do: label familiar syntax, exclude unwanted outputs, or define an interface for a model. Those jobs can share code while requiring different evaluations. This article develops the distinctions with the actual grammar and examples. The [companion experiment](/posts/2026-08-22-grammar-constrained-decoding-lean.html) examines what happened when a related grammar was used during model generation. Together they study a particular representation and its effects; they do not establish a complete theorem prover.
+What do we want our grammar to do? This is a somewhat philosophical question. For instance, it might be simply a label for common syntax (and therefore exclude other syntax), it could be an interface description so that the model will output what we want. It could be all of these, and have different evaluations. It might be the same code. We’ll talk about these as we explore the actual grammar and give some examples. Also, we will discuss some of the actual effects of using such a grammar in this companion article: [Grammar Constrained Decoding: Trying it out on Lean](/posts/2026-08-22-grammar-constrained-decoding-lean.html). This is not a complete theorem prover, just a study of one representation and its effects.
 
 ## A useful subset is a design decision
 
-Lean lets users extend syntax and implement new tactics. A fixed grammar written outside Lean therefore needs an explicit scope: a particular environment, a supported collection of forms, or an approximation that tolerates unfamiliar extensions. The existence of extensions does not mean we must model every extension before doing useful work. It means we must explain what our grammar promises.
+A note about ‘a useful subset’: Lean is very extensible. It allows syntax extension and implementation of new tactics. This grammar isn’t meant to run inside Lean, so we need to limit its scope somehow. It could be a limitation to a certain environment, or collection of forms, or just an approximation.
 
-Lean’s parser architecture and syntax categories provide useful guidance, but reproducing a keyword dispatch pattern is not the same as reproducing Lean’s parser. Its tactic syntax can contain terms, nested tactic sequences, notation, and layout-sensitive constructs. The [Lean reference manual](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Custom-Tactics/) explains how tactic syntax and its implementation connect to the elaborator.
+Lean has a very interesting parser architecture. To get a feel for the types of things we need to parse, the syntax types are a good start. In particular, we need to have a feel for the differences between these types and not re-invent the pattern matching dispatch on keywords. In particular, the syntax for tactics is interesting, and how it interacts with the elaborator, so we refer to the reference manual on this: [Custom Tactics](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Custom-Tactics/)
 
-For this project, the initial practical choice was a keyword-oriented approximation. Frequently observed forms received named alternatives. Argument text was mostly left unrestricted. Unknown identifier-led forms received a generic fallback so unfamiliar macros would not immediately count as failures.
+Initially, for me, the approach to defining this grammar was a bit hacky, and mostly looked for keywords. Mostly, the arguments to keywords weren’t specifically limited. However, often there was a common form, and it was coded as an alternative.
 
-That design serves two purposes which must be evaluated separately. As a classifier, it can label common surface forms. As a decoding constraint, it defines which strings a model may produce. A helpful classification hierarchy is not necessarily a restrictive language.
+To review, we want to make something that is good for both classifying the surface form (common ones) as well as constraining the decoding. These are not necessarily the same thing.
 
-There is also a difference between the original architectural proposal and the implemented experiment. The proposal sketched explicit rewrite lists, simplifier arguments, locations, and control constructs. The experimental grammar delegated much more content to a catch-all. The experiment consequently tests a broader approximation than that more structured proposal suggested.
+Finally, a note about the grammar: this grammar was more of an experiment, and it differs in some ways from the initial proposed architecture. In particular, the initial proposal had more specific forms for the rewrite list, arguments to simplifier, locations, control constructs, etc, whereas this one left more to the catch-all.
 
-## Read the grammar before reading the percentage
-
-Here is a shortened version of the actual scoring design. The full file contains 53 named tactic alternatives, including the focus and case-arm forms, plus the generic fallback. “53” counts those alternatives; it is not a count of every grammar definition and lexical terminal.
+Before reading the next section on the percentage, let's look at the actual design. This is a shortened version of the actual file; in fact, it contains 53 tactic alternatives for the forms including both focus and case where arms, as well as the generic one. The number 53 is not the number of definitions in the grammar but the number of alternatives for the non-terminal `tactic`.
 
 ```lark
 start: tactic
@@ -58,29 +56,29 @@ ARGS: /.+/
 %ignore WS
 ```
 
-The suffixes `.2` and `.-1` influence rule preference in Lark’s interpretation. The `i` makes these quoted literals case-insensitive. Both details matter: this is a grammar for classification, with deliberate behaviour that should not be confused with Lean’s own case-sensitive syntax.
+Here the digits `.2` and `.-1` at the end of some definitions influence how Lark interprets the grammar, and similarly the `i` at the end of some literal definitions indicates they should be interpreted case-insensitively.
 
-`rw_tac` demands the literal and some argument text, but it does not demand a bracketed list. `ARGS` accepts an arbitrary nonempty run matched by its regular expression. It has no production describing a matching closing bracket. Likewise, `exact_tac` does not parse an application tree for `f x`; it consumes the remaining text.
+As an example, notice that the non-terminal `rw_tac` expects to see a literal "rw" followed by some arguments, but those arguments are not expected to be a list. In fact, the non-terminal `ARGS` simply matches an arbitrary string matched by the regular expression. In particular, there is no definition of what it means for a closing bracket to match an opening bracket. Similarly, the non-terminal `exact_tac` does not parse the application tree in, e.g., `f x`. In fact, it just takes whatever is left of the text.
 
-The generic rule is even more consequential. Suppose `rfl nonsense` does not match the fixed `rfl_tac` alternative. It can still match `generic_tac`: an identifier followed by argument text. Putting the fallback at lower priority changes which successful parse is preferred. It does not make the fallback unavailable when a named form rejects a string.
+Finally, note how the line "rfl nonsense" would not match the non-terminal `rfl_tac`, but it would match the non-terminal `generic_tac`. The priority of the non-terminals simply determines which one should be used if both can match.
 
-That explains these executable counterexamples:
+Finally, here are some actual counterexamples that can be run yourself:
 
-| Input | Historical scoring classification | What the classification misses |
+|Input string|Historical tactic scoring would class this as|But it is in fact|
 |---|---|---|
-| `rw [` | Named: rewrite form | Unclosed argument list |
-| `exact (` | Named: exact form | Incomplete term |
-| `rfl nonsense` | Generic fallback | A fixed tactic’s argument restriction |
-| `sorry` | Generic fallback | An omitted keyword is still admitted |
-| `The first step is to induct on the structure of n.` | Generic fallback | English prose begins with an identifier |
+|`rw [`|A named tactic, namely rewrite|A list of arguments which is not closed|
+|`exact (`|A named tactic, namely exact|An incomplete term|
+|`rfl nonsense`|A generic tactic form|An invalid use of a fixed tactic (which may take arguments in some forms)|
+|`sorry`|A generic tactic form|An omitted keyword|
+|`The first step is to induct on the structure of n.`|A generic tactic form|A piece of English prose, which to be fair starts with a valid identifier|
 
-These are not hypothetical problems in a different grammar. They are acceptance results from the companion code. Nor does calling the grammar a “category gate” resolve the issue: it accepts text outside the intended category too.
+These aren't hypotheticals; these are accepted by the [companion code](https://github.com/stanleyngugi/ai-proof-grammars). And the problem isn't solved by saying "fine, the grammar is just a category gate"; this accepts input that isn't in the category it's supposed to accept!
 
-The useful conclusion is narrower. The grammar recognizes a broad family of identifier-led surface forms, with additional support for a small amount of structure. Whether that bias is helpful during generation is an empirical question for the second article.
+The most we can say about the grammar above is that it accepts some relatively broad set of identifier-led surface forms with a bit of structure on top. Whether this kind of bias helps our generation is something we'll explore in [article 2](/posts/2026-08-22-grammar-constrained-decoding-lean.html).
 
-## What explicit structure buys
+## What does explicitly modelling some structure give us?
 
-To see the tradeoff, replace the broad rewrite rule with a deliberately small grammar:
+Consider the following much smaller grammar:
 
 ```lark
 start: rw_tac
@@ -90,17 +88,13 @@ name: /[A-Za-z_][A-Za-z0-9_'.]*/
 %ignore WS
 ```
 
-This teaching grammar accepts `rw [mul_comm]` and `rw [h1, h2]`. It rejects `rw [` because the list must close. It also rejects valid Lean forms outside its support, such as a reverse rewrite using `←` or a more elaborate term. That is a scope decision we can see directly in the productions.
+This small teaching grammar enables us to accept something like `rw [mul_comm]` or `rw [h1, h2]`. It will reject incomplete input like `rw [`, but it does reject valid Lean syntax, like those that include the ← character or more involved terms. These are choices about how wide to make the scope of the grammar.
 
-Adding a `generic_tac` alternative would weaken that guarantee again. The accepted language is the union of the alternatives. A string rejected along one path can survive along another. Consequently, the questions to ask when adding a fallback are: what valid examples does it recover, and what invalid examples does it re-admit?
+If we add an alternative `generic_tac` like we had before, we'll immediately lose some of this guarantee, because now the grammar describes the union of the languages of the alternatives. We'd have to think carefully about what valid and invalid examples might now be accepted again.
 
-There is no need to claim that all term syntax is impossible to model with a grammar in order to justify a restricted experiment. Many useful pieces—lists, delimiters, optional clauses, bounded argument forms—can be represented explicitly. Resolving names and checking types are separate matters. A dictionary of candidate names can restrict spellings without proving that a chosen name applies to the current goal.
+To be clear, this isn't about some impossibility of modelling all term syntax with a grammar. There are lots of pieces of syntax that we could model quite well with a grammar, such as lists, delimiters, optional clauses, bounded arguments, etc., that don't require name resolution or type checking. It is instead an engineering decision of how much expressiveness and precision we want in our grammar, and how much we want to have to maintain.
 
-The engineering tradeoff is between expressiveness, precision, and maintenance. A broad slot supports more existing text with fewer rules. A structured slot supplies more checks but needs additional productions and careful treatment of valid syntax. Neither choice should be evaluated using coverage alone.
-
-## Remove the named rules and measure again
-
-The catch-all suggests a simple ablation. Keep only the generic identifier-led rule and the two explicitly modelled structural forms. Does acceptance change on the saved model outputs?
+What happens if I remove these and re-run measurements? Just to confirm, the input will still be the same, just the grammar I use will be the one below (i.e. the generic identifier-led rule, and two structure rules):
 
 ```lark
 start: tactic
@@ -111,18 +105,18 @@ focus_tac: "·" tactic
 case_arm_tac: "|" CASE_PATTERN "=>" tactic?
 ```
 
-The lexical rules are kept consistent with the historical scoring grammar. I ran both parsers on the first cleaned line of every saved Qwen output—the same unit used in the original Qwen score table.
+The above grammar, I believe, has lexing rules consistent with the scoring grammar used for the historical numbers. I ran both the above and the scoring grammar on the first cleaned line of all saved Qwen model outputs (to be consistent with the column under Qwen in the original Qwen score table). The results are in the table below.
 
-| Saved outputs | Full scoring grammar | Reduced grammar | Disagreements |
-|---|---:|---:|---:|
-| Unconstrained Qwen | 420/640 accepted | 420/640 accepted | 0 |
-| Constrained Qwen | 640/640 accepted | 640/640 accepted | 0 |
+|Saved outputs |Accepted using full scoring grammar |Accepted using the reduced grammar |Number of disagreements |
+|---|---|---|---|
+|Unconstrained Qwen |420/640 |420/640 |0 |
+|Constrained Qwen |640/640 |640/640 |0 |
 
-This is a finite comparison, not a proof that the grammars accept exactly the same language. It also says nothing yet about compilation cost or generation speed. Its conclusion is concrete: on these 1,280 outputs, the named alternatives change the available labels without changing acceptance decisions.
+While this is not a proof that the grammars accept the same language, I think it is good evidence for it being true (ignoring differences in how quickly they can be compiled/run). The only functional difference between the two grammars, as far as I can tell, is in the names of the alternatives that can be accepted.
 
-The result helps explain why a large named-match percentage can coexist with weak rejection. A parser can attach a specific label to `rw [` even though the accepted language is permissive enough to admit the same text without that named alternative.
+This goes some way to explaining the disconnect between the large percentage of named matches and the low percentage of rejections, I think.
 
-It also suggests a useful research direction: compare grammar representations while holding their language fixed, and compare accepted languages while holding other implementation choices fixed. Otherwise a change in rule count mixes classification, expressiveness, and runtime representation in one number.
+I think it will be important to be careful to separate out investigations of different ways of representing the same accepted language, vs investigations of accepting different languages, while keeping other implementation choices fixed.
 
 ## Two measurements, with two denominators
 
@@ -168,9 +162,9 @@ This dated rerun used Mathlib commit `53c82c1c23ec418ebf7290390bc8108957bef853`:
 
 ## Extracting the corpus is part of the experiment
 
-The initial research log describes an iterative extraction process. A bracket-only merger split some continuations too early; an indentation-aware merger reduced the number of entries. Case-arm support also removed a recurring failure pattern. Inspecting concrete failures was useful: it separated missing grammar forms from text segmentation problems.
+In the original post on this, I talked about a series of improvements to this extraction process, finding that the problem the initial “merge together lines with only brackets on them” was splitting continuations a bit too early, and that using a version that was also aware of indentation reduced the number of entries quite a bit. I then went on to observe that handling the arms of cases statements eliminated a common failure mode, and that by looking at the failures we could understand whether they were due to unsupported forms in the grammar or due to problems in the text extraction.
 
-But the later audit exposed the complementary risk: merging too much. The historical extractor merges more-indented lines before establishing the boundaries of individual proof steps. On this ordinary proof:
+However, while auditing the code recently, I found a way in which the historical extractor was merging too much: it was merging together lines that started with more indentation before it had determined where the individual proof steps were. For example, it would extract
 
 ```lean
 example (p q : Prop) (h : p ∧ q) : q ∧ p := by
@@ -179,47 +173,38 @@ example (p q : Prop) (h : p ∧ q) : q ∧ p := by
   · exact h.1
 ```
 
-it returns one entry:
+as a single entry:
 
 ```text
 constructor · exact h.2 · exact h.1
 ```
 
-The entry preserves some words but loses the original structure and the intended counting unit. The grammar can accept the flattened result through a generic argument slot. Only auditing parse failures would miss it, because this problematic entry passes.
+While this contains some of the right words, it doesn’t contain the right structure, and isn’t the right thing to be counting. (It does parse, using the generic argument slot in the grammar, so it wouldn’t have been found by auditing parse failures.)
 
-This example changes how we should interpret both coverage and keyword concentration. The counter increments `constructor` once; it does not record the two subsequent `exact` steps as separate leading keywords. A large corpus does not average this away if the segmentation rule systematically behaves that way.
+This changes some of my understanding of the coverage of the corpus and the concentration of keywords it contains. It also shows a few of the pitfalls of processing Lean source files as text: block comments are nested and so can’t be removed with a non-greedy regular expression, characters inside strings shouldn’t count towards brackets, and layout information is used to separate nested proofs from wrapped arguments. For reproducibility, I will keep using the historical text extraction for now, but I note these caveats.
 
-Other details require care too. Lean has nested block comments; a non-greedy comment-removal regular expression is not a full nested-comment parser. Strings can contain characters that a bracket counter mistakes for syntax. Layout can distinguish nested proof structure from a wrapped argument. The historical extractor is retained for reproducibility, with those limitations documented.
+In future, we will want to understand the syntax of Lean programs better, perhaps by getting the spans from the Lean compiler itself or by looking at elaboration traces. We will also want to understand the provenance of our corpus, so that we know which file each entry came from, where in the file it was, and what environment it was in. For the purposes of this article, however, it is sufficient to know exactly what corpus we are working with, and not claim that it is necessarily all of the verified tactic applications in Mathlib.
 
-<figure>
-<img src="/assets/cfg/extraction.svg" width="760" height="490" alt="Three proof steps are flattened by the historical extractor into one entry beginning with constructor; the CFG can accept the flattened entry." loading="lazy">
-<figcaption>The extractor defines the object that the grammar subsequently scores. Acceptance cannot repair a mistaken unit of analysis.</figcaption>
-</figure>
+### The table of the fractions of the historical corpus in the original report
 
-A stronger future corpus study would use Lean-derived syntax spans or elaboration traces and retain file, location, and environment provenance. For the present article, the responsible step is to identify the historical extraction precisely and avoid presenting its entries as every independently verified tactic application in Mathlib.
+|type of classification|number of entries|percentage|
+|---|---|---|
+|named alternative exists|133224|92.4 %|
+|only generic fallback|10725|7.4 %|
+|no classification (rejected)|205|0.14 %|
+|In total|144154|100.0 %|
 
-## What the historical corpus table establishes
+Unfortunately, the original corpus for which this was done in its original immutable revision, as well as the full artifact extracted from it, is not included in the companion repo provided here. So this revision of the corpus does not actually run on the original corpus, but as explained in the [provenance document](https://github.com/stanleyngugi/ai-proof-grammars/blob/main/docs/provenance.md), it does run on a later local checkout of Mathlib that is available.
 
-The original report records the following counts:
+Moreover, this does in fact give evidence that the leading keywords are used in a very concentrated manner. Even if one takes the full pass into account, the top 20 leading keywords cover 84.9% (now 82.4%) of all uses. So maybe this is actually a good starting point for investigating more compact vocabularies of actions. However, this does not give any information about the distribution of tactic applications that would be independent of the way the data was extracted.
 
-| Classification | Entries | Share |
-|---|---:|---:|
-| Named alternative | 133,224 | 92.4% |
-| Generic fallback | 10,725 | 7.4% |
-| Rejected | 205 | 0.14% |
-| Total | 144,154 | 100% |
+For this, one would have to compare with another extraction procedure such as the one underlying Lean4trace (see [Lean4trace](https://openreview.net/forum?id=sjLWmLeJ6R)), which actually uses the Lean elaboration machinery to extract its training data. However, it should be noted that even if both procedures gave exactly the same percentages, that would not constitute a validation of the set of theorems that were extracted, since that would only show that the same procedure gives the same results on a different checkout, but would not remove systematic errors.
 
-These figures belong to the original research log. The initial immutable corpus revision and complete extracted artifact are not included in the companion repository, so this revision does not claim to have rerun that exact corpus. A later local Mathlib checkout is identified in the provenance document and can be used for a separately labelled run.
-
-The log also records concentrated leading-keyword usage, with a full-pass top-20 share of 84.9% and a later value of 82.4%. Those are observations from the extraction procedure. They support investigating compact action vocabularies, but they do not establish an extraction-independent distribution of all tactic applications.
-
-[Lean4trace](https://openreview.net/forum?id=sjLWmLeJ6R) is relevant related work because it extracts training data through Lean’s elaboration machinery. Its methodology is worth studying before interpreting agreement between headline percentages as independent validation. Matching a frequency statistic does not validate a separately sampled theorem set, and repeating one extractor on another checkout does not remove its systematic errors.
-
-The table records what motivated the experiment. Establishing a stronger claim about the distribution of tactic applications would require a corpus whose counting unit has been validated against source structure.
+This is just to document the motivation for the experiment. If one wants to make a stronger claim, one should validate the corpus used for counting.
 
 ## Macros as a controlled interface
 
-The original project explored a second direction: use Lean’s own macro system to create regular interfaces to useful tactics. The experiment included wrappers of this form:
+In the original project there was a second idea for trying to tackle this, which was to use Lean macros to produce some regular interfaces for running various tactics, and then wrapping those:
 
 ```lean
 macro "solve_positivity" : tactic => `(tactic| positivity)
@@ -228,39 +213,39 @@ macro "discharge_linear" e1:term:max e2:term:max : tactic =>
   `(tactic| linarith [$e1, $e2])
 ```
 
-The two-argument example makes precedence a practical concern. Adjacent unrestricted term slots can interact with application parsing; the original experiment used `term:max` to bound each argument more tightly. Complex arguments may then need parentheses. The full historical macro suite and its imports are retained in the consolidated experiment file.
+For the second one (which is the only one that takes multiple arguments), the precedence stuff is a bit of an issue, so if those arguments are complex then they will have to be wrapped in brackets. But anyway, the whole suite of macros and all the things it imports is still there in the original consolidated experiment.
 
-The contribution of a macro depends on the interface it creates. Renaming `positivity` adds little if the grammar already accepts both names with arbitrary arguments. A bounded operation with explicit slots is more interesting: the external grammar can model those slots, while the macro expands them into familiar Lean syntax.
+This doesn't help at all if the grammar is accepting those as arguments already, but it might be a way of binding some operations to something that can be expressed in the external grammar. It's only worth doing for some operations though, because something like the rename of positivity is pretty useless.
 
-This is a language-design option rather than evidence that macros solve arbitrary coverage. A macro definition does not guarantee that every invocation elaborates or closes a goal. Its value would need to be measured in the forms it makes expressible, the malformed arguments it excludes, and the maintenance burden it introduces.
+That's an option in the language design, although as noted before that doesn't mean that it's going to work for any given macro.
 
 ## Designing an output language instead of only describing one
 
-The macro idea points to a broader question from the original proposal: must the model generate exactly the surface language that human authors use? A corpus grammar tries to accommodate an existing practice. A controlled interface can instead expose a selected collection of operations with argument forms chosen for generation. These are different research objectives, even if both eventually produce Lean proof terms.
+But that leads on nicely to a more general point, which is a question about the original proposal. Is it necessary that the language is exactly the same as the one that the human authors are writing in? There's quite a bit of difference between designing a grammar for a given corpus, and designing a nice interface to a selection of operations. They're quite different research objectives.
 
-For example, an interface could distinguish a rewrite operation with a list of references from an exact operation with one supported term. It could make reverse rewriting an explicit argument rather than another piece of punctuation for the model to discover. It could expose a small compound operation that expands into several ordinary tactics. Such an interface would need a translator or macro layer, examples, and an explicit account of unsupported cases.
+To be more concrete, a few examples of features that this interface might have, that the standard one doesn’t:
 
-The attraction is maintenance at a boundary we control. Adding an operation would involve both a grammar production and its implementation. Tests could assert that accepted examples translate correctly and that malformed argument combinations fail early. Library-specific complexity could remain behind that interface where doing so does not remove useful expressive choices.
+In general, we want something that’s easy for us to maintain and extend while still being expressive. Adding a new operation should involve adding a production to the grammar and implementing that operation. We can also do things like write tests for this interface to make sure that we’re accepting all the examples we want to, and rejecting nonsensical combinations of arguments early. And we can move complexity that’s specific to some library into that library, while maintaining the same expressive power.
 
-There are costs. A model already trained on Lean may be less fluent in unfamiliar wrappers. More regular syntax does not guarantee better strategy selection. A coarse operation may hide alternatives that were useful to search; a fine-grained interface may require many more generation steps. Supporting a new tactic with a macro does not demonstrate semantic completeness of a fixed finite interface.
+There are also some downsides. For one, it might be harder for a model that’s already trained on Lean to use. It might also be the case that it’s harder for a model to figure out good strategies in this interface; making the interface “too coarse” might make it harder to search, just as making it too fine-grained makes it take too many steps to generate anything. And finally, even with the macros, it’ll be hard to show that the interface is “semantically complete” in a sense, since it’s not realistic to show that any tactic we might want to use can be supported by the interface with a finite set of operations.
 
-This is therefore a hypothesis worth preserving, not a property measured by the current corpus-fit experiment. The relevant comparison would hold the task set and available operations fixed while varying their surface representation. It would measure malformed arguments, accepted coverage, output length, and ultimately task performance. Simply giving an existing keyword a new spelling would be a weak test.
+It’s also hard to show empirically that the interface is “complete enough” with our current method of fitting a corpus, since that’s inherently tied to the particular interface we’re fitting. To do this properly, we’d want to compare different interfaces on a fixed set of tasks, with a fixed set of available operations, and see which one performs better on those tasks (along with other metrics like how often it generates malformed arguments, what fraction of the arguments it accepts, how long its outputs are, etc.). But that’s kind of a weak test, since it requires the interfaces to be fairly similar (it wouldn’t be very interesting if the only difference was that one interface used “introduction” as a keyword and the other used “intro”).
 
-That distinction also helps interpret the original ambition. A grammar can be an observational instrument, a sampling restriction, or a designed action interface. The project began with ideas about all three. The present evidence is strongest for the first two; the third remains a concrete route for future work rather than an explanation retroactively attached to the saved numbers.
+Finally, a quick note on terminology: while this post talks primarily about designing a grammar for actions that an agent can take in an environment, I had a few other use cases in mind when I first started this project. In particular, I think this could also be useful for either (a) designing a grammar that is used to more accurately describe/understand some environment, or (b) designing a grammar that we can use to sample from (i.e., we want to restrict the things we sample to be “valid” in some sense). My current results are more directly relevant to these two goals, but I hope to have results relevant to the first goal soon.
 
-## What transfers to Rocq and Isabelle
+## Rocq and Isabelle
 
-The original work also built a Rocq/SSReflect-oriented grammar and an Isar-oriented grammar. The log records 98.81% acceptance on Rocq units and 95.47% on selected Isabelle proof-step text. These are exploratory cross-system observations using distinct extraction procedures, not directly comparable measurements of language complexity.
+That work, in addition to building the grammar, did a bit more, for which the log may be instructive. It also experimented with a Rocq (SSReflect) grammar, and an Isabelle grammar. In brief, it could accept 98.81% of the Rocq units it was given, and could accept 95.47% of the text corresponding to proof steps of a selected Isabelle file. These were explored with different extraction procedures, so don’t take these as a definitive measure of the comparative complexity of these languages.
 
-For Rocq, proof delimiters provide helpful boundaries, but the historical splitter treats top-level periods as sentence ends and does not fully account for qualified names. For Isabelle, proof headers, quoted terms, and wrapped fact references complicate line segmentation. The Isabelle work did not include kernel execution in that environment.
+Note that Rocq has proof delimiters, but the splitter didn’t take account of that, it merely split at all top-level “.”, and furthermore it did not take account of qualified names. Also, the Isabelle work was done without executing in the Isabelle kernel, and again the extraction of statements from the text required some attention to Isabelle syntax, for example taking account of proof headers, quoted terms, and wrapped fact references such as `using X[of ...]`.
 
-The separately preserved Rocq macro file contains five small examples using `Tactic Notation`. It is useful evidence for those forms. Parenthesized term arguments working in those examples does not establish that every Rocq notation avoids precedence or argument-boundary issues.
+For completeness, here is the [file of Rocq macros](https://github.com/stanleyngugi/ai-proof-grammars/blob/main/post1-tactic-cfg/rocq_macro_bridge.v), which includes five small examples of “Tactic Notation”. Note that terms passed as arguments are parenthesised, so perhaps there are no issues with precedence etc in Rocq.
 
-The transferable lesson is a methodology: choose an interface, expose what it accepts, retain source provenance, and test both real examples and counterexamples. A percentage becomes informative only after its unit and acceptance language are understood.
+Ultimately, the lesson of this post is methodological: always be clear about what interface is being used; always keep track of the provenance of the source used for analysis; always test on real examples, as well as counter examples; always know what the units of the percentages are and what language they are accepted in!
 
-## Reproducing the revised checks
+## Reproducing the checks
 
-The companion repository separates historical inputs from derived analyses. No GPU or Pantograph process is needed for the checks in this article:
+There is also a [companion repo](https://github.com/stanleyngugi/ai-proof-grammars) with all inputs and analyses, to reproduce the checks done in this article. To do so, it’s not needed to have a GPU or run Pantograph, simply:
 
 ```bash
 python3 -m venv .venv
@@ -270,7 +255,7 @@ python analysis/audit.py
 python -m unittest discover -s tests
 ```
 
-`analysis/audit.json` records exact sample counts, acceptance decisions, the reduced-grammar disagreements, and SHA-256 hashes of the relevant inputs. The counterexamples above are checked in the test suite. A separate mutation run accepts an explicit Mathlib path and writes a new result rather than overwriting the historical table:
+All the exact numbers and acceptances, including which samples didn’t agree with the reduced grammars, and the SHA-256 hashes of the inputs used, can be found in `analysis/audit.json`. All the counterexamples shown here are checked there. To run the mutation pass yourself, given a path to a Mathlib copy, without overwriting the historical data, run:
 
 ```bash
 python post1-tactic-cfg/strength_analysis.py \
@@ -278,9 +263,9 @@ python post1-tactic-cfg/strength_analysis.py \
   --out analysis/strength.json
 ```
 
-That command intentionally uses the historical heuristic extractor. Its output is labelled accordingly; repairing arithmetic and paths does not turn extraction into a Lean parser. The provenance document explains which figures can be regenerated from saved outputs and which remain historical report entries.
+Note that this will use the historical version of the heuristic extractor, and the results will be marked as such. The fixes to arithmetic and paths do not turn it into a real Lean parser. For more information on which figures can be regenerated, and which are simply stored from the historical run of the reporting script, see the [provenance document](https://github.com/stanleyngugi/ai-proof-grammars/blob/main/docs/provenance.md).
 
-A compact grammar is still a useful object to investigate. The stronger account of this work is that we can now inspect what its compactness means: a small vocabulary of named forms, a broad fallback, and a measurable tradeoff between coverage and rejection. The next question is what happens when that exact accepted language changes the model’s sampling distribution. That is the subject of the companion article.
+Now that we have a compact grammar, it is time to see what effect having the exact accepted language has on our sampling distribution. See the [companion article](/posts/2026-08-22-grammar-constrained-decoding-lean.html).
 
 ## References
 
