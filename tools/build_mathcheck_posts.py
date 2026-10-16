@@ -22,7 +22,6 @@ POSTS = (
         "slug": "mathcheck-rl",
         "modified": "2026-10-17",
         "description": "Formal verification of bounded mathematical submissions against frozen specifications, producing RL rewards without stored answer keys.",
-        "previous_title": "Grading Mathematical Answers Without Answer Keys",
         "repo": "https://github.com/stanleyngugi/mathcheck-rl",
         "source_path": "TECHNICAL_ARTICLE.md",
         "publication": "2026-09-12",

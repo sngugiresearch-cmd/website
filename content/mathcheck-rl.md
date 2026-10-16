@@ -1,4 +1,4 @@
-# Grading Mathematical Answers Without Precomputed Answer Keys
+# Grading Mathematical Answers Without Answer Keys
 
 MathCheck RL leverages a frozen mathematical specification to reward bounded answers and complete finite certificates for mathematical problems. The model generates the data and trusted code constructs and executes the corresponding checking obligation in Lean.
 

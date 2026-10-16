@@ -2,9 +2,9 @@
   "mathcheck-rl.md": {
     "source": "https://github.com/stanleyngugi/mathcheck-rl/blob/main/TECHNICAL_ARTICLE.md",
     "source_relation": "website author rewrite",
-    "sha256": "c45c1e6e53c6074cfdda724a58424412dd8b7b5576d88f187e590ed6e2d0c4fa",
+    "sha256": "844fc0fe65d53fa239ba3d20baa035fb6f50741a3962362c0bf67885db719150",
     "output": "posts/mathcheck-rl.html",
-    "title": "Grading Mathematical Answers Without Precomputed Answer Keys",
+    "title": "Grading Mathematical Answers Without Answer Keys",
     "reading_minutes": 23
   },
   "mathcheck-engine.md": {
